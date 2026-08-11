@@ -1,0 +1,97 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "status": {
+      "const": "proposed_thresholds",
+      "default": "proposed_thresholds",
+      "title": "Status",
+      "type": "string"
+    },
+    "pilot_max_cer": {
+      "minimum": 0,
+      "title": "Pilot Max Cer",
+      "type": "number"
+    },
+    "pilot_min_dialect_preservation": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Pilot Min Dialect Preservation",
+      "type": "number"
+    },
+    "human_min_fine_tuned_preference_rate": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Human Min Fine Tuned Preference Rate",
+      "type": "number"
+    },
+    "independent_min_utterances": {
+      "minimum": 1,
+      "title": "Independent Min Utterances",
+      "type": "integer"
+    },
+    "independent_min_speakers": {
+      "minimum": 2,
+      "title": "Independent Min Speakers",
+      "type": "integer"
+    },
+    "independent_min_relative_cer_improvement": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Independent Min Relative Cer Improvement",
+      "type": "number"
+    },
+    "independent_min_dialect_preservation_delta": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Independent Min Dialect Preservation Delta",
+      "type": "number"
+    },
+    "standard_min_utterances": {
+      "minimum": 1,
+      "title": "Standard Min Utterances",
+      "type": "integer"
+    },
+    "standard_min_speakers": {
+      "minimum": 2,
+      "title": "Standard Min Speakers",
+      "type": "integer"
+    },
+    "standard_max_relative_cer_regression": {
+      "minimum": 0,
+      "title": "Standard Max Relative Cer Regression",
+      "type": "number"
+    },
+    "standard_max_absolute_cer_regression": {
+      "minimum": 0,
+      "title": "Standard Max Absolute Cer Regression",
+      "type": "number"
+    },
+    "empty_output_increase_allowed": {
+      "minimum": 0,
+      "title": "Empty Output Increase Allowed",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "pilot_max_cer",
+    "pilot_min_dialect_preservation",
+    "human_min_fine_tuned_preference_rate",
+    "independent_min_utterances",
+    "independent_min_speakers",
+    "independent_min_relative_cer_improvement",
+    "independent_min_dialect_preservation_delta",
+    "standard_min_utterances",
+    "standard_min_speakers",
+    "standard_max_relative_cer_regression",
+    "standard_max_absolute_cer_regression",
+    "empty_output_increase_allowed"
+  ],
+  "title": "Gate2Criteria",
+  "type": "object"
+}

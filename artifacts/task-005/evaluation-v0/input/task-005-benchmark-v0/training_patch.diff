@@ -1,0 +1,101 @@
+diff --git a/examples/asr/asr_adapters/train_asr_adapter.py b/examples/asr/asr_adapters/train_asr_adapter.py
+index fcddc865ca..d7e767a63f 100644
+--- a/examples/asr/asr_adapters/train_asr_adapter.py
++++ b/examples/asr/asr_adapters/train_asr_adapter.py
+@@ -86,6 +86,8 @@ from dataclasses import is_dataclass
+ from typing import Union
+ 
+ import lightning.pytorch as pl
++import torch
++from lightning.pytorch.plugins.precision import MixedPrecision
+ from omegaconf import DictConfig, OmegaConf, open_dict
+ 
+ from nemo.collections.asr.models import ASRModel
+@@ -96,11 +98,37 @@ from nemo.utils.exp_manager import clean_exp_ckpt, exp_manager
+ from nemo.utils.trainer_utils import resolve_trainer_cfg
+ 
+ 
++class NonFiniteLossGuard(pl.Callback):
++    """Abort the TASK-005 run as soon as a logged batch loss is non-finite."""
++
++    @staticmethod
++    def _check(outputs, stage: str):
++        if isinstance(outputs, dict):
++            values = [value for key, value in outputs.items() if 'loss' in str(key).lower()]
++        else:
++            values = [outputs]
++
++        for value in values:
++            if isinstance(value, torch.Tensor) and not torch.isfinite(value.detach()).all():
++                raise FloatingPointError(f'non-finite {stage} loss detected')
++
++    def on_train_batch_end(self, trainer, pl_module, outputs, batch, batch_idx):
++        self._check(outputs, 'training')
++
++    def on_validation_batch_end(self, trainer, pl_module, outputs, batch, batch_idx, dataloader_idx=0):
++        self._check(outputs, 'validation')
++
++
+ def update_model_config_to_support_adapter(model_cfg, current_cfg):
+     with open_dict(model_cfg):
+         # Override prediction logging in config
+         model_cfg.log_prediction = current_cfg.model.get('log_prediction', False)
+ 
++        # Permit an adaptation run to explicitly request validation loss even
++        # when the restored RNNT artifact disables it by default.
++        if 'compute_eval_loss' in current_cfg.model:
++            model_cfg.compute_eval_loss = bool(current_cfg.model.compute_eval_loss)
++
+         # Update encoder adapter compatible config
+         adapter_metadata = adapter_mixins.get_registered_adapter(model_cfg.encoder._target_)
+         if adapter_metadata is not None:
+@@ -110,7 +138,7 @@ def update_model_config_to_support_adapter(model_cfg, current_cfg):
+ def update_model_cfg(original_cfg, new_cfg):
+     with open_dict(original_cfg), open_dict(new_cfg):
+         # force inject some keys into the config
+-        whitelist_keys = ['num_workers', 'pin_memory']
++        whitelist_keys = ['num_workers', 'pin_memory', 'lang_field']
+         for wkey in whitelist_keys:
+             if wkey in new_cfg:
+                 original_cfg[wkey] = new_cfg[wkey]
+@@ -156,7 +184,20 @@ def main(cfg):
+     if cfg.model.pretrained_model is not None and cfg.model.nemo_model is not None:
+         raise ValueError("Cannot set both `cfg.model.nemo_model` and `cfg.model.pretrained_model`. Select one only.")
+ 
+-    trainer = pl.Trainer(**resolve_trainer_cfg(cfg.trainer))
++    trainer_cfg = resolve_trainer_cfg(cfg.trainer)
++    amp_init_scale = os.environ.get('TASK005_AMP_INIT_SCALE')
++    if amp_init_scale is not None:
++        precision = str(trainer_cfg.pop('precision'))
++        if precision != '16-mixed':
++            raise ValueError(f'TASK005_AMP_INIT_SCALE requires 16-mixed precision, got {precision}')
++        scaler = torch.amp.GradScaler('cuda', init_scale=float(amp_init_scale))
++        precision_plugin = MixedPrecision(precision='16-mixed', device='cuda', scaler=scaler)
++        trainer = pl.Trainer(**trainer_cfg, plugins=[precision_plugin])
++        logging.info(f'TASK-005 AMP initial loss scale: {amp_init_scale}')
++    else:
++        trainer = pl.Trainer(**trainer_cfg)
++    if os.environ.get('TASK005_NONFINITE_LOSS_GUARD') == 'YES':
++        trainer.callbacks.append(NonFiniteLossGuard())
+     exp_log_dir = exp_manager(trainer, cfg.get("exp_manager", None))
+ 
+     if cfg.model.pretrained_model is not None:
+@@ -228,6 +269,18 @@ def main(cfg):
+     # Then, Unfreeze just the adapter weights that were enabled above (no part of encoder/decoder/joint/etc)
+     model.unfreeze_enabled_adapters()
+ 
++    expected_trainable = os.environ.get('TASK005_EXPECTED_TRAINABLE_PARAMETERS')
++    if expected_trainable is not None:
++        trainable = [(name, param) for name, param in model.named_parameters() if param.requires_grad]
++        trainable_count = sum(param.numel() for _, param in trainable)
++        non_adapter_trainable = [name for name, _ in trainable if '.adapter_layer.' not in name]
++        logging.info(f'TASK-005 trainable parameters: {trainable_count}')
++        if trainable_count != int(expected_trainable) or non_adapter_trainable:
++            raise RuntimeError(
++                f'TASK-005 adapter gate failed: count={trainable_count}, '
++                f'expected={expected_trainable}, non_adapter={non_adapter_trainable}'
++            )
++
+     # Update model config prior to training
+     model.cfg = model.cfg
+ 

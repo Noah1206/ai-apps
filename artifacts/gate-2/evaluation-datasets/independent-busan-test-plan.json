@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0.0",
+  "status": "data_not_available_on_mac",
+  "dataset_id": "busan-independent-test-v0",
+  "dataset_kind": "independent_busan_test",
+  "proposed_minimum": {
+    "utterances": 100,
+    "speakers": 5,
+    "utterances_per_speaker": 10
+  },
+  "recommended_target": {
+    "utterances": 200,
+    "speakers": 10
+  },
+  "requirements": [
+    "Busan or Gyeongsang real speech",
+    "speaker, utterance, source-recording, and audio-lineage overlap must be zero",
+    "human-reviewed Surface transcript and dialect-expression labels",
+    "16 kHz mono PCM16 WAV",
+    "training_allowed=false",
+    "checkpoint_selection_allowed=false",
+    "never use for early stopping or checkpoint selection"
+  ],
+  "available_assets_checked": [
+    "data/lab (200 train plus 10 frozen pilot records)",
+    "task-005-independent-validation-v0.zip (40 items already used for checkpoint selection)"
+  ],
+  "eligible_existing_items": 0
+}

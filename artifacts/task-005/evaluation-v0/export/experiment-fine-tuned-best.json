@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0.0",
+  "experiment_id": "task-005-nemotron-3.5-asr-streaming-0.6b-busan-adapter-best-v0",
+  "task": "surface_asr",
+  "model": {
+    "name": "nvidia/nemotron-3.5-asr-streaming-0.6b",
+    "version": "f3d333391852ba876df169dcc9ba902d25b6ab0b",
+    "model_provider": "NVIDIA",
+    "model_family": "FastConformer-RNNT",
+    "decoder_type": "RNNT",
+    "target_language": "ko-KR",
+    "fine_tuned": true,
+    "checkpoint_identifier": "lightning:///home/ab409/task-005-nemotron/experiments/task-005-nemotron-busan-adapter/2026-08-08_00-10-10/checkpoints/task-005-nemotron-busan-adapter--val_loss=42.0270-epoch=5.ckpt#sha256:a05b3fcc919d18638d87f69700e1e7fba9b2f5f8b2d20396226b2aae9d13343e",
+    "checkpoint": "nemo:///home/ab409/task-005-nemotron/evaluation-artifacts/task-005-busan-adapter-best-epoch5-step97.nemo#sha256:580124ff0ea5c9e2f5546e9186c93c3c2d9e16641a749d02b219e2d06029f950",
+    "tokenizer_version": "sentencepiece-13087",
+    "config_hash": null
+  },
+  "benchmark_id": "busan-surface-v0",
+  "benchmark_version": "1.0.0",
+  "hypothesis": null,
+  "changed_variable": null,
+  "status": "completed",
+  "created_at": "2026-08-08T11:40:43.371438Z"
+}

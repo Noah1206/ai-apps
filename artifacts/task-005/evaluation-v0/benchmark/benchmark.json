@@ -1,0 +1,338 @@
+{
+  "schema_version": "1.0.0",
+  "benchmark_id": "busan-surface-v0",
+  "benchmark_version": "1.0.0",
+  "created_at": "2026-07-29T05:13:18.949958Z",
+  "frozen": true,
+  "entries": [
+    {
+      "utterance_id": "3faa344e-968d-42cb-baf8-f1847a936a98",
+      "speaker_id": "sample10",
+      "split": "test",
+      "original_audio_sha256": "2783c5f005a5ef63b7e9edbbbbe97f8e722ec33ddb4bbbafe6572b90b27168a3",
+      "derived_audio_sha256": "33970054f90c63647a576f73aec889e7ccb3bc284b460c57ba1f75cd78d1a25c",
+      "derived_audio_path": "derived/asr_16k_mono/27/2783c5f005a5ef63b7e9edbbbbe97f8e722ec33ddb4bbbafe6572b90b27168a3.asr-16k-mono.wav",
+      "lineage_audio_sha256s": [
+        "2783c5f005a5ef63b7e9edbbbbe97f8e722ec33ddb4bbbafe6572b90b27168a3",
+        "d8f00b0b46bcacaf88df94ae826b82908a76b3d368f728421a4d499043957cab",
+        "33970054f90c63647a576f73aec889e7ccb3bc284b460c57ba1f75cd78d1a25c",
+        "93f786915958ccf1beff5ad33bf6187d3926d7a80aec523bdea51bd3978771c9",
+        "d8f00b0b46bcacaf88df94ae826b82908a76b3d368f728421a4d499043957cab"
+      ],
+      "surface_text": "와따 맛있노",
+      "normalized_meaning": "진짜 맛있다",
+      "dialect_expressions": [
+        {
+          "surface_form": "와따",
+          "normalized_forms": [
+            "와"
+          ],
+          "status": "candidate",
+          "reviewer_id": null,
+          "notes": null
+        },
+        {
+          "surface_form": "맛있노",
+          "normalized_forms": [
+            "맛있다"
+          ],
+          "status": "candidate",
+          "reviewer_id": null,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "utterance_id": "dbfedf22-ef0f-4cc5-ac99-2daf4758aa72",
+      "speaker_id": "sample9",
+      "split": "test",
+      "original_audio_sha256": "85b2ee890d2c13bd5621208586af16187977ed1d966f01577bf7ef74cad7041a",
+      "derived_audio_sha256": "d9bc03e60a510c394b5d190f49689232f2a49bd346ae2ac5941bf83c43a7302b",
+      "derived_audio_path": "derived/asr_16k_mono/85/85b2ee890d2c13bd5621208586af16187977ed1d966f01577bf7ef74cad7041a.asr-16k-mono.wav",
+      "lineage_audio_sha256s": [
+        "85b2ee890d2c13bd5621208586af16187977ed1d966f01577bf7ef74cad7041a",
+        "7d52569366f34a7e50e5871d1ecc02e98b20d7c99c96cfc6b6603bcbb04b3298",
+        "d9bc03e60a510c394b5d190f49689232f2a49bd346ae2ac5941bf83c43a7302b",
+        "e4486ad1a9efcdc7fe7d4ec2646e7efd5e5ab3e7313a55b447c8f5bedd4f68b0",
+        "7d52569366f34a7e50e5871d1ecc02e98b20d7c99c96cfc6b6603bcbb04b3298"
+      ],
+      "surface_text": "마, 괜찮다 아이가.",
+      "normalized_meaning": "야, 괜찮잖아. 뭘 엄살 부리고있어.",
+      "dialect_expressions": [
+        {
+          "surface_form": "마",
+          "normalized_forms": [
+            "야"
+          ],
+          "status": "candidate",
+          "reviewer_id": null,
+          "notes": null
+        },
+        {
+          "surface_form": "아이가",
+          "normalized_forms": [
+            "잖아"
+          ],
+          "status": "candidate",
+          "reviewer_id": null,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "utterance_id": "75b96c24-cab0-4e52-839b-dd67b496e58a",
+      "speaker_id": "sample8",
+      "split": "test",
+      "original_audio_sha256": "0adf8a1e25ed7c4477b27296173e199f4ff773a83faa4d59db699c614e36101a",
+      "derived_audio_sha256": "50b006e1885af65902b722accc3ebf9509e7c615ab8c634a8b40eb7fe5fce115",
+      "derived_audio_path": "derived/asr_16k_mono/0a/0adf8a1e25ed7c4477b27296173e199f4ff773a83faa4d59db699c614e36101a.asr-16k-mono.wav",
+      "lineage_audio_sha256s": [
+        "0adf8a1e25ed7c4477b27296173e199f4ff773a83faa4d59db699c614e36101a",
+        "e6e6339d94070fdd65898e21365b47a8a44d23847edfeabb1ca2dff46a0f7b9b",
+        "50b006e1885af65902b722accc3ebf9509e7c615ab8c634a8b40eb7fe5fce115",
+        "01f43ec44677019b80f58ffaad5c10fb286c7bbcf7359b259a0f6c6571a45a1c",
+        "e6e6339d94070fdd65898e21365b47a8a44d23847edfeabb1ca2dff46a0f7b9b"
+      ],
+      "surface_text": "내일 같이 가재이",
+      "normalized_meaning": "내일 같이 가자.",
+      "dialect_expressions": [
+        {
+          "surface_form": "가재이",
+          "normalized_forms": [
+            "가자"
+          ],
+          "status": "candidate",
+          "reviewer_id": null,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "utterance_id": "d66716eb-c35d-4867-907c-187935449cab",
+      "speaker_id": "sample7",
+      "split": "test",
+      "original_audio_sha256": "e69ea3143e188b36f70a23a47cc0916ce9e48dfb5ce83c74639d97c37931c703",
+      "derived_audio_sha256": "5da9025ca7f1ebda0ec44f2af456e4f10adc824136f96f1316db873a293fde75",
+      "derived_audio_path": "derived/asr_16k_mono/e6/e69ea3143e188b36f70a23a47cc0916ce9e48dfb5ce83c74639d97c37931c703.asr-16k-mono.wav",
+      "lineage_audio_sha256s": [
+        "e69ea3143e188b36f70a23a47cc0916ce9e48dfb5ce83c74639d97c37931c703",
+        "f565a1a4212c3a7e97bb852c5aede9b498a662d8bd2ce27c6459e785a3c936b4",
+        "5da9025ca7f1ebda0ec44f2af456e4f10adc824136f96f1316db873a293fde75",
+        "222119d0bdec76c9244c51f47ad05bf9415af50a47dc14c939e0269e4e739ff1",
+        "f565a1a4212c3a7e97bb852c5aede9b498a662d8bd2ce27c6459e785a3c936b4"
+      ],
+      "surface_text": "여기 좀 앉으이소.",
+      "normalized_meaning": "여기 앉으세요.",
+      "dialect_expressions": [
+        {
+          "surface_form": "앉으이소",
+          "normalized_forms": [
+            "앉으세요"
+          ],
+          "status": "candidate",
+          "reviewer_id": null,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "utterance_id": "38f63a59-325b-4e53-9287-ab094c6a889d",
+      "speaker_id": "sample6",
+      "split": "test",
+      "original_audio_sha256": "312f919809cef3db2534f14d14f32f70119afd024e504591572ef731935a3ecc",
+      "derived_audio_sha256": "44bc461d2126394fa3afc6d72da6dac6a057c3cc1e977c65ff14033ec8925f3a",
+      "derived_audio_path": "derived/asr_16k_mono/31/312f919809cef3db2534f14d14f32f70119afd024e504591572ef731935a3ecc.asr-16k-mono.wav",
+      "lineage_audio_sha256s": [
+        "312f919809cef3db2534f14d14f32f70119afd024e504591572ef731935a3ecc",
+        "994b712706327542310e90271b5aeee3f9a37d1b03d20cd804c9c14513cdd3bc",
+        "44bc461d2126394fa3afc6d72da6dac6a057c3cc1e977c65ff14033ec8925f3a",
+        "9c44989bb27eb929493902ec94a0aedcdafd47025c217e9a2699ed5f4e4da5fa",
+        "994b712706327542310e90271b5aeee3f9a37d1b03d20cd804c9c14513cdd3bc"
+      ],
+      "surface_text": "지금 뭐 하노?",
+      "normalized_meaning": "지금 뭐 해?",
+      "dialect_expressions": [
+        {
+          "surface_form": "하노",
+          "normalized_forms": [
+            "해",
+            "하니"
+          ],
+          "status": "candidate",
+          "reviewer_id": null,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "utterance_id": "c95d2f85-a98a-4c19-9476-e55b92a49dc0",
+      "speaker_id": "sample5",
+      "split": "test",
+      "original_audio_sha256": "1edb9a815fbc9006e48106965370ee68e10754c8924bd5ca1df94493af757a48",
+      "derived_audio_sha256": "61fc443d26779b2e3e388fbf82d90e66c4a6d9f48a6daf775651c30a279978f5",
+      "derived_audio_path": "derived/asr_16k_mono/1e/1edb9a815fbc9006e48106965370ee68e10754c8924bd5ca1df94493af757a48.asr-16k-mono.wav",
+      "lineage_audio_sha256s": [
+        "1edb9a815fbc9006e48106965370ee68e10754c8924bd5ca1df94493af757a48",
+        "e7caa25b422b709f0f57c60bf88bdb266a2dbcc8b2df4bc5958e04ea4d38708d",
+        "61fc443d26779b2e3e388fbf82d90e66c4a6d9f48a6daf775651c30a279978f5",
+        "d1bfcb715a7fe78cc609ea060554e7bce03ec5c28196c331b78d44858e9517a9",
+        "e7caa25b422b709f0f57c60bf88bdb266a2dbcc8b2df4bc5958e04ea4d38708d"
+      ],
+      "surface_text": "그거 아이다.",
+      "normalized_meaning": "그거 아니야.",
+      "dialect_expressions": [
+        {
+          "surface_form": "아이다",
+          "normalized_forms": [
+            "아니야",
+            "아닙니다"
+          ],
+          "status": "candidate",
+          "reviewer_id": null,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "utterance_id": "c426f5fc-397d-4ef8-8d7c-9b1d34e4a81a",
+      "speaker_id": "sample4",
+      "split": "test",
+      "original_audio_sha256": "08dfc20a2056ba0f4b54fd8454f6f20f16b127f5d2e5faba01109caa596eabbe",
+      "derived_audio_sha256": "726cc8e6d31c36a7b218e0fc2f689fe5348321a20e1014fb476610720b8bde07",
+      "derived_audio_path": "derived/asr_16k_mono/08/08dfc20a2056ba0f4b54fd8454f6f20f16b127f5d2e5faba01109caa596eabbe.asr-16k-mono.wav",
+      "lineage_audio_sha256s": [
+        "08dfc20a2056ba0f4b54fd8454f6f20f16b127f5d2e5faba01109caa596eabbe",
+        "5688441c634c73bbfc8f5546563b30cd41116edf962830230d72e111fd612d63",
+        "726cc8e6d31c36a7b218e0fc2f689fe5348321a20e1014fb476610720b8bde07",
+        "87ba2f1817a8172c02d8a66f4c201e28a2658709738124921da96f8e0830f869",
+        "5688441c634c73bbfc8f5546563b30cd41116edf962830230d72e111fd612d63"
+      ],
+      "surface_text": "오늘 와 이리 춥노?",
+      "normalized_meaning": "오늘 왜 이렇게 추워?",
+      "dialect_expressions": [
+        {
+          "surface_form": "와",
+          "normalized_forms": [
+            "왜"
+          ],
+          "status": "candidate",
+          "reviewer_id": null,
+          "notes": null
+        },
+        {
+          "surface_form": "이리",
+          "normalized_forms": [
+            "이렇게"
+          ],
+          "status": "candidate",
+          "reviewer_id": null,
+          "notes": null
+        },
+        {
+          "surface_form": "춥노",
+          "normalized_forms": [
+            "추워"
+          ],
+          "status": "candidate",
+          "reviewer_id": null,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "utterance_id": "d53bf39e-0c55-4433-8bea-3b5242b55f9a",
+      "speaker_id": "sample3",
+      "split": "test",
+      "original_audio_sha256": "cb7704375e0137630de0df8bc69cc443fd966d48d89edf4c8257db1a5faa6671",
+      "derived_audio_sha256": "1e18da0037ce3d9598e706ed2a5ca102c7c6222bda65cbc2f4ac2bf4471f64e2",
+      "derived_audio_path": "derived/asr_16k_mono/cb/cb7704375e0137630de0df8bc69cc443fd966d48d89edf4c8257db1a5faa6671.asr-16k-mono.wav",
+      "lineage_audio_sha256s": [
+        "cb7704375e0137630de0df8bc69cc443fd966d48d89edf4c8257db1a5faa6671",
+        "94fbb662adc87caa4bfd1b8c4666da32ca3444c58958cef8c644a0c98bbaaffe",
+        "1e18da0037ce3d9598e706ed2a5ca102c7c6222bda65cbc2f4ac2bf4471f64e2",
+        "6f20abafe6cdb19cf5a7bd474f32055d1c5fe69c254974126a32ec8627fb6ac4",
+        "94fbb662adc87caa4bfd1b8c4666da32ca3444c58958cef8c644a0c98bbaaffe"
+      ],
+      "surface_text": "밥 묵었나?",
+      "normalized_meaning": "밥 먹었어?",
+      "dialect_expressions": [
+        {
+          "surface_form": "묵었나",
+          "normalized_forms": [
+            "먹었어",
+            "먹었니"
+          ],
+          "status": "candidate",
+          "reviewer_id": null,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "utterance_id": "9e5edb72-7ef8-46df-8021-ab0de6dfd567",
+      "speaker_id": "sample2",
+      "split": "test",
+      "original_audio_sha256": "1cd1c4da037862f88b356a8b753b5c64b320f2e01a36eff793d52058a81b3496",
+      "derived_audio_sha256": "b359917925ce2aab2c272932c88608f640ffbef70d05f5bdbe230365dca4d1d8",
+      "derived_audio_path": "derived/asr_16k_mono/1c/1cd1c4da037862f88b356a8b753b5c64b320f2e01a36eff793d52058a81b3496.asr-16k-mono.wav",
+      "lineage_audio_sha256s": [
+        "1cd1c4da037862f88b356a8b753b5c64b320f2e01a36eff793d52058a81b3496",
+        "706b6c79a8eea35498a9556ff0262a7e3def26a4c670bd3069e9aa6e403d5ad5",
+        "b359917925ce2aab2c272932c88608f640ffbef70d05f5bdbe230365dca4d1d8",
+        "27d46c5091a7df5719172c8505afd7ea497e33266a7a73c60ee70bd8c03d6c39",
+        "706b6c79a8eea35498a9556ff0262a7e3def26a4c670bd3069e9aa6e403d5ad5"
+      ],
+      "surface_text": "니 지금 어데고?",
+      "normalized_meaning": "너 지금 어디야?",
+      "dialect_expressions": [
+        {
+          "surface_form": "니",
+          "normalized_forms": [
+            "너"
+          ],
+          "status": "candidate",
+          "reviewer_id": null,
+          "notes": null
+        },
+        {
+          "surface_form": "어데고",
+          "normalized_forms": [
+            "어디야"
+          ],
+          "status": "candidate",
+          "reviewer_id": null,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "utterance_id": "e2d209fb-b801-4a47-b528-3ae54c723ea0",
+      "speaker_id": "sample1",
+      "split": "test",
+      "original_audio_sha256": "35c0c64b9cdaa4835ec7f231ca20a55bdf6a07a23f54242735a52020156a353b",
+      "derived_audio_sha256": "3ac665c6efbcf0d8006c9ea808a24b5e013cb9c8440928ae742f9205f5d988cf",
+      "derived_audio_path": "derived/asr_16k_mono/35/35c0c64b9cdaa4835ec7f231ca20a55bdf6a07a23f54242735a52020156a353b.asr-16k-mono.wav",
+      "lineage_audio_sha256s": [
+        "35c0c64b9cdaa4835ec7f231ca20a55bdf6a07a23f54242735a52020156a353b",
+        "44ad6e07f7ce33ccedd44abac60e8ed6d4e256a4969fcaa6e84d8dccf64b23f5",
+        "3ac665c6efbcf0d8006c9ea808a24b5e013cb9c8440928ae742f9205f5d988cf",
+        "855e14295c11ff0663d510483ff4e1ebf791d6b80acc9921da6e3b1aaa5e44fa",
+        "44ad6e07f7ce33ccedd44abac60e8ed6d4e256a4969fcaa6e84d8dccf64b23f5"
+      ],
+      "surface_text": "국밥 하나 주이소",
+      "normalized_meaning": "국밥 하나 시킬게요",
+      "dialect_expressions": [
+        {
+          "surface_form": "주이소",
+          "normalized_forms": [
+            "주세요",
+            "주십시오"
+          ],
+          "status": "candidate",
+          "reviewer_id": null,
+          "notes": null
+        }
+      ]
+    }
+  ]
+}

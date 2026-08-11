@@ -1,0 +1,53 @@
+{
+  "experiment_id": "task-003b-nemotron-3.5-asr-streaming-0.6b-pretrained-v0",
+  "started_at": "2026-07-30T00:00:00Z",
+  "completed_at": "2026-07-30T00:01:00Z",
+  "hostname": "<external-gpu-host>",
+  "operating_system": "Linux",
+  "python_version": "3.12",
+  "pytorch_version": "<runtime value>",
+  "cuda_runtime_version": "<runtime value>",
+  "cuda_driver_version": "<runtime value>",
+  "cudnn_version": "<runtime value>",
+  "gpu_name": "<runtime value>",
+  "gpu_count": 1,
+  "gpu_vram": [
+    {
+      "device_index": 0,
+      "bytes": 0
+    }
+  ],
+  "gpu_vram_bytes": [
+    0
+  ],
+  "nemo_version": null,
+  "transformers_version": "5.13.0",
+  "model_id": "nvidia/nemotron-3.5-asr-streaming-0.6b",
+  "requested_revision": "f3d333391852ba876df169dcc9ba902d25b6ab0b",
+  "resolved_revision": "f3d333391852ba876df169dcc9ba902d25b6ab0b",
+  "model_provider": "NVIDIA",
+  "model_family": "FastConformer-RNNT",
+  "decoder_type": "RNNT",
+  "fine_tuned": false,
+  "target_language": "ko-KR",
+  "model_cache_path": "<model-cache>/models--nvidia--nemotron-3.5-asr-streaming-0.6b/snapshots/<revision>/model.safetensors",
+  "model_artifact_hash": "sha256:<computed-at-runtime>",
+  "generation_output_type": "<runtime value>",
+  "benchmark_id": "busan-surface-v0",
+  "benchmark_version": "1.0.0",
+  "benchmark_package_sha256": "<computed-at-runtime>",
+  "inference_config": {
+    "mode": "offline_per_utterance",
+    "decoding": "transformers_5.13_default_greedy_rnnt",
+    "max_symbols_per_step": 10,
+    "context_biasing": false,
+    "word_boosting": false,
+    "external_language_model": false,
+    "reference_conditioning": false,
+    "postprocessing_llm": false,
+    "punctuation": "model_default",
+    "capitalization": "model_default"
+  },
+  "random_seed": 0,
+  "git_commit": null
+}

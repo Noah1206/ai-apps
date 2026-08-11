@@ -1,0 +1,36 @@
+{
+  "created_at": "2026-08-08T05:10:06.602026Z",
+  "model_revision": "f3d333391852ba876df169dcc9ba902d25b6ab0b",
+  "pretrained": {
+    "path": "/home/ab409/task-005-nemotron/models/nemotron-3.5-asr-streaming-0.6b.nemo",
+    "sha256": "210214ed94039bf6bfbb9a047c7fa289628db75b103e2bf6381fa78285436a74"
+  },
+  "best_checkpoint": {
+    "path": "/home/ab409/task-005-nemotron/experiments/task-005-nemotron-busan-adapter/2026-08-08_00-10-10/checkpoints/task-005-nemotron-busan-adapter--val_loss=42.0270-epoch=5.ckpt",
+    "sha256": "a05b3fcc919d18638d87f69700e1e7fba9b2f5f8b2d20396226b2aae9d13343e",
+    "epoch": 5,
+    "global_step": 97,
+    "adapter_state_sha256": "f2c17a1c2bfdb8cf9f24ad79f28b6c3379c48ce1f3067312bb09e4b0eb41ff36",
+    "adapter_tensor_count": 96,
+    "adapter_parameter_count": 1622016,
+    "missing_keys": [],
+    "unexpected_keys": []
+  },
+  "exported_best_nemo": {
+    "path": "/home/ab409/task-005-nemotron/evaluation-artifacts/task-005-busan-adapter-best-epoch5-step97.nemo",
+    "sha256": "580124ff0ea5c9e2f5546e9186c93c3c2d9e16641a749d02b219e2d06029f950",
+    "included_in_results_zip": false
+  },
+  "training_hparams": {
+    "path": "/home/ab409/task-005-nemotron/experiments/task-005-nemotron-busan-adapter/2026-08-08_00-10-10/hparams.yaml",
+    "sha256": "718e27fc8374bc33e9b8432f1dfa5df9afa72ce243fd1dc7ee6f88b08195b38b"
+  },
+  "modified_trainer": {
+    "path": "/mnt/c/Users/ab409/Downloads/PORTER-main/NeMo/examples/asr/asr_adapters/train_asr_adapter.py",
+    "sha256": "9b73564f9fab17a40c305d86fe1e46cc259bcfd2b83cbc788a9ebdaa451dcd56"
+  },
+  "training_patch": {
+    "path": "training_patch.diff",
+    "sha256": "edf4aac3b415bb38856105f735914c14ff4b05a6f91083be5ffe8075b9370507"
+  }
+}

@@ -1,0 +1,190 @@
+{
+  "$defs": {
+    "ConsentRecord": {
+      "additionalProperties": false,
+      "description": "Consent is explicit and separates storage, research, and training use.",
+      "properties": {
+        "storage_allowed": {
+          "title": "Storage Allowed",
+          "type": "boolean"
+        },
+        "research_use_allowed": {
+          "title": "Research Use Allowed",
+          "type": "boolean"
+        },
+        "model_training_allowed": {
+          "default": false,
+          "title": "Model Training Allowed",
+          "type": "boolean"
+        },
+        "policy_version": {
+          "default": "lab-v0",
+          "minLength": 1,
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "captured_at": {
+          "format": "date-time",
+          "title": "Captured At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "storage_allowed",
+        "research_use_allowed"
+      ],
+      "title": "ConsentRecord",
+      "type": "object"
+    },
+    "TrainingRecordingImportEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "prompt_id": {
+          "pattern": "^T004-S\\d{3}$",
+          "title": "Prompt Id",
+          "type": "string"
+        },
+        "source_filename": {
+          "minLength": 1,
+          "title": "Source Filename",
+          "type": "string"
+        },
+        "source_audio_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Source Audio Sha256",
+          "type": "string"
+        },
+        "candidate_surface_text": {
+          "minLength": 1,
+          "title": "Candidate Surface Text",
+          "type": "string"
+        },
+        "utterance_id": {
+          "format": "uuid",
+          "title": "Utterance Id",
+          "type": "string"
+        },
+        "duration_ms": {
+          "exclusiveMinimum": 0,
+          "title": "Duration Ms",
+          "type": "number"
+        },
+        "audio_quality_passed": {
+          "title": "Audio Quality Passed",
+          "type": "boolean"
+        },
+        "audio_quality_warnings": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Audio Quality Warnings",
+          "type": "array"
+        }
+      },
+      "required": [
+        "prompt_id",
+        "source_filename",
+        "source_audio_sha256",
+        "candidate_surface_text",
+        "utterance_id",
+        "duration_ms",
+        "audio_quality_passed"
+      ],
+      "title": "TrainingRecordingImportEntry",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "task_id": {
+      "const": "TASK-004",
+      "default": "TASK-004",
+      "title": "Task Id",
+      "type": "string"
+    },
+    "import_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Import Id",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "source_directory_name": {
+      "minLength": 1,
+      "title": "Source Directory Name",
+      "type": "string"
+    },
+    "prompt_sheet_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Prompt Sheet Sha256",
+      "type": "string"
+    },
+    "speaker_id": {
+      "minLength": 1,
+      "title": "Speaker Id",
+      "type": "string"
+    },
+    "region": {
+      "minLength": 1,
+      "title": "Region",
+      "type": "string"
+    },
+    "device": {
+      "minLength": 1,
+      "title": "Device",
+      "type": "string"
+    },
+    "recording_environment": {
+      "minLength": 1,
+      "title": "Recording Environment",
+      "type": "string"
+    },
+    "split": {
+      "const": "train",
+      "default": "train",
+      "title": "Split",
+      "type": "string"
+    },
+    "label_status": {
+      "const": "candidate",
+      "default": "candidate",
+      "title": "Label Status",
+      "type": "string"
+    },
+    "consent": {
+      "$ref": "#/$defs/ConsentRecord"
+    },
+    "entries": {
+      "items": {
+        "$ref": "#/$defs/TrainingRecordingImportEntry"
+      },
+      "minItems": 1,
+      "title": "Entries",
+      "type": "array"
+    }
+  },
+  "required": [
+    "import_id",
+    "source_directory_name",
+    "prompt_sheet_sha256",
+    "speaker_id",
+    "region",
+    "device",
+    "recording_environment",
+    "consent",
+    "entries"
+  ],
+  "title": "TrainingRecordingImportManifest",
+  "type": "object"
+}

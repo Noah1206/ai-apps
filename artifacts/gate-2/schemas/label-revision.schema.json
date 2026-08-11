@@ -1,0 +1,182 @@
+{
+  "$defs": {
+    "DialectExpressionLabel": {
+      "additionalProperties": false,
+      "description": "A linguistic label; generated labels remain candidates until reviewed.",
+      "properties": {
+        "surface_form": {
+          "minLength": 1,
+          "title": "Surface Form",
+          "type": "string"
+        },
+        "normalized_forms": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Normalized Forms",
+          "type": "array"
+        },
+        "status": {
+          "$ref": "#/$defs/ReviewStatus",
+          "default": "candidate"
+        },
+        "reviewer_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reviewer Id"
+        },
+        "notes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Notes"
+        }
+      },
+      "required": [
+        "surface_form"
+      ],
+      "title": "DialectExpressionLabel",
+      "type": "object"
+    },
+    "LinguisticGroundTruth": {
+      "additionalProperties": false,
+      "description": "Surface text is never replaced by normalized meaning.",
+      "properties": {
+        "surface_text": {
+          "minLength": 1,
+          "title": "Surface Text",
+          "type": "string"
+        },
+        "normalized_meaning": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Normalized Meaning"
+        },
+        "dialect_expressions": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/DialectExpressionLabel"
+          },
+          "title": "Dialect Expressions",
+          "type": "array"
+        },
+        "label_status": {
+          "$ref": "#/$defs/ReviewStatus",
+          "default": "candidate"
+        },
+        "label_version": {
+          "default": "label_v0",
+          "minLength": 1,
+          "title": "Label Version",
+          "type": "string"
+        },
+        "reviewer_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reviewer Id"
+        }
+      },
+      "required": [
+        "surface_text"
+      ],
+      "title": "LinguisticGroundTruth",
+      "type": "object"
+    },
+    "ReviewStatus": {
+      "enum": [
+        "candidate",
+        "human_reviewed",
+        "approved",
+        "deprecated"
+      ],
+      "title": "ReviewStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Append-only evidence for a correction to linguistic ground truth.",
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "revision_id": {
+      "format": "uuid",
+      "title": "Revision Id",
+      "type": "string"
+    },
+    "utterance_id": {
+      "format": "uuid",
+      "title": "Utterance Id",
+      "type": "string"
+    },
+    "previous": {
+      "$ref": "#/$defs/LinguisticGroundTruth"
+    },
+    "updated": {
+      "$ref": "#/$defs/LinguisticGroundTruth"
+    },
+    "changed_by": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Changed By",
+      "type": "string"
+    },
+    "reason": {
+      "anyOf": [
+        {
+          "maxLength": 4000,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reason"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "utterance_id",
+    "previous",
+    "updated",
+    "changed_by"
+  ],
+  "title": "LabelRevision",
+  "type": "object"
+}

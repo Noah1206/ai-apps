@@ -1,0 +1,5 @@
+# PyTorch and CUDA are intentionally supplied by nvcr.io/nvidia/pytorch:26.06-py3.
+# Installing another torch wheel over that container would break the selected matrix.
+transformers==5.13.0
+jsonschema==4.25.1
+PyYAML==6.0.3

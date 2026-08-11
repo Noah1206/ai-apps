@@ -1,0 +1,69 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "source_artifacts": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Source Artifacts",
+      "type": "array"
+    },
+    "speaker_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Speaker Ids",
+      "type": "array"
+    },
+    "utterance_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Utterance Ids",
+      "type": "array"
+    },
+    "source_recording_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Recording Ids",
+      "type": "array"
+    },
+    "audio_sha256s": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Audio Sha256S",
+      "type": "array"
+    },
+    "normalized_surface_texts": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Normalized Surface Texts",
+      "type": "array"
+    }
+  },
+  "required": [
+    "source_artifacts",
+    "speaker_ids",
+    "utterance_ids",
+    "source_recording_ids",
+    "audio_sha256s",
+    "normalized_surface_texts"
+  ],
+  "title": "EvaluationExclusionRegistry",
+  "type": "object"
+}

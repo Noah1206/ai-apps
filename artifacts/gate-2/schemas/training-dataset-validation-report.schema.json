@@ -1,0 +1,151 @@
+{
+  "$defs": {
+    "DatasetSplit": {
+      "enum": [
+        "unassigned",
+        "train",
+        "validation",
+        "test"
+      ],
+      "title": "DatasetSplit",
+      "type": "string"
+    },
+    "DuplicateSurfaceTextGroup": {
+      "additionalProperties": false,
+      "properties": {
+        "normalized_surface_text": {
+          "minLength": 1,
+          "title": "Normalized Surface Text",
+          "type": "string"
+        },
+        "utterance_ids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "minItems": 2,
+          "title": "Utterance Ids",
+          "type": "array"
+        },
+        "splits": {
+          "items": {
+            "$ref": "#/$defs/DatasetSplit"
+          },
+          "minItems": 1,
+          "title": "Splits",
+          "type": "array"
+        }
+      },
+      "required": [
+        "normalized_surface_text",
+        "utterance_ids",
+        "splits"
+      ],
+      "title": "DuplicateSurfaceTextGroup",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "task_id": {
+      "const": "TASK-004",
+      "default": "TASK-004",
+      "title": "Task Id",
+      "type": "string"
+    },
+    "dataset_id": {
+      "minLength": 1,
+      "title": "Dataset Id",
+      "type": "string"
+    },
+    "dataset_version": {
+      "minLength": 1,
+      "title": "Dataset Version",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "passed": {
+      "title": "Passed",
+      "type": "boolean"
+    },
+    "benchmark_manifests_checked": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Benchmark Manifests Checked",
+      "type": "array"
+    },
+    "train_utterance_count": {
+      "minimum": 0,
+      "title": "Train Utterance Count",
+      "type": "integer"
+    },
+    "validation_utterance_count": {
+      "minimum": 0,
+      "title": "Validation Utterance Count",
+      "type": "integer"
+    },
+    "train_speaker_count": {
+      "minimum": 0,
+      "title": "Train Speaker Count",
+      "type": "integer"
+    },
+    "validation_speaker_count": {
+      "minimum": 0,
+      "title": "Validation Speaker Count",
+      "type": "integer"
+    },
+    "total_duration_hours": {
+      "minimum": 0,
+      "title": "Total Duration Hours",
+      "type": "number"
+    },
+    "duplicate_surface_text_groups": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/DuplicateSurfaceTextGroup"
+      },
+      "title": "Duplicate Surface Text Groups",
+      "type": "array"
+    },
+    "errors": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Errors",
+      "type": "array"
+    },
+    "warnings": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Warnings",
+      "type": "array"
+    }
+  },
+  "required": [
+    "dataset_id",
+    "dataset_version",
+    "passed",
+    "benchmark_manifests_checked",
+    "train_utterance_count",
+    "validation_utterance_count",
+    "train_speaker_count",
+    "validation_speaker_count",
+    "total_duration_hours"
+  ],
+  "title": "TrainingDatasetValidationReport",
+  "type": "object"
+}

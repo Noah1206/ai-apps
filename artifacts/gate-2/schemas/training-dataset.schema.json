@@ -1,0 +1,247 @@
+{
+  "$defs": {
+    "DatasetSplit": {
+      "enum": [
+        "unassigned",
+        "train",
+        "validation",
+        "test"
+      ],
+      "title": "DatasetSplit",
+      "type": "string"
+    },
+    "DialectExpressionLabel": {
+      "additionalProperties": false,
+      "description": "A linguistic label; generated labels remain candidates until reviewed.",
+      "properties": {
+        "surface_form": {
+          "minLength": 1,
+          "title": "Surface Form",
+          "type": "string"
+        },
+        "normalized_forms": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Normalized Forms",
+          "type": "array"
+        },
+        "status": {
+          "$ref": "#/$defs/ReviewStatus",
+          "default": "candidate"
+        },
+        "reviewer_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reviewer Id"
+        },
+        "notes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Notes"
+        }
+      },
+      "required": [
+        "surface_form"
+      ],
+      "title": "DialectExpressionLabel",
+      "type": "object"
+    },
+    "ReviewStatus": {
+      "enum": [
+        "candidate",
+        "human_reviewed",
+        "approved",
+        "deprecated"
+      ],
+      "title": "ReviewStatus",
+      "type": "string"
+    },
+    "TrainingDatasetEntry": {
+      "additionalProperties": false,
+      "description": "One approved, training-consented Surface ASR example.",
+      "properties": {
+        "utterance_id": {
+          "format": "uuid",
+          "title": "Utterance Id",
+          "type": "string"
+        },
+        "speaker_id": {
+          "minLength": 1,
+          "title": "Speaker Id",
+          "type": "string"
+        },
+        "split": {
+          "$ref": "#/$defs/DatasetSplit"
+        },
+        "region": {
+          "minLength": 1,
+          "title": "Region",
+          "type": "string"
+        },
+        "recording_environment": {
+          "minLength": 1,
+          "title": "Recording Environment",
+          "type": "string"
+        },
+        "original_audio_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Original Audio Sha256",
+          "type": "string"
+        },
+        "asr_audio_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Asr Audio Sha256",
+          "type": "string"
+        },
+        "asr_audio_path": {
+          "minLength": 1,
+          "title": "Asr Audio Path",
+          "type": "string"
+        },
+        "audio_lineage_sha256s": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 2,
+          "title": "Audio Lineage Sha256S",
+          "type": "array"
+        },
+        "duration_ms": {
+          "exclusiveMinimum": 0,
+          "title": "Duration Ms",
+          "type": "number"
+        },
+        "surface_text": {
+          "minLength": 1,
+          "title": "Surface Text",
+          "type": "string"
+        },
+        "label_status": {
+          "$ref": "#/$defs/ReviewStatus"
+        },
+        "label_version": {
+          "minLength": 1,
+          "title": "Label Version",
+          "type": "string"
+        },
+        "dialect_expressions": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/DialectExpressionLabel"
+          },
+          "title": "Dialect Expressions",
+          "type": "array"
+        },
+        "audio_quality_passed": {
+          "const": true,
+          "default": true,
+          "title": "Audio Quality Passed",
+          "type": "boolean"
+        },
+        "model_training_allowed": {
+          "const": true,
+          "default": true,
+          "title": "Model Training Allowed",
+          "type": "boolean"
+        },
+        "consent_policy_version": {
+          "minLength": 1,
+          "title": "Consent Policy Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "utterance_id",
+        "speaker_id",
+        "split",
+        "region",
+        "recording_environment",
+        "original_audio_sha256",
+        "asr_audio_sha256",
+        "asr_audio_path",
+        "audio_lineage_sha256s",
+        "duration_ms",
+        "surface_text",
+        "label_status",
+        "label_version",
+        "consent_policy_version"
+      ],
+      "title": "TrainingDatasetEntry",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Frozen train/validation membership with strict split isolation.",
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "task_id": {
+      "const": "TASK-004",
+      "default": "TASK-004",
+      "title": "Task Id",
+      "type": "string"
+    },
+    "dataset_id": {
+      "minLength": 1,
+      "title": "Dataset Id",
+      "type": "string"
+    },
+    "dataset_version": {
+      "minLength": 1,
+      "title": "Dataset Version",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "frozen": {
+      "const": true,
+      "default": true,
+      "title": "Frozen",
+      "type": "boolean"
+    },
+    "benchmark_exclusion_policy": {
+      "const": "utterance_speaker_audio_lineage_and_exact_surface",
+      "default": "utterance_speaker_audio_lineage_and_exact_surface",
+      "title": "Benchmark Exclusion Policy",
+      "type": "string"
+    },
+    "entries": {
+      "items": {
+        "$ref": "#/$defs/TrainingDatasetEntry"
+      },
+      "minItems": 2,
+      "title": "Entries",
+      "type": "array"
+    }
+  },
+  "required": [
+    "dataset_id",
+    "dataset_version",
+    "entries"
+  ],
+  "title": "TrainingDatasetManifest",
+  "type": "object"
+}

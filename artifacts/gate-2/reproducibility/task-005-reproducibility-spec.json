@@ -1,0 +1,166 @@
+{
+  "schema_version": "1.0.0",
+  "task_id": "TASK-005",
+  "experiment_id": "task-005-nemotron-3.5-asr-streaming-0.6b-busan-adapter-best-v0",
+  "base_model_id": "nvidia/nemotron-3.5-asr-streaming-0.6b",
+  "base_model_revision": "f3d333391852ba876df169dcc9ba902d25b6ab0b",
+  "nemo_revision": "6c57e73e83de967eed4d334c493ac313b9afd147",
+  "train_dataset_sha256": "fcef88360c12d4149a290fa0ff93546fd2cb1bf7bd9d6f9c177557c27e22e20d",
+  "validation_dataset_sha256": "8253af4979ce5f9e20aed9bbb9023ee9f03f3797278e53beabdb90468f825f0d",
+  "benchmark_package_sha256": "151c1e28804627bea69bbd7f6632f4d3558ebf076147e42c1d168d508467233c",
+  "checkpoint_selection_criterion": "minimum independent-validation val_loss before opening the frozen benchmark; selected epoch 5 global step 97 with val_loss 42.027042",
+  "artifacts": [
+    {
+      "artifact_id": "pretrained_nemo",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/nemotron-3.5-asr-streaming-0.6b.nemo",
+      "required": false,
+      "expected_sha256": "210214ed94039bf6bfbb9a047c7fa289628db75b103e2bf6381fa78285436a74",
+      "source_gpu_path": "/home/ab409/task-005-nemotron/models/nemotron-3.5-asr-streaming-0.6b.nemo",
+      "purpose": "optional redundant local copy; the fixed model ID, revision, original SHA and full fine-tuned export are preserved"
+    },
+    {
+      "artifact_id": "best_checkpoint",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/task-005-recovery-gate2-slim-20260808/model/task-005-nemotron-busan-adapter--val_loss=42.0270-epoch=5.ckpt",
+      "required": true,
+      "expected_sha256": "a05b3fcc919d18638d87f69700e1e7fba9b2f5f8b2d20396226b2aae9d13343e",
+      "source_gpu_path": "/home/ab409/task-005-nemotron/experiments/task-005-nemotron-busan-adapter/2026-08-08_00-10-10/checkpoints/task-005-nemotron-busan-adapter--val_loss=42.0270-epoch=5.ckpt",
+      "purpose": "selected optimizer-resumable checkpoint"
+    },
+    {
+      "artifact_id": "best_exported_nemo",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/task-005-recovery-gate2-slim-20260808/model/task-005-busan-adapter-best-epoch5-step97.nemo",
+      "required": true,
+      "expected_sha256": "580124ff0ea5c9e2f5546e9186c93c3c2d9e16641a749d02b219e2d06029f950",
+      "source_gpu_path": "/home/ab409/task-005-nemotron/evaluation-artifacts/task-005-busan-adapter-best-epoch5-step97.nemo",
+      "purpose": "selected inference model"
+    },
+    {
+      "artifact_id": "best_adapter_state",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/task-005-recovery-gate2-slim-20260808/adapter/best-checkpoint-adapter-audit.recovery-time.json",
+      "required": true,
+      "expected_sha256": "04b4001d4d1e641e36d8af557a8f66d64f52a53318d93a8cf400d9d475735335",
+      "source_gpu_path": "/home/ab409/task-005-nemotron/experiments/task-005-nemotron-busan-adapter/2026-08-08_00-10-10/checkpoints/task-005-nemotron-busan-adapter--val_loss=42.0270-epoch=5.ckpt",
+      "purpose": "audit of the 96 selected adapter tensors embedded in the hashed best checkpoint; tensor-content SHA f2c17a1c2bfdb8cf9f24ad79f28b6c3379c48ce1f3067312bb09e4b0eb41ff36"
+    },
+    {
+      "artifact_id": "hparams",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/task-005-recovery-gate2-slim-20260808/config/hparams.yaml",
+      "required": true,
+      "expected_sha256": "718e27fc8374bc33e9b8432f1dfa5df9afa72ce243fd1dc7ee6f88b08195b38b",
+      "source_gpu_path": "/home/ab409/task-005-nemotron/experiments/task-005-nemotron-busan-adapter/2026-08-08_00-10-10/hparams.yaml",
+      "purpose": "exact trainer and model hyperparameters"
+    },
+    {
+      "artifact_id": "training_launcher",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/task-005-recovery-gate2-slim-20260808/launcher/run_task005_adapter_finetune_when_authorized.sh",
+      "required": true,
+      "expected_sha256": "a72b9a362b4ca4b12518899d57637f6c6b52d78a89f458bbd8a4d8d0570cffd0",
+      "source_gpu_path": "/mnt/c/Users/ab409/Downloads/PORTER-main/run_task005_adapter_finetune_when_authorized.sh",
+      "purpose": "exact authorization-gated training command"
+    },
+    {
+      "artifact_id": "benchmark_inference_runner",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/task-005-recovery-gate2-slim-20260808/inference/run_task005_nemo_benchmark.py",
+      "required": true,
+      "expected_sha256": "88232b4e2eae22608e5fb7144b9518f388c7ea5d4c2e75dda14bb273eb37ad7f",
+      "source_gpu_path": "/mnt/c/Users/ab409/orca/projects/ai deepleauning/run_task005_nemo_benchmark.py",
+      "purpose": "exact pretrained and fine-tuned offline inference code"
+    },
+    {
+      "artifact_id": "environment_lock",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/task-005-recovery-gate2-slim-20260808/environment/preserved-venv-versions.recovery-time.json",
+      "required": true,
+      "expected_sha256": "db0449f11a3c151be25af9ee312aa5a6c1ba87a7cc3533db4ceb52ffba2a0bf0",
+      "source_gpu_path": null,
+      "purpose": "recovery-time snapshot of the preserved execution venv; historical inference metadata and logs provide execution-time evidence"
+    },
+    {
+      "artifact_id": "tensorboard_log_initial",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/task-005-recovery-gate2-slim-20260808/logs/training-experiment/events.out.tfevents.1786115470.DESKTOP-ACGQ4VL.860.0",
+      "required": true,
+      "expected_sha256": "86b5c682395dcb78e6d4f65a50c38b84705da428f84a0842f04f7a8195c78b54",
+      "source_gpu_path": "/home/ab409/task-005-nemotron/experiments/task-005-nemotron-busan-adapter/2026-08-08_00-10-10",
+      "purpose": "TensorBoard events from the initial training run"
+    },
+    {
+      "artifact_id": "tensorboard_log_resumed",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/task-005-recovery-gate2-slim-20260808/logs/training-experiment/events.out.tfevents.1786119975.DESKTOP-ACGQ4VL.730.0",
+      "required": true,
+      "expected_sha256": "725427c81b3f6cc5ddc030c84e6cf85c612d7d650fc4e90a81f5b2b112362359",
+      "source_gpu_path": "/home/ab409/task-005-nemotron/experiments/task-005-nemotron-busan-adapter/2026-08-08_00-10-10",
+      "purpose": "TensorBoard events from the resumed training run"
+    },
+    {
+      "artifact_id": "console_log_initial",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/task-005-recovery-gate2-slim-20260808/logs/run-control/20260807T150953Z-main/console.log",
+      "required": true,
+      "expected_sha256": "77fcfc18c93e32c5581f61cc8780ff36798186b067a49ec28448f6e5e657b91a",
+      "source_gpu_path": "/home/ab409/task-005-nemotron/run-control/20260807T150953Z-main/console.log",
+      "purpose": "initial main run log including the RAM-OOM interruption"
+    },
+    {
+      "artifact_id": "console_log_resumed",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/task-005-recovery-gate2-slim-20260808/logs/run-control/20260807T162453Z-main/console.log",
+      "required": true,
+      "expected_sha256": "e0c77ec943338a0bd9641011cf888b1b527c15a7ffffe5edb9bab2d4a6bc8670",
+      "source_gpu_path": "/home/ab409/task-005-nemotron/run-control",
+      "purpose": "successful resumed main run log; the bundle manifest pins all command, GPU and timing logs"
+    },
+    {
+      "artifact_id": "training_patch",
+      "relative_path": "artifacts/task-005/evaluation-v0/input/task-005-benchmark-v0/training_patch.diff",
+      "required": true,
+      "expected_sha256": "edf4aac3b415bb38856105f735914c14ff4b05a6f91083be5ffe8075b9370507",
+      "source_gpu_path": null,
+      "purpose": "local changes applied to pinned NeMo trainer"
+    },
+    {
+      "artifact_id": "modified_training_entrypoint",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/task-005-recovery-gate2-slim-20260808/launcher/train_asr_adapter.py",
+      "required": true,
+      "expected_sha256": "9b73564f9fab17a40c305d86fe1e46cc259bcfd2b83cbc788a9ebdaa451dcd56",
+      "source_gpu_path": "/mnt/c/Users/ab409/Downloads/PORTER-main/NeMo/examples/asr/asr_adapters/train_asr_adapter.py",
+      "purpose": "exact patched NeMo training entry point"
+    },
+    {
+      "artifact_id": "recovery_bundle_manifest",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/task-005-recovery-gate2-slim-20260808/MANIFEST.json",
+      "required": true,
+      "expected_sha256": "dbe378df47bb18cf533ebfe93950a140ef334f2377a4a4a09737c493ab1310cc",
+      "source_gpu_path": null,
+      "purpose": "content index for all 125 imported recovery files"
+    },
+    {
+      "artifact_id": "nemo_dependency_lock",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/task-005-recovery-gate2-slim-20260808/provenance/NeMo-uv.lock",
+      "required": true,
+      "expected_sha256": "121cd4d0ce127a3c26c692c3ce47f59449034e61bffb56ad2ee6fe25ecd5fe22",
+      "source_gpu_path": null,
+      "purpose": "pinned NeMo dependency resolution recovered from the GPU environment"
+    },
+    {
+      "artifact_id": "train_dataset",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/task-005-nemotron-train-pool-v0.zip",
+      "required": true,
+      "expected_sha256": "fcef88360c12d4149a290fa0ff93546fd2cb1bf7bd9d6f9c177557c27e22e20d",
+      "source_gpu_path": null,
+      "purpose": "immutable 200-utterance training input"
+    },
+    {
+      "artifact_id": "validation_dataset",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/task-005-independent-validation-v0.zip",
+      "required": true,
+      "expected_sha256": "8253af4979ce5f9e20aed9bbb9023ee9f03f3797278e53beabdb90468f825f0d",
+      "source_gpu_path": null,
+      "purpose": "immutable 40-utterance checkpoint-selection validation input"
+    },
+    {
+      "artifact_id": "benchmark_dataset",
+      "relative_path": "artifacts/task-002/busan-surface-v0--1.0.0.zip",
+      "required": true,
+      "expected_sha256": "151c1e28804627bea69bbd7f6632f4d3558ebf076147e42c1d168d508467233c",
+      "source_gpu_path": null,
+      "purpose": "immutable frozen pilot test"
+    }
+  ]
+}

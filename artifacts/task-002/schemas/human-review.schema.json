@@ -1,0 +1,81 @@
+{
+  "$defs": {
+    "ReviewVerdict": {
+      "enum": [
+        "confirmed",
+        "rejected",
+        "uncertain"
+      ],
+      "title": "ReviewVerdict",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Append-only human judgment of one stored prediction.",
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "review_id": {
+      "format": "uuid",
+      "title": "Review Id",
+      "type": "string"
+    },
+    "prediction_id": {
+      "format": "uuid",
+      "title": "Prediction Id",
+      "type": "string"
+    },
+    "utterance_id": {
+      "format": "uuid",
+      "title": "Utterance Id",
+      "type": "string"
+    },
+    "reviewer_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Reviewer Id",
+      "type": "string"
+    },
+    "verdict": {
+      "$ref": "#/$defs/ReviewVerdict"
+    },
+    "confirmed_failure_types": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Confirmed Failure Types",
+      "type": "array"
+    },
+    "notes": {
+      "anyOf": [
+        {
+          "maxLength": 4000,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Notes"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "prediction_id",
+    "utterance_id",
+    "reviewer_id",
+    "verdict"
+  ],
+  "title": "HumanReview",
+  "type": "object"
+}

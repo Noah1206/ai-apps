@@ -1,0 +1,545 @@
+{
+  "$defs": {
+    "AudioAsset": {
+      "additionalProperties": false,
+      "properties": {
+        "asset_id": {
+          "minLength": 8,
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "role": {
+          "$ref": "#/$defs/AudioRole"
+        },
+        "relative_path": {
+          "title": "Relative Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "byte_size": {
+          "exclusiveMinimum": 0,
+          "title": "Byte Size",
+          "type": "integer"
+        },
+        "container": {
+          "minLength": 1,
+          "title": "Container",
+          "type": "string"
+        },
+        "codec": {
+          "minLength": 1,
+          "title": "Codec",
+          "type": "string"
+        },
+        "sample_rate_hz": {
+          "exclusiveMinimum": 0,
+          "title": "Sample Rate Hz",
+          "type": "integer"
+        },
+        "channels": {
+          "exclusiveMinimum": 0,
+          "title": "Channels",
+          "type": "integer"
+        },
+        "sample_width_bits": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sample Width Bits"
+        },
+        "duration_ms": {
+          "exclusiveMinimum": 0,
+          "title": "Duration Ms",
+          "type": "number"
+        },
+        "parent_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Parent Sha256"
+        }
+      },
+      "required": [
+        "asset_id",
+        "role",
+        "relative_path",
+        "sha256",
+        "byte_size",
+        "container",
+        "codec",
+        "sample_rate_hz",
+        "channels",
+        "duration_ms"
+      ],
+      "title": "AudioAsset",
+      "type": "object"
+    },
+    "AudioBundle": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "1.0.0",
+          "default": "1.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "audio_contract_version": {
+          "const": "1.1.0",
+          "default": "1.1.0",
+          "title": "Audio Contract Version",
+          "type": "string"
+        },
+        "original": {
+          "$ref": "#/$defs/AudioAsset"
+        },
+        "derived": {
+          "$ref": "#/$defs/AudioAsset"
+        },
+        "transformation": {
+          "$ref": "#/$defs/AudioTransformation"
+        },
+        "quality": {
+          "$ref": "#/$defs/AudioQualityReport"
+        },
+        "master": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AudioAsset"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "derivatives": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/AudioAsset"
+          },
+          "title": "Derivatives",
+          "type": "array"
+        },
+        "transformations": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/AudioTransformation"
+          },
+          "title": "Transformations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "original",
+        "derived",
+        "transformation",
+        "quality"
+      ],
+      "title": "AudioBundle",
+      "type": "object"
+    },
+    "AudioQualityReport": {
+      "additionalProperties": false,
+      "properties": {
+        "passed": {
+          "title": "Passed",
+          "type": "boolean"
+        },
+        "duration_ms": {
+          "exclusiveMinimum": 0,
+          "title": "Duration Ms",
+          "type": "number"
+        },
+        "peak_amplitude": {
+          "maximum": 1.1,
+          "minimum": 0,
+          "title": "Peak Amplitude",
+          "type": "number"
+        },
+        "rms_dbfs": {
+          "title": "Rms Dbfs",
+          "type": "number"
+        },
+        "clipping_ratio": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Clipping Ratio",
+          "type": "number"
+        },
+        "silence_ratio": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Silence Ratio",
+          "type": "number"
+        },
+        "dc_offset": {
+          "title": "Dc Offset",
+          "type": "number"
+        },
+        "warnings": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Warnings",
+          "type": "array"
+        }
+      },
+      "required": [
+        "passed",
+        "duration_ms",
+        "peak_amplitude",
+        "rms_dbfs",
+        "clipping_ratio",
+        "silence_ratio",
+        "dc_offset"
+      ],
+      "title": "AudioQualityReport",
+      "type": "object"
+    },
+    "AudioRole": {
+      "description": "Stable roles in the master-audio lineage.\n\n``ORIGINAL`` and ``DERIVED_16K_MONO`` remain readable for records created\nby Audio Lab v0.1. New records use a canonical 48 kHz master and\npurpose-specific derivatives.",
+      "enum": [
+        "original",
+        "master_48k_mono",
+        "master_48k_stereo",
+        "asr_16k_mono",
+        "pronunciation_24k_mono",
+        "tts_48k_mono",
+        "derived_16k_mono"
+      ],
+      "title": "AudioRole",
+      "type": "string"
+    },
+    "AudioTransformation": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "target_role": {
+          "$ref": "#/$defs/AudioRole",
+          "default": "derived_16k_mono"
+        },
+        "tool": {
+          "const": "ffmpeg",
+          "default": "ffmpeg",
+          "title": "Tool",
+          "type": "string"
+        },
+        "tool_version": {
+          "minLength": 1,
+          "title": "Tool Version",
+          "type": "string"
+        },
+        "command_fingerprint": {
+          "minLength": 8,
+          "title": "Command Fingerprint",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "tool_version",
+        "command_fingerprint"
+      ],
+      "title": "AudioTransformation",
+      "type": "object"
+    },
+    "ConsentRecord": {
+      "additionalProperties": false,
+      "description": "Consent is explicit and separates storage, research, and training use.",
+      "properties": {
+        "storage_allowed": {
+          "title": "Storage Allowed",
+          "type": "boolean"
+        },
+        "research_use_allowed": {
+          "title": "Research Use Allowed",
+          "type": "boolean"
+        },
+        "model_training_allowed": {
+          "default": false,
+          "title": "Model Training Allowed",
+          "type": "boolean"
+        },
+        "policy_version": {
+          "default": "lab-v0",
+          "minLength": 1,
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "captured_at": {
+          "format": "date-time",
+          "title": "Captured At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "storage_allowed",
+        "research_use_allowed"
+      ],
+      "title": "ConsentRecord",
+      "type": "object"
+    },
+    "DatasetSplit": {
+      "enum": [
+        "unassigned",
+        "train",
+        "validation",
+        "test"
+      ],
+      "title": "DatasetSplit",
+      "type": "string"
+    },
+    "DialectExpressionLabel": {
+      "additionalProperties": false,
+      "description": "A linguistic label; generated labels remain candidates until reviewed.",
+      "properties": {
+        "surface_form": {
+          "minLength": 1,
+          "title": "Surface Form",
+          "type": "string"
+        },
+        "normalized_forms": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Normalized Forms",
+          "type": "array"
+        },
+        "status": {
+          "$ref": "#/$defs/ReviewStatus",
+          "default": "candidate"
+        },
+        "reviewer_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reviewer Id"
+        },
+        "notes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Notes"
+        }
+      },
+      "required": [
+        "surface_form"
+      ],
+      "title": "DialectExpressionLabel",
+      "type": "object"
+    },
+    "LinguisticGroundTruth": {
+      "additionalProperties": false,
+      "description": "Surface text is never replaced by normalized meaning.",
+      "properties": {
+        "surface_text": {
+          "minLength": 1,
+          "title": "Surface Text",
+          "type": "string"
+        },
+        "normalized_meaning": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Normalized Meaning"
+        },
+        "dialect_expressions": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/DialectExpressionLabel"
+          },
+          "title": "Dialect Expressions",
+          "type": "array"
+        },
+        "label_status": {
+          "$ref": "#/$defs/ReviewStatus",
+          "default": "candidate"
+        },
+        "label_version": {
+          "default": "label_v0",
+          "minLength": 1,
+          "title": "Label Version",
+          "type": "string"
+        },
+        "reviewer_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reviewer Id"
+        }
+      },
+      "required": [
+        "surface_text"
+      ],
+      "title": "LinguisticGroundTruth",
+      "type": "object"
+    },
+    "ReviewStatus": {
+      "enum": [
+        "candidate",
+        "human_reviewed",
+        "approved",
+        "deprecated"
+      ],
+      "title": "ReviewStatus",
+      "type": "string"
+    },
+    "SpeakerContext": {
+      "additionalProperties": false,
+      "properties": {
+        "speaker_id": {
+          "minLength": 1,
+          "title": "Speaker Id",
+          "type": "string"
+        },
+        "region": {
+          "minLength": 1,
+          "title": "Region",
+          "type": "string"
+        },
+        "age_group": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Age Group"
+        },
+        "gender": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Gender"
+        },
+        "device": {
+          "default": "unknown",
+          "minLength": 1,
+          "title": "Device",
+          "type": "string"
+        },
+        "environment": {
+          "default": "unknown",
+          "minLength": 1,
+          "title": "Environment",
+          "type": "string"
+        }
+      },
+      "required": [
+        "speaker_id",
+        "region"
+      ],
+      "title": "SpeakerContext",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "utterance_id": {
+      "format": "uuid",
+      "title": "Utterance Id",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "source": {
+      "default": "lab_upload",
+      "enum": [
+        "lab_upload",
+        "import"
+      ],
+      "title": "Source",
+      "type": "string"
+    },
+    "speaker": {
+      "$ref": "#/$defs/SpeakerContext"
+    },
+    "dataset_split": {
+      "$ref": "#/$defs/DatasetSplit",
+      "default": "unassigned"
+    },
+    "consent": {
+      "$ref": "#/$defs/ConsentRecord"
+    },
+    "audio": {
+      "$ref": "#/$defs/AudioBundle"
+    },
+    "ground_truth": {
+      "$ref": "#/$defs/LinguisticGroundTruth"
+    }
+  },
+  "required": [
+    "speaker",
+    "consent",
+    "audio",
+    "ground_truth"
+  ],
+  "title": "UtteranceRecord",
+  "type": "object"
+}

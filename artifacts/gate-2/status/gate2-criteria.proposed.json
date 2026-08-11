@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0.0",
+  "status": "proposed_thresholds",
+  "pilot_max_cer": 0.35,
+  "pilot_min_dialect_preservation": 0.6,
+  "human_min_fine_tuned_preference_rate": 0.7,
+  "independent_min_utterances": 100,
+  "independent_min_speakers": 5,
+  "independent_min_relative_cer_improvement": 0.1,
+  "independent_min_dialect_preservation_delta": 0.15,
+  "standard_min_utterances": 100,
+  "standard_min_speakers": 5,
+  "standard_max_relative_cer_regression": 0.15,
+  "standard_max_absolute_cer_regression": 0.03,
+  "empty_output_increase_allowed": 0
+}

@@ -1,0 +1,18 @@
+name: task-003b-nemotron
+status: selected_not_yet_gpu_validated
+recommended_base_image: nvcr.io/nvidia/pytorch:26.06-py3
+operating_system:
+  container: Ubuntu 24.04
+  host: Linux or Windows with WSL2 and NVIDIA Container Toolkit
+python: "3.12"
+pytorch: "2.13.0a0+8145d630e8 (provided by the NVIDIA 26.06 container)"
+cuda: "13.3.0 (provided by the NVIDIA 26.06 container)"
+transformers: "5.13.0"
+nemo:
+  required_for_selected_path: false
+  official_model_runtime_engine: "NeMo 26.06"
+notes:
+  - The official model card recommends Python 3.11 or newer and latest PyTorch.
+  - The selected path uses the model card's official Transformers offline RNNT API.
+  - Exact cross-component compatibility remains to be confirmed on the external GPU.
+  - Do not install a second PyTorch wheel over the NVIDIA container's PyTorch.

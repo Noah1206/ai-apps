@@ -1,0 +1,114 @@
+{
+  "schema_version": "1.0.0",
+  "created_at": "2026-08-08T11:42:32Z",
+  "status": "automatic_evaluation_complete_human_review_pending",
+  "inputs": {
+    "results_zip": {
+      "path": "/Users/johyeon-ung/Downloads/Gmail/task-005-nemotron-benchmark-results-v0.zip",
+      "sha256": "8758714ada3a402f78fd364d754553612b4ec59106c7402a16da8cf6d5e7bdcc"
+    },
+    "benchmark_zip": {
+      "path": "artifacts/task-002/busan-surface-v0--1.0.0.zip",
+      "sha256": "151c1e28804627bea69bbd7f6632f4d3558ebf076147e42c1d168d508467233c"
+    },
+    "validation_zip_provenance": {
+      "path": "/Users/johyeon-ung/Downloads/Gmail/task-005-independent-validation-v0.zip",
+      "sha256": "8253af4979ce5f9e20aed9bbb9023ee9f03f3797278e53beabdb90468f825f0d"
+    }
+  },
+  "validation": {
+    "benchmark_id": "busan-surface-v0",
+    "benchmark_version": "1.0.0",
+    "frozen": true,
+    "utterances": 10,
+    "sample_rate_hz": 16000,
+    "channels": 1,
+    "duplicate_utterance_ids": 0,
+    "missing_audio": 0,
+    "audio_hash_mismatches": 0,
+    "corrupt_audio": 0,
+    "results_zip_members": 9,
+    "path_traversal_members": 0,
+    "symlink_members": 0,
+    "model_artifacts_in_results_zip": 0,
+    "prediction_rows_per_experiment": 10,
+    "prediction_duplicates": 0,
+    "prediction_missing": 0,
+    "prediction_errors": 0
+  },
+  "normalization": {
+    "cer": "Unicode NFC, then remove Unicode separator and punctuation categories; words are not changed",
+    "dialect_preservation": "Unicode NFC exact surface-form substring match",
+    "overcorrection": "Unicode NFC exact normalized-form substring match",
+    "wer": "not_defined_or_computed"
+  },
+  "experiments": {
+    "pretrained": {
+      "experiment_id": "task-005-nemotron-3.5-asr-streaming-0.6b-nemo-pretrained-control-v0",
+      "report_id": "report-b5f2b6f8-b3e1-4809-98a4-54fa3300ef42",
+      "fine_tuned": false,
+      "cer": 0.6166666666666667,
+      "dialect_preservation_rate": 0.2,
+      "context_overcorrection_rate": 0.0,
+      "high_confidence_wrong_count": 0,
+      "empty_predictions": 3,
+      "p50_latency_ms": 407.4265,
+      "p95_latency_ms": 9954.67635
+    },
+    "fine_tuned_best": {
+      "experiment_id": "task-005-nemotron-3.5-asr-streaming-0.6b-busan-adapter-best-v0",
+      "report_id": "report-2d2e6c74-9e7c-4d46-a882-e6a04a8cff05",
+      "fine_tuned": true,
+      "selected_epoch": 5,
+      "selected_global_step": 97,
+      "cer": 0.05,
+      "dialect_preservation_rate": 0.9333333333333333,
+      "context_overcorrection_rate": 0.0,
+      "high_confidence_wrong_count": 0,
+      "empty_predictions": 0,
+      "p50_latency_ms": 448.5375,
+      "p95_latency_ms": 3392.04385
+    }
+  },
+  "automatic_comparison": {
+    "cer_delta_fine_tuned_minus_pretrained": -0.5666666666666667,
+    "dialect_preservation_delta": 0.7333333333333333,
+    "cer_outcomes": {
+      "improved": 8,
+      "tied": 2,
+      "worsened": 0
+    },
+    "dialect_preservation_outcomes": {
+      "improved": 9,
+      "tied": 1,
+      "worsened": 0
+    }
+  },
+  "cases": [
+    {"reference":"와따 맛있노","pretrained":"","fine_tuned":"와따 맛있노?","pretrained_cer":1.0,"fine_tuned_cer":0.0,"cer_outcome":"improved"},
+    {"reference":"마, 괜찮다 아이가.","pretrained":"막 괜찮다 이거","fine_tuned":"막 괜찮다 아이가.","pretrained_cer":0.4285714286,"fine_tuned_cer":0.1428571429,"cer_outcome":"improved"},
+    {"reference":"내일 같이 가재이","pretrained":"","fine_tuned":"내일 같이 가재이.","pretrained_cer":1.0,"fine_tuned_cer":0.0,"cer_outcome":"improved"},
+    {"reference":"여기 좀 앉으이소.","pretrained":"어 이 조만칠이서","fine_tuned":"아 여기 좀 앉으이소.","pretrained_cer":0.8571428571,"fine_tuned_cer":0.1428571429,"cer_outcome":"improved"},
+    {"reference":"지금 뭐 하노?","pretrained":"지금 뭐 하노","fine_tuned":"지금 뭐 하노?","pretrained_cer":0.0,"fine_tuned_cer":0.0,"cer_outcome":"tied"},
+    {"reference":"그거 아이다.","pretrained":"","fine_tuned":"그거 아이다.","pretrained_cer":1.0,"fine_tuned_cer":0.0,"cer_outcome":"improved"},
+    {"reference":"오늘 와 이리 춥노?","pretrained":"옷 와이디 춤로","fine_tuned":"오늘 와이리 춥노?","pretrained_cer":0.7142857143,"fine_tuned_cer":0.0,"cer_outcome":"improved"},
+    {"reference":"밥 묵었나?","pretrained":"밤 무거나","fine_tuned":"밥 묵었나?","pretrained_cer":0.75,"fine_tuned_cer":0.0,"cer_outcome":"improved"},
+    {"reference":"니 지금 어데고?","pretrained":"니 지금 어디가","fine_tuned":"니 지금 어데고?","pretrained_cer":0.3333333333,"fine_tuned_cer":0.0,"cer_outcome":"improved"},
+    {"reference":"국밥 하나 주이소","pretrained":"국밥 하나 주의소","fine_tuned":"국밥아나 주이소.","pretrained_cer":0.1428571429,"fine_tuned_cer":0.1428571429,"cer_outcome":"tied"}
+  ],
+  "human_review": {
+    "queue_items": 10,
+    "completed": 0,
+    "status": "pending",
+    "superiority_confirmed": false
+  },
+  "limitations": [
+    "Only 10 frozen benchmark utterances are available.",
+    "Human A/B review is not completed.",
+    "All 15 benchmark dialect labels are candidate labels, not approved labels.",
+    "WER is not part of the current Audio Lab contract.",
+    "The train pool has one declared speaker; benchmark speaker IDs sample1 through sample10 do not establish real-world speaker independence.",
+    "No exact normalized transcript overlap was found, but training intentionally contains related dialect expressions; the nearest pair has official normalized CER 0.3333.",
+    "Automatic metrics alone do not establish general Busan ASR superiority."
+  ]
+}

@@ -1,0 +1,541 @@
+{
+  "schema_version": "1.0.0",
+  "report_id": "report-b5f2b6f8-b3e1-4809-98a4-54fa3300ef42",
+  "experiment_id": "task-005-nemotron-3.5-asr-streaming-0.6b-nemo-pretrained-control-v0",
+  "benchmark_id": "busan-surface-v0",
+  "benchmark_version": "1.0.0",
+  "created_at": "2026-08-08T11:40:42.813864Z",
+  "model": {
+    "name": "nvidia/nemotron-3.5-asr-streaming-0.6b",
+    "version": "f3d333391852ba876df169dcc9ba902d25b6ab0b",
+    "model_provider": "NVIDIA",
+    "model_family": "FastConformer-RNNT",
+    "decoder_type": "RNNT",
+    "target_language": "ko-KR",
+    "fine_tuned": false,
+    "checkpoint_identifier": "hf://nvidia/nemotron-3.5-asr-streaming-0.6b@f3d333391852ba876df169dcc9ba902d25b6ab0b#sha256:210214ed94039bf6bfbb9a047c7fa289628db75b103e2bf6381fa78285436a74",
+    "checkpoint": "nemo:///home/ab409/task-005-nemotron/models/nemotron-3.5-asr-streaming-0.6b.nemo#sha256:210214ed94039bf6bfbb9a047c7fa289628db75b103e2bf6381fa78285436a74",
+    "tokenizer_version": "sentencepiece-13087",
+    "config_hash": null
+  },
+  "metrics": {
+    "utterance_count": 10,
+    "cer": 0.6166666666666667,
+    "dialect_preservation_rate": 0.2,
+    "context_overcorrection_rate": 0.0,
+    "high_confidence_wrong_count": 0,
+    "p50_latency_ms": 407.42650000000003,
+    "p95_latency_ms": 9954.676349999983
+  },
+  "cases": [
+    {
+      "schema_version": "1.0.0",
+      "utterance_id": "3faa344e-968d-42cb-baf8-f1847a936a98",
+      "reference_surface_text": "와따 맛있노",
+      "normalized_meaning": "진짜 맛있다",
+      "hypothesis_surface_text": "",
+      "confidence": null,
+      "cer": 1.0,
+      "edits": {
+        "substitutions": 0,
+        "deletions": 5,
+        "insertions": 0,
+        "reference_characters": 5
+      },
+      "dialect": {
+        "preservation_rate": 0.0,
+        "overcorrection_rate": 0.0,
+        "reference_expression_count": 2,
+        "approved_expression_count": 0,
+        "results": [
+          {
+            "surface_form": "와따",
+            "normalized_forms": [
+              "와"
+            ],
+            "label_status": "candidate",
+            "match_status": "missing",
+            "matched_form": null
+          },
+          {
+            "surface_form": "맛있노",
+            "normalized_forms": [
+              "맛있다"
+            ],
+            "label_status": "candidate",
+            "match_status": "missing",
+            "matched_form": null
+          }
+        ]
+      },
+      "high_confidence_wrong": false,
+      "model": {
+        "name": "nvidia/nemotron-3.5-asr-streaming-0.6b",
+        "version": "f3d333391852ba876df169dcc9ba902d25b6ab0b",
+        "model_provider": "NVIDIA",
+        "model_family": "FastConformer-RNNT",
+        "decoder_type": "RNNT",
+        "target_language": "ko-KR",
+        "fine_tuned": false,
+        "checkpoint_identifier": "hf://nvidia/nemotron-3.5-asr-streaming-0.6b@f3d333391852ba876df169dcc9ba902d25b6ab0b#sha256:210214ed94039bf6bfbb9a047c7fa289628db75b103e2bf6381fa78285436a74",
+        "checkpoint": "nemo:///home/ab409/task-005-nemotron/models/nemotron-3.5-asr-streaming-0.6b.nemo#sha256:210214ed94039bf6bfbb9a047c7fa289628db75b103e2bf6381fa78285436a74",
+        "tokenizer_version": "sentencepiece-13087",
+        "config_hash": null
+      }
+    },
+    {
+      "schema_version": "1.0.0",
+      "utterance_id": "dbfedf22-ef0f-4cc5-ac99-2daf4758aa72",
+      "reference_surface_text": "마, 괜찮다 아이가.",
+      "normalized_meaning": "야, 괜찮잖아. 뭘 엄살 부리고있어.",
+      "hypothesis_surface_text": "막 괜찮다 이거",
+      "confidence": null,
+      "cer": 0.42857142857142855,
+      "edits": {
+        "substitutions": 2,
+        "deletions": 1,
+        "insertions": 0,
+        "reference_characters": 7
+      },
+      "dialect": {
+        "preservation_rate": 0.0,
+        "overcorrection_rate": 0.0,
+        "reference_expression_count": 2,
+        "approved_expression_count": 0,
+        "results": [
+          {
+            "surface_form": "마",
+            "normalized_forms": [
+              "야"
+            ],
+            "label_status": "candidate",
+            "match_status": "missing",
+            "matched_form": null
+          },
+          {
+            "surface_form": "아이가",
+            "normalized_forms": [
+              "잖아"
+            ],
+            "label_status": "candidate",
+            "match_status": "missing",
+            "matched_form": null
+          }
+        ]
+      },
+      "high_confidence_wrong": false,
+      "model": {
+        "name": "nvidia/nemotron-3.5-asr-streaming-0.6b",
+        "version": "f3d333391852ba876df169dcc9ba902d25b6ab0b",
+        "model_provider": "NVIDIA",
+        "model_family": "FastConformer-RNNT",
+        "decoder_type": "RNNT",
+        "target_language": "ko-KR",
+        "fine_tuned": false,
+        "checkpoint_identifier": "hf://nvidia/nemotron-3.5-asr-streaming-0.6b@f3d333391852ba876df169dcc9ba902d25b6ab0b#sha256:210214ed94039bf6bfbb9a047c7fa289628db75b103e2bf6381fa78285436a74",
+        "checkpoint": "nemo:///home/ab409/task-005-nemotron/models/nemotron-3.5-asr-streaming-0.6b.nemo#sha256:210214ed94039bf6bfbb9a047c7fa289628db75b103e2bf6381fa78285436a74",
+        "tokenizer_version": "sentencepiece-13087",
+        "config_hash": null
+      }
+    },
+    {
+      "schema_version": "1.0.0",
+      "utterance_id": "75b96c24-cab0-4e52-839b-dd67b496e58a",
+      "reference_surface_text": "내일 같이 가재이",
+      "normalized_meaning": "내일 같이 가자.",
+      "hypothesis_surface_text": "",
+      "confidence": null,
+      "cer": 1.0,
+      "edits": {
+        "substitutions": 0,
+        "deletions": 7,
+        "insertions": 0,
+        "reference_characters": 7
+      },
+      "dialect": {
+        "preservation_rate": 0.0,
+        "overcorrection_rate": 0.0,
+        "reference_expression_count": 1,
+        "approved_expression_count": 0,
+        "results": [
+          {
+            "surface_form": "가재이",
+            "normalized_forms": [
+              "가자"
+            ],
+            "label_status": "candidate",
+            "match_status": "missing",
+            "matched_form": null
+          }
+        ]
+      },
+      "high_confidence_wrong": false,
+      "model": {
+        "name": "nvidia/nemotron-3.5-asr-streaming-0.6b",
+        "version": "f3d333391852ba876df169dcc9ba902d25b6ab0b",
+        "model_provider": "NVIDIA",
+        "model_family": "FastConformer-RNNT",
+        "decoder_type": "RNNT",
+        "target_language": "ko-KR",
+        "fine_tuned": false,
+        "checkpoint_identifier": "hf://nvidia/nemotron-3.5-asr-streaming-0.6b@f3d333391852ba876df169dcc9ba902d25b6ab0b#sha256:210214ed94039bf6bfbb9a047c7fa289628db75b103e2bf6381fa78285436a74",
+        "checkpoint": "nemo:///home/ab409/task-005-nemotron/models/nemotron-3.5-asr-streaming-0.6b.nemo#sha256:210214ed94039bf6bfbb9a047c7fa289628db75b103e2bf6381fa78285436a74",
+        "tokenizer_version": "sentencepiece-13087",
+        "config_hash": null
+      }
+    },
+    {
+      "schema_version": "1.0.0",
+      "utterance_id": "d66716eb-c35d-4867-907c-187935449cab",
+      "reference_surface_text": "여기 좀 앉으이소.",
+      "normalized_meaning": "여기 앉으세요.",
+      "hypothesis_surface_text": "어 이 조만칠이서",
+      "confidence": null,
+      "cer": 0.8571428571428571,
+      "edits": {
+        "substitutions": 6,
+        "deletions": 0,
+        "insertions": 0,
+        "reference_characters": 7
+      },
+      "dialect": {
+        "preservation_rate": 0.0,
+        "overcorrection_rate": 0.0,
+        "reference_expression_count": 1,
+        "approved_expression_count": 0,
+        "results": [
+          {
+            "surface_form": "앉으이소",
+            "normalized_forms": [
+              "앉으세요"
+            ],
+            "label_status": "candidate",
+            "match_status": "missing",
+            "matched_form": null
+          }
+        ]
+      },
+      "high_confidence_wrong": false,
+      "model": {
+        "name": "nvidia/nemotron-3.5-asr-streaming-0.6b",
+        "version": "f3d333391852ba876df169dcc9ba902d25b6ab0b",
+        "model_provider": "NVIDIA",
+        "model_family": "FastConformer-RNNT",
+        "decoder_type": "RNNT",
+        "target_language": "ko-KR",
+        "fine_tuned": false,
+        "checkpoint_identifier": "hf://nvidia/nemotron-3.5-asr-streaming-0.6b@f3d333391852ba876df169dcc9ba902d25b6ab0b#sha256:210214ed94039bf6bfbb9a047c7fa289628db75b103e2bf6381fa78285436a74",
+        "checkpoint": "nemo:///home/ab409/task-005-nemotron/models/nemotron-3.5-asr-streaming-0.6b.nemo#sha256:210214ed94039bf6bfbb9a047c7fa289628db75b103e2bf6381fa78285436a74",
+        "tokenizer_version": "sentencepiece-13087",
+        "config_hash": null
+      }
+    },
+    {
+      "schema_version": "1.0.0",
+      "utterance_id": "38f63a59-325b-4e53-9287-ab094c6a889d",
+      "reference_surface_text": "지금 뭐 하노?",
+      "normalized_meaning": "지금 뭐 해?",
+      "hypothesis_surface_text": "지금 뭐 하노",
+      "confidence": null,
+      "cer": 0.0,
+      "edits": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "reference_characters": 5
+      },
+      "dialect": {
+        "preservation_rate": 1.0,
+        "overcorrection_rate": 0.0,
+        "reference_expression_count": 1,
+        "approved_expression_count": 0,
+        "results": [
+          {
+            "surface_form": "하노",
+            "normalized_forms": [
+              "해",
+              "하니"
+            ],
+            "label_status": "candidate",
+            "match_status": "preserved",
+            "matched_form": "하노"
+          }
+        ]
+      },
+      "high_confidence_wrong": false,
+      "model": {
+        "name": "nvidia/nemotron-3.5-asr-streaming-0.6b",
+        "version": "f3d333391852ba876df169dcc9ba902d25b6ab0b",
+        "model_provider": "NVIDIA",
+        "model_family": "FastConformer-RNNT",
+        "decoder_type": "RNNT",
+        "target_language": "ko-KR",
+        "fine_tuned": false,
+        "checkpoint_identifier": "hf://nvidia/nemotron-3.5-asr-streaming-0.6b@f3d333391852ba876df169dcc9ba902d25b6ab0b#sha256:210214ed94039bf6bfbb9a047c7fa289628db75b103e2bf6381fa78285436a74",
+        "checkpoint": "nemo:///home/ab409/task-005-nemotron/models/nemotron-3.5-asr-streaming-0.6b.nemo#sha256:210214ed94039bf6bfbb9a047c7fa289628db75b103e2bf6381fa78285436a74",
+        "tokenizer_version": "sentencepiece-13087",
+        "config_hash": null
+      }
+    },
+    {
+      "schema_version": "1.0.0",
+      "utterance_id": "c95d2f85-a98a-4c19-9476-e55b92a49dc0",
+      "reference_surface_text": "그거 아이다.",
+      "normalized_meaning": "그거 아니야.",
+      "hypothesis_surface_text": "",
+      "confidence": null,
+      "cer": 1.0,
+      "edits": {
+        "substitutions": 0,
+        "deletions": 5,
+        "insertions": 0,
+        "reference_characters": 5
+      },
+      "dialect": {
+        "preservation_rate": 0.0,
+        "overcorrection_rate": 0.0,
+        "reference_expression_count": 1,
+        "approved_expression_count": 0,
+        "results": [
+          {
+            "surface_form": "아이다",
+            "normalized_forms": [
+              "아니야",
+              "아닙니다"
+            ],
+            "label_status": "candidate",
+            "match_status": "missing",
+            "matched_form": null
+          }
+        ]
+      },
+      "high_confidence_wrong": false,
+      "model": {
+        "name": "nvidia/nemotron-3.5-asr-streaming-0.6b",
+        "version": "f3d333391852ba876df169dcc9ba902d25b6ab0b",
+        "model_provider": "NVIDIA",
+        "model_family": "FastConformer-RNNT",
+        "decoder_type": "RNNT",
+        "target_language": "ko-KR",
+        "fine_tuned": false,
+        "checkpoint_identifier": "hf://nvidia/nemotron-3.5-asr-streaming-0.6b@f3d333391852ba876df169dcc9ba902d25b6ab0b#sha256:210214ed94039bf6bfbb9a047c7fa289628db75b103e2bf6381fa78285436a74",
+        "checkpoint": "nemo:///home/ab409/task-005-nemotron/models/nemotron-3.5-asr-streaming-0.6b.nemo#sha256:210214ed94039bf6bfbb9a047c7fa289628db75b103e2bf6381fa78285436a74",
+        "tokenizer_version": "sentencepiece-13087",
+        "config_hash": null
+      }
+    },
+    {
+      "schema_version": "1.0.0",
+      "utterance_id": "c426f5fc-397d-4ef8-8d7c-9b1d34e4a81a",
+      "reference_surface_text": "오늘 와 이리 춥노?",
+      "normalized_meaning": "오늘 왜 이렇게 추워?",
+      "hypothesis_surface_text": "옷 와이디 춤로",
+      "confidence": null,
+      "cer": 0.7142857142857143,
+      "edits": {
+        "substitutions": 4,
+        "deletions": 1,
+        "insertions": 0,
+        "reference_characters": 7
+      },
+      "dialect": {
+        "preservation_rate": 0.3333333333333333,
+        "overcorrection_rate": 0.0,
+        "reference_expression_count": 3,
+        "approved_expression_count": 0,
+        "results": [
+          {
+            "surface_form": "와",
+            "normalized_forms": [
+              "왜"
+            ],
+            "label_status": "candidate",
+            "match_status": "preserved",
+            "matched_form": "와"
+          },
+          {
+            "surface_form": "이리",
+            "normalized_forms": [
+              "이렇게"
+            ],
+            "label_status": "candidate",
+            "match_status": "missing",
+            "matched_form": null
+          },
+          {
+            "surface_form": "춥노",
+            "normalized_forms": [
+              "추워"
+            ],
+            "label_status": "candidate",
+            "match_status": "missing",
+            "matched_form": null
+          }
+        ]
+      },
+      "high_confidence_wrong": false,
+      "model": {
+        "name": "nvidia/nemotron-3.5-asr-streaming-0.6b",
+        "version": "f3d333391852ba876df169dcc9ba902d25b6ab0b",
+        "model_provider": "NVIDIA",
+        "model_family": "FastConformer-RNNT",
+        "decoder_type": "RNNT",
+        "target_language": "ko-KR",
+        "fine_tuned": false,
+        "checkpoint_identifier": "hf://nvidia/nemotron-3.5-asr-streaming-0.6b@f3d333391852ba876df169dcc9ba902d25b6ab0b#sha256:210214ed94039bf6bfbb9a047c7fa289628db75b103e2bf6381fa78285436a74",
+        "checkpoint": "nemo:///home/ab409/task-005-nemotron/models/nemotron-3.5-asr-streaming-0.6b.nemo#sha256:210214ed94039bf6bfbb9a047c7fa289628db75b103e2bf6381fa78285436a74",
+        "tokenizer_version": "sentencepiece-13087",
+        "config_hash": null
+      }
+    },
+    {
+      "schema_version": "1.0.0",
+      "utterance_id": "d53bf39e-0c55-4433-8bea-3b5242b55f9a",
+      "reference_surface_text": "밥 묵었나?",
+      "normalized_meaning": "밥 먹었어?",
+      "hypothesis_surface_text": "밤 무거나",
+      "confidence": null,
+      "cer": 0.75,
+      "edits": {
+        "substitutions": 3,
+        "deletions": 0,
+        "insertions": 0,
+        "reference_characters": 4
+      },
+      "dialect": {
+        "preservation_rate": 0.0,
+        "overcorrection_rate": 0.0,
+        "reference_expression_count": 1,
+        "approved_expression_count": 0,
+        "results": [
+          {
+            "surface_form": "묵었나",
+            "normalized_forms": [
+              "먹었어",
+              "먹었니"
+            ],
+            "label_status": "candidate",
+            "match_status": "missing",
+            "matched_form": null
+          }
+        ]
+      },
+      "high_confidence_wrong": false,
+      "model": {
+        "name": "nvidia/nemotron-3.5-asr-streaming-0.6b",
+        "version": "f3d333391852ba876df169dcc9ba902d25b6ab0b",
+        "model_provider": "NVIDIA",
+        "model_family": "FastConformer-RNNT",
+        "decoder_type": "RNNT",
+        "target_language": "ko-KR",
+        "fine_tuned": false,
+        "checkpoint_identifier": "hf://nvidia/nemotron-3.5-asr-streaming-0.6b@f3d333391852ba876df169dcc9ba902d25b6ab0b#sha256:210214ed94039bf6bfbb9a047c7fa289628db75b103e2bf6381fa78285436a74",
+        "checkpoint": "nemo:///home/ab409/task-005-nemotron/models/nemotron-3.5-asr-streaming-0.6b.nemo#sha256:210214ed94039bf6bfbb9a047c7fa289628db75b103e2bf6381fa78285436a74",
+        "tokenizer_version": "sentencepiece-13087",
+        "config_hash": null
+      }
+    },
+    {
+      "schema_version": "1.0.0",
+      "utterance_id": "9e5edb72-7ef8-46df-8021-ab0de6dfd567",
+      "reference_surface_text": "니 지금 어데고?",
+      "normalized_meaning": "너 지금 어디야?",
+      "hypothesis_surface_text": "니 지금 어디가",
+      "confidence": null,
+      "cer": 0.3333333333333333,
+      "edits": {
+        "substitutions": 2,
+        "deletions": 0,
+        "insertions": 0,
+        "reference_characters": 6
+      },
+      "dialect": {
+        "preservation_rate": 0.5,
+        "overcorrection_rate": 0.0,
+        "reference_expression_count": 2,
+        "approved_expression_count": 0,
+        "results": [
+          {
+            "surface_form": "니",
+            "normalized_forms": [
+              "너"
+            ],
+            "label_status": "candidate",
+            "match_status": "preserved",
+            "matched_form": "니"
+          },
+          {
+            "surface_form": "어데고",
+            "normalized_forms": [
+              "어디야"
+            ],
+            "label_status": "candidate",
+            "match_status": "missing",
+            "matched_form": null
+          }
+        ]
+      },
+      "high_confidence_wrong": false,
+      "model": {
+        "name": "nvidia/nemotron-3.5-asr-streaming-0.6b",
+        "version": "f3d333391852ba876df169dcc9ba902d25b6ab0b",
+        "model_provider": "NVIDIA",
+        "model_family": "FastConformer-RNNT",
+        "decoder_type": "RNNT",
+        "target_language": "ko-KR",
+        "fine_tuned": false,
+        "checkpoint_identifier": "hf://nvidia/nemotron-3.5-asr-streaming-0.6b@f3d333391852ba876df169dcc9ba902d25b6ab0b#sha256:210214ed94039bf6bfbb9a047c7fa289628db75b103e2bf6381fa78285436a74",
+        "checkpoint": "nemo:///home/ab409/task-005-nemotron/models/nemotron-3.5-asr-streaming-0.6b.nemo#sha256:210214ed94039bf6bfbb9a047c7fa289628db75b103e2bf6381fa78285436a74",
+        "tokenizer_version": "sentencepiece-13087",
+        "config_hash": null
+      }
+    },
+    {
+      "schema_version": "1.0.0",
+      "utterance_id": "e2d209fb-b801-4a47-b528-3ae54c723ea0",
+      "reference_surface_text": "국밥 하나 주이소",
+      "normalized_meaning": "국밥 하나 시킬게요",
+      "hypothesis_surface_text": "국밥 하나 주의소",
+      "confidence": null,
+      "cer": 0.14285714285714285,
+      "edits": {
+        "substitutions": 1,
+        "deletions": 0,
+        "insertions": 0,
+        "reference_characters": 7
+      },
+      "dialect": {
+        "preservation_rate": 0.0,
+        "overcorrection_rate": 0.0,
+        "reference_expression_count": 1,
+        "approved_expression_count": 0,
+        "results": [
+          {
+            "surface_form": "주이소",
+            "normalized_forms": [
+              "주세요",
+              "주십시오"
+            ],
+            "label_status": "candidate",
+            "match_status": "missing",
+            "matched_form": null
+          }
+        ]
+      },
+      "high_confidence_wrong": false,
+      "model": {
+        "name": "nvidia/nemotron-3.5-asr-streaming-0.6b",
+        "version": "f3d333391852ba876df169dcc9ba902d25b6ab0b",
+        "model_provider": "NVIDIA",
+        "model_family": "FastConformer-RNNT",
+        "decoder_type": "RNNT",
+        "target_language": "ko-KR",
+        "fine_tuned": false,
+        "checkpoint_identifier": "hf://nvidia/nemotron-3.5-asr-streaming-0.6b@f3d333391852ba876df169dcc9ba902d25b6ab0b#sha256:210214ed94039bf6bfbb9a047c7fa289628db75b103e2bf6381fa78285436a74",
+        "checkpoint": "nemo:///home/ab409/task-005-nemotron/models/nemotron-3.5-asr-streaming-0.6b.nemo#sha256:210214ed94039bf6bfbb9a047c7fa289628db75b103e2bf6381fa78285436a74",
+        "tokenizer_version": "sentencepiece-13087",
+        "config_hash": null
+      }
+    }
+  ]
+}

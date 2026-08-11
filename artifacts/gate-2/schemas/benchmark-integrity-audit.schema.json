@@ -1,0 +1,161 @@
+{
+  "$defs": {
+    "BenchmarkSerialization": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "raw_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Raw Sha256",
+          "type": "string"
+        },
+        "semantic_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Semantic Sha256",
+          "type": "string"
+        },
+        "utterance_count": {
+          "minimum": 1,
+          "title": "Utterance Count",
+          "type": "integer"
+        },
+        "raw_dialect_expression_count": {
+          "minimum": 0,
+          "title": "Raw Dialect Expression Count",
+          "type": "integer"
+        },
+        "semantic_dialect_expression_count": {
+          "minimum": 0,
+          "title": "Semantic Dialect Expression Count",
+          "type": "integer"
+        },
+        "annotation_structure": {
+          "enum": [
+            "legacy_quoted_compound",
+            "expanded_labels"
+          ],
+          "title": "Annotation Structure",
+          "type": "string"
+        },
+        "used_by": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Used By",
+          "type": "array"
+        },
+        "related_artifacts": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Related Artifacts",
+          "type": "array"
+        }
+      },
+      "required": [
+        "path",
+        "raw_sha256",
+        "semantic_sha256",
+        "utterance_count",
+        "raw_dialect_expression_count",
+        "semantic_dialect_expression_count",
+        "annotation_structure"
+      ],
+      "title": "BenchmarkSerialization",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "audit_id": {
+      "minLength": 1,
+      "title": "Audit Id",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "benchmark_id": {
+      "minLength": 1,
+      "title": "Benchmark Id",
+      "type": "string"
+    },
+    "benchmark_version": {
+      "minLength": 1,
+      "title": "Benchmark Version",
+      "type": "string"
+    },
+    "decision": {
+      "const": "audited_semantic_equivalence_keep_version",
+      "title": "Decision",
+      "type": "string"
+    },
+    "canonical_artifact_path": {
+      "minLength": 1,
+      "title": "Canonical Artifact Path",
+      "type": "string"
+    },
+    "canonical_package_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Canonical Package Sha256",
+      "type": "string"
+    },
+    "canonical_manifest_raw_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Canonical Manifest Raw Sha256",
+      "type": "string"
+    },
+    "canonical_semantic_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Canonical Semantic Sha256",
+      "type": "string"
+    },
+    "semantically_equivalent": {
+      "const": true,
+      "default": true,
+      "title": "Semantically Equivalent",
+      "type": "boolean"
+    },
+    "serializations": {
+      "items": {
+        "$ref": "#/$defs/BenchmarkSerialization"
+      },
+      "minItems": 2,
+      "title": "Serializations",
+      "type": "array"
+    },
+    "provenance_note": {
+      "minLength": 1,
+      "title": "Provenance Note",
+      "type": "string"
+    }
+  },
+  "required": [
+    "audit_id",
+    "benchmark_id",
+    "benchmark_version",
+    "decision",
+    "canonical_artifact_path",
+    "canonical_package_sha256",
+    "canonical_manifest_raw_sha256",
+    "canonical_semantic_sha256",
+    "serializations",
+    "provenance_note"
+  ],
+  "title": "BenchmarkIntegrityAudit",
+  "type": "object"
+}

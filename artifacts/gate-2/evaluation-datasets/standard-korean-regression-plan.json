@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0.0",
+  "status": "data_not_available_on_mac",
+  "dataset_id": "standard-korean-regression-v0",
+  "dataset_kind": "standard_korean_regression",
+  "proposed_minimum": {
+    "utterances": 100,
+    "speakers": 5
+  },
+  "recommended_target": {
+    "utterances": 200,
+    "speakers": 10
+  },
+  "content": [
+    "standard Korean conversational speech",
+    "short and long utterances",
+    "sentence-initial short syllables and final endings",
+    "multiple genders and age groups when source policy permits"
+  ],
+  "evaluation": [
+    "same pretrained and selected adapter artifacts",
+    "same offline NeMo API and decoding settings",
+    "CER and empty-output count",
+    "utterance-level regressions",
+    "latency as a non-blocking diagnostic"
+  ],
+  "eligible_existing_items": 0
+}

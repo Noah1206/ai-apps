@@ -1,0 +1,494 @@
+{
+  "$defs": {
+    "DialectExpressionResult": {
+      "additionalProperties": false,
+      "properties": {
+        "surface_form": {
+          "title": "Surface Form",
+          "type": "string"
+        },
+        "normalized_forms": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Normalized Forms",
+          "type": "array"
+        },
+        "label_status": {
+          "$ref": "#/$defs/ReviewStatus"
+        },
+        "match_status": {
+          "$ref": "#/$defs/DialectMatchStatus"
+        },
+        "matched_form": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Matched Form"
+        }
+      },
+      "required": [
+        "surface_form",
+        "normalized_forms",
+        "label_status",
+        "match_status"
+      ],
+      "title": "DialectExpressionResult",
+      "type": "object"
+    },
+    "DialectMatchStatus": {
+      "enum": [
+        "preserved",
+        "overcorrected",
+        "missing"
+      ],
+      "title": "DialectMatchStatus",
+      "type": "string"
+    },
+    "DialectPreservationMetric": {
+      "additionalProperties": false,
+      "properties": {
+        "preservation_rate": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Preservation Rate",
+          "type": "number"
+        },
+        "overcorrection_rate": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Overcorrection Rate",
+          "type": "number"
+        },
+        "reference_expression_count": {
+          "minimum": 0,
+          "title": "Reference Expression Count",
+          "type": "integer"
+        },
+        "approved_expression_count": {
+          "minimum": 0,
+          "title": "Approved Expression Count",
+          "type": "integer"
+        },
+        "results": {
+          "items": {
+            "$ref": "#/$defs/DialectExpressionResult"
+          },
+          "title": "Results",
+          "type": "array"
+        }
+      },
+      "required": [
+        "preservation_rate",
+        "overcorrection_rate",
+        "reference_expression_count",
+        "approved_expression_count",
+        "results"
+      ],
+      "title": "DialectPreservationMetric",
+      "type": "object"
+    },
+    "EditCounts": {
+      "additionalProperties": false,
+      "properties": {
+        "substitutions": {
+          "minimum": 0,
+          "title": "Substitutions",
+          "type": "integer"
+        },
+        "deletions": {
+          "minimum": 0,
+          "title": "Deletions",
+          "type": "integer"
+        },
+        "insertions": {
+          "minimum": 0,
+          "title": "Insertions",
+          "type": "integer"
+        },
+        "reference_characters": {
+          "minimum": 0,
+          "title": "Reference Characters",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "substitutions",
+        "deletions",
+        "insertions",
+        "reference_characters"
+      ],
+      "title": "EditCounts",
+      "type": "object"
+    },
+    "EvaluationCaseResult": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "1.0.0",
+          "default": "1.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "utterance_id": {
+          "format": "uuid",
+          "title": "Utterance Id",
+          "type": "string"
+        },
+        "reference_surface_text": {
+          "title": "Reference Surface Text",
+          "type": "string"
+        },
+        "normalized_meaning": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Normalized Meaning"
+        },
+        "hypothesis_surface_text": {
+          "title": "Hypothesis Surface Text",
+          "type": "string"
+        },
+        "confidence": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Confidence"
+        },
+        "cer": {
+          "minimum": 0,
+          "title": "Cer",
+          "type": "number"
+        },
+        "edits": {
+          "$ref": "#/$defs/EditCounts"
+        },
+        "dialect": {
+          "$ref": "#/$defs/DialectPreservationMetric"
+        },
+        "high_confidence_wrong": {
+          "title": "High Confidence Wrong",
+          "type": "boolean"
+        },
+        "model": {
+          "$ref": "#/$defs/ModelDescriptor"
+        }
+      },
+      "required": [
+        "utterance_id",
+        "reference_surface_text",
+        "normalized_meaning",
+        "hypothesis_surface_text",
+        "cer",
+        "edits",
+        "dialect",
+        "high_confidence_wrong",
+        "model"
+      ],
+      "title": "EvaluationCaseResult",
+      "type": "object"
+    },
+    "ModelDescriptor": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "version": {
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        },
+        "model_provider": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Provider"
+        },
+        "model_family": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Family"
+        },
+        "decoder_type": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Decoder Type"
+        },
+        "target_language": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target Language"
+        },
+        "fine_tuned": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fine Tuned"
+        },
+        "checkpoint_identifier": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Checkpoint Identifier"
+        },
+        "checkpoint": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Checkpoint"
+        },
+        "tokenizer_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tokenizer Version"
+        },
+        "config_hash": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Config Hash"
+        }
+      },
+      "required": [
+        "name",
+        "version"
+      ],
+      "title": "ModelDescriptor",
+      "type": "object"
+    },
+    "PredictionSource": {
+      "enum": [
+        "manual",
+        "precomputed",
+        "model_runner"
+      ],
+      "title": "PredictionSource",
+      "type": "string"
+    },
+    "ReviewStatus": {
+      "enum": [
+        "candidate",
+        "human_reviewed",
+        "approved",
+        "deprecated"
+      ],
+      "title": "ReviewStatus",
+      "type": "string"
+    },
+    "StoredPrediction": {
+      "additionalProperties": false,
+      "description": "Persisted model result linked to an experiment and immutable audio.",
+      "properties": {
+        "schema_version": {
+          "const": "1.0.0",
+          "default": "1.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "prediction_id": {
+          "format": "uuid",
+          "title": "Prediction Id",
+          "type": "string"
+        },
+        "experiment_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Experiment Id",
+          "type": "string"
+        },
+        "utterance_id": {
+          "format": "uuid",
+          "title": "Utterance Id",
+          "type": "string"
+        },
+        "audio_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Audio Sha256",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/PredictionSource"
+        },
+        "latency_ms": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Latency Ms"
+        },
+        "automatic_failure_candidates": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Automatic Failure Candidates",
+          "type": "array"
+        },
+        "evaluation": {
+          "$ref": "#/$defs/EvaluationCaseResult"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "experiment_id",
+        "utterance_id",
+        "audio_sha256",
+        "source",
+        "evaluation"
+      ],
+      "title": "StoredPrediction",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A/B comparison restricted to two predictions for the same utterance.",
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "utterance_id": {
+      "format": "uuid",
+      "title": "Utterance Id",
+      "type": "string"
+    },
+    "prediction_a": {
+      "$ref": "#/$defs/StoredPrediction"
+    },
+    "prediction_b": {
+      "$ref": "#/$defs/StoredPrediction"
+    },
+    "cer_delta_b_minus_a": {
+      "title": "Cer Delta B Minus A",
+      "type": "number"
+    },
+    "preservation_delta_b_minus_a": {
+      "title": "Preservation Delta B Minus A",
+      "type": "number"
+    },
+    "overcorrection_delta_b_minus_a": {
+      "title": "Overcorrection Delta B Minus A",
+      "type": "number"
+    },
+    "confidence_delta_b_minus_a": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Confidence Delta B Minus A"
+    }
+  },
+  "required": [
+    "utterance_id",
+    "prediction_a",
+    "prediction_b",
+    "cer_delta_b_minus_a",
+    "preservation_delta_b_minus_a",
+    "overcorrection_delta_b_minus_a",
+    "confidence_delta_b_minus_a"
+  ],
+  "title": "PredictionComparison",
+  "type": "object"
+}

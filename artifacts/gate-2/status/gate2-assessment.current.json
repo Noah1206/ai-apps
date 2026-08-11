@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0.0",
+  "status": "FAIL",
+  "passed_checks": [
+    "benchmark_integrity",
+    "reproducibility",
+    "pilot_cer",
+    "pilot_dialect_preservation",
+    "pilot_empty_output_regression"
+  ],
+  "failed_checks": [],
+  "pending_checks": [
+    "human_ab",
+    "independent_multi_speaker_test",
+    "standard_korean_regression"
+  ],
+  "note": "FAIL means Gate 2 evidence is incomplete or a safety/integrity check failed; it does not by itself mean the adapter weights are unusable. Thresholds are proposals."
+}

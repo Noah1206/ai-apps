@@ -1,0 +1,112 @@
+{
+  "schema_version": "1.0.0",
+  "created_at": "2026-08-08T05:10:06.612802Z",
+  "status": "complete",
+  "benchmark": {
+    "benchmark_id": "busan-surface-v0",
+    "benchmark_version": "1.0.0",
+    "frozen": true,
+    "package_sha256": "151c1e28804627bea69bbd7f6632f4d3558ebf076147e42c1d168d508467233c",
+    "manifest_sha256": "7dd7ad855da2fa5f3a9611b46315c4655f932e37a3706973070c526a6c804bdc",
+    "utterances": 10
+  },
+  "checkpoint_selection": {
+    "criterion": "independent validation loss before benchmark",
+    "selected_epoch": 5,
+    "selected_global_step": 97,
+    "benchmark_checkpoint_selection": false,
+    "final_step_400_nemo_used": false,
+    "final_adapters_pt_used": false
+  },
+  "comparison": {
+    "pretrained_experiment_id": "task-005-nemotron-3.5-asr-streaming-0.6b-nemo-pretrained-control-v0",
+    "fine_tuned_experiment_id": "task-005-nemotron-3.5-asr-streaming-0.6b-busan-adapter-best-v0",
+    "same_nemo_api": true,
+    "same_inference_config": true,
+    "benchmark_runs_per_model": 1,
+    "benchmark_audio_passes_per_model": 10,
+    "accuracy_metrics_computed": false,
+    "human_review_created": false
+  },
+  "guards": {
+    "reference_conditioning": false,
+    "context_biasing": false,
+    "word_boosting": false,
+    "external_language_model": false,
+    "llm_postprocessing": false,
+    "prediction_overwrite": false
+  },
+  "validation": {
+    "pretrained_rows": 10,
+    "fine_tuned_rows": 10,
+    "missing": 0,
+    "duplicates": 0,
+    "errors": 0,
+    "adapter_benchmark_forward_calls": 240
+  },
+  "commands": [
+    {
+      "stage": "pretrained_benchmark",
+      "python": "/home/ab409/.venvs/task-005-nemo/bin/python",
+      "script": "/mnt/c/Users/ab409/orca/projects/ai deepleauning/run_task005_nemo_benchmark.py",
+      "benchmark_manifest": "/home/ab409/task-005-nemotron/evaluation-input/busan-surface-v0-1.0.0/benchmark.json",
+      "target_language": "ko-KR",
+      "model": "/home/ab409/task-005-nemotron/models/nemotron-3.5-asr-streaming-0.6b.nemo",
+      "experiment_id": "task-005-nemotron-3.5-asr-streaming-0.6b-nemo-pretrained-control-v0",
+      "mode": "benchmark"
+    },
+    {
+      "stage": "fine_tuned_best_benchmark",
+      "python": "/home/ab409/.venvs/task-005-nemo/bin/python",
+      "script": "/mnt/c/Users/ab409/orca/projects/ai deepleauning/run_task005_nemo_benchmark.py",
+      "benchmark_manifest": "/home/ab409/task-005-nemotron/evaluation-input/busan-surface-v0-1.0.0/benchmark.json",
+      "target_language": "ko-KR",
+      "model": "/home/ab409/task-005-nemotron/evaluation-artifacts/task-005-busan-adapter-best-epoch5-step97.nemo",
+      "source_checkpoint": "/home/ab409/task-005-nemotron/experiments/task-005-nemotron-busan-adapter/2026-08-08_00-10-10/checkpoints/task-005-nemotron-busan-adapter--val_loss=42.0270-epoch=5.ckpt",
+      "experiment_id": "task-005-nemotron-3.5-asr-streaming-0.6b-busan-adapter-best-v0",
+      "mode": "benchmark"
+    }
+  ],
+  "files": [
+    {
+      "path": "pretrained/predictions.jsonl",
+      "sha256": "19c6684e846102c44a57f2bb510699aab876b376e17195775442464cd88a2b0d",
+      "bytes": 11837
+    },
+    {
+      "path": "pretrained/execution_metadata.json",
+      "sha256": "0ae3eeb59009e035e6f45fbe8602de3250c6e8c5c416270d81e4187e965801c9",
+      "bytes": 2891
+    },
+    {
+      "path": "pretrained/inference_summary.json",
+      "sha256": "6bf5c465433691d9f785e24e94aebeae688191775859b7099e1f841d9221508a",
+      "bytes": 2124
+    },
+    {
+      "path": "fine-tuned-best/predictions.jsonl",
+      "sha256": "b76909a4e740fd9f369aeab7a3772641c6cef8b5be77d0b589875bab90a30421",
+      "bytes": 13050
+    },
+    {
+      "path": "fine-tuned-best/execution_metadata.json",
+      "sha256": "197abfe536d1fe9a5f946a899c3c40443326d7c9b7e792ba3ae7579b81ac4e95",
+      "bytes": 3071
+    },
+    {
+      "path": "fine-tuned-best/inference_summary.json",
+      "sha256": "5c883a797d988559854020c2f149df48c30b30ac30d3d1c974a859bf3b9dca54",
+      "bytes": 2121
+    },
+    {
+      "path": "checkpoint_hashes.json",
+      "sha256": "623a143a90ba553196fbd55d552552f2f9873cc7c4e20017b13045626e2a6b13",
+      "bytes": 1714
+    },
+    {
+      "path": "training_patch.diff",
+      "sha256": "edf4aac3b415bb38856105f735914c14ff4b05a6f91083be5ffe8075b9370507",
+      "bytes": 5036
+    }
+  ]
+}

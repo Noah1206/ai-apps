@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="부산 Surface ASR의 보존 오류를 측정하는 오프라인 음성 연구 도구"
+    />
+    <title>Busan Speech Lab</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><rect width=%2264%22 height=%2264%22 rx=%2212%22 fill=%22%23102a2c%22/><path d=%22M14 35c8-22 10 22 18 0s10 22 18 0%22 fill=%22none%22 stroke=%22%23009d96%22 stroke-width=%226%22 stroke-linecap=%22round%22/></svg>"
+    />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <aside class="lab-sidebar">
+      <a class="lab-mark" href="/" aria-label="연구실 홈">
+        <span class="lab-mark__pulse" aria-hidden="true"></span>
+        <strong>BUSAN SPEECH LAB</strong>
+      </a>
+      <nav class="sidebar-nav" aria-label="작업 단계">
+        <a href="#upload-title" aria-current="location">
+          <span>01</span>
+          발화 등록
+        </a>
+        <a href="#signal-title">
+          <span>02</span>
+          신호 분석
+        </a>
+        <a href="#evaluation-title">
+          <span>03</span>
+          모델 평가
+        </a>
+        <a href="#benchmark-title">
+          <span>04</span>
+          벤치마크
+        </a>
+      </nav>
+      <div id="connection-status" class="connection-status" aria-live="polite">
+        <span aria-hidden="true"></span>
+        연결 확인 중
+      </div>
+    </aside>
+
+    <main>
+      <div class="workbench">
+        <section class="panel panel--input" aria-labelledby="upload-title">
+          <div class="panel__head">
+            <h2 id="upload-title">발화 등록</h2>
+          </div>
+
+          <form id="upload-form">
+            <label id="drop-zone" class="drop-zone" for="audio-file">
+              <input id="audio-file" name="file" type="file" accept="audio/*,.wav,.flac,.mp3,.m4a,.ogg" required />
+              <span class="drop-zone__index">AUDIO</span>
+              <strong id="file-label">음성 파일 선택</strong>
+              <small>최대 100MB · 0.25-120초</small>
+            </label>
+
+            <div class="field-grid">
+              <label>
+                <span>화자 ID</span>
+                <input name="speaker_id" value="speaker_demo_001" required />
+              </label>
+              <label>
+                <span>지역</span>
+                <input name="region" value="Busan" required />
+              </label>
+              <label>
+                <span>기기</span>
+                <input name="device" value="unknown" required />
+              </label>
+              <label>
+                <span>환경</span>
+                <input name="environment" value="quiet_room" required />
+              </label>
+            </div>
+
+            <label class="field field--primary">
+              <span>발화 원문</span>
+              <input
+                name="surface_text"
+                placeholder="예: 국밥 하나 주이소"
+                autocomplete="off"
+                required
+              />
+            </label>
+            <label class="field">
+              <span>표준어 의미</span>
+              <input
+                name="normalized_meaning"
+                placeholder="예: 국밥 하나 주세요"
+                autocomplete="off"
+              />
+            </label>
+
+            <fieldset class="dialect-fields">
+              <legend>방언 표현</legend>
+              <div class="field-grid field-grid--dialect">
+                <label>
+                  <span>Surface 표현</span>
+                  <input
+                    id="dialect-surface"
+                    placeholder='예: "와따", "맛있노"'
+                  />
+                </label>
+                <label>
+                  <span>표준화 후보</span>
+                  <input
+                    id="dialect-normalized"
+                    placeholder='같은 순서: "정말", "맛있다"'
+                  />
+                </label>
+              </div>
+              <p class="field-help">
+                여러 표현은 각각 쌍따옴표로 감싸세요. 따옴표는 구분에만 사용되며
+                실제 라벨에는 저장되지 않습니다.
+              </p>
+            </fieldset>
+
+            <fieldset class="consent-fields">
+              <legend>동의 범위</legend>
+              <label>
+                <input name="storage_allowed" type="checkbox" required />
+                <span>원본 음성 저장에 동의</span>
+              </label>
+              <label>
+                <input name="research_use_allowed" type="checkbox" />
+                <span>연구 평가 사용에 동의</span>
+              </label>
+              <label>
+                <input name="model_training_allowed" type="checkbox" />
+                <span>모델 학습 사용에 별도 동의</span>
+              </label>
+            </fieldset>
+
+            <button class="action-button" type="submit">
+              <span>업로드 및 분석</span>
+              <span aria-hidden="true">→</span>
+            </button>
+            <p id="upload-message" class="form-message" aria-live="polite"></p>
+          </form>
+        </section>
+
+        <section class="panel panel--evidence" aria-labelledby="evidence-title">
+          <div class="panel__head">
+            <h2 id="evidence-title">오디오 품질</h2>
+            <span id="quality-badge" class="quality-badge">미측정</span>
+          </div>
+
+          <dl id="lineage-list" class="lineage-list">
+            <div>
+              <dt>UTTERANCE</dt>
+              <dd>-</dd>
+            </div>
+            <div>
+              <dt>ORIGINAL SHA-256</dt>
+              <dd>-</dd>
+            </div>
+            <div>
+              <dt>MASTER SHA-256</dt>
+              <dd>-</dd>
+            </div>
+            <div>
+              <dt>ASR WAV SHA-256</dt>
+              <dd>-</dd>
+            </div>
+          </dl>
+
+          <pre id="audio-tree" class="audio-tree">원본 마스터 음원 · 48kHz mono/stereo
+├── ASR 학습용 · 16kHz mono
+├── 발음 평가용 · 24kHz mono
+└── TTS 학습용 · 48kHz mono</pre>
+
+          <div class="quality-grid" aria-label="오디오 품질 지표">
+            <div>
+              <span>RMS</span>
+              <strong id="metric-rms">-</strong>
+              <small>dBFS</small>
+            </div>
+            <div>
+              <span>CLIP</span>
+              <strong id="metric-clip">-</strong>
+              <small>ratio</small>
+            </div>
+            <div>
+              <span>SILENCE</span>
+              <strong id="metric-silence">-</strong>
+              <small>ratio</small>
+            </div>
+          </div>
+
+          <div class="warning-box">
+            <span>품질 경고</span>
+            <p id="quality-warnings">-</p>
+          </div>
+
+          <div class="schema-links">
+            <a href="/api/schemas/utterance" target="_blank" rel="noreferrer">Utterance Schema ↗</a>
+            <a href="/api/schemas/benchmark" target="_blank" rel="noreferrer">Benchmark Schema ↗</a>
+          </div>
+        </section>
+      </div>
+
+      <section class="signal-stage" aria-labelledby="signal-title">
+        <div class="signal-stage__head">
+          <h2 id="signal-title">신호 분석</h2>
+          <div id="signal-meta" class="signal-meta">데이터 없음</div>
+        </div>
+        <div class="signal-strip">
+          <div class="signal-label">
+            <span>WAVE</span>
+            <small>amplitude</small>
+          </div>
+          <canvas id="waveform" aria-label="오디오 파형"></canvas>
+        </div>
+        <div class="signal-strip signal-strip--mel">
+          <div class="signal-label">
+            <span>MEL</span>
+            <small>40-7600 Hz</small>
+          </div>
+          <canvas id="mel" aria-label="Mel 스펙트로그램"></canvas>
+        </div>
+        <div class="signal-strip">
+          <div class="signal-label">
+            <span>F0</span>
+            <small>exploratory</small>
+          </div>
+          <canvas id="f0" aria-label="기본 주파수 곡선"></canvas>
+        </div>
+        <audio id="audio-player" controls preload="metadata">
+          브라우저가 오디오 재생을 지원하지 않습니다.
+        </audio>
+      </section>
+
+      <section class="evaluation-section" aria-labelledby="evaluation-title">
+        <div class="evaluation-copy">
+          <h2 id="evaluation-title">모델 평가</h2>
+          <p>실험별 예측을 저장하고 같은 발화에서 모델 결과를 비교합니다.</p>
+
+          <section
+            id="training-review"
+            class="training-review"
+            aria-labelledby="training-review-title"
+            hidden
+          >
+            <div class="training-review__head">
+              <strong id="training-review-title">TASK-004 검수</strong>
+              <span id="training-review-status" class="training-review__status">불러오는 중</span>
+            </div>
+            <label class="training-review__import">
+              <span>녹음 묶음</span>
+              <select id="training-import-select" aria-label="TASK-004 녹음 묶음"></select>
+            </label>
+            <dl class="training-review__counts" aria-label="검수 진행 현황">
+              <div>
+                <dt>검수</dt>
+                <dd id="training-review-progress">0 / 0</dd>
+              </div>
+              <div>
+                <dt>승인</dt>
+                <dd id="training-review-approved">0</dd>
+              </div>
+              <div>
+                <dt>재녹음</dt>
+                <dd id="training-review-rerecord">0</dd>
+              </div>
+            </dl>
+            <div class="training-review__current">
+              <div>
+                <span id="training-review-position">목록 없음</span>
+                <strong id="training-review-prompt-id">T004</strong>
+              </div>
+              <span id="training-review-item-status" class="training-review__item-status">
+                미검수
+              </span>
+            </div>
+            <label class="training-review__prompt-select">
+              <span>200개 검수 목록</span>
+              <select id="training-review-item-select"></select>
+            </label>
+            <p id="training-review-candidate" class="training-review__candidate">
+              수집 문장을 불러옵니다.
+            </p>
+            <div class="training-review__navigation">
+              <button id="training-review-previous" type="button">이전</button>
+              <button id="training-review-next" type="button">다음</button>
+              <button id="training-review-edit" type="button">라벨 수정</button>
+            </div>
+            <div class="training-review__decisions">
+              <button id="training-review-rerecord-button" type="button">
+                재녹음 필요
+              </button>
+              <button id="training-review-approve" type="button">
+                승인하고 다음
+              </button>
+            </div>
+            <p id="training-review-message" class="form-message" aria-live="polite"></p>
+          </section>
+
+          <label class="stored-utterance-control">
+            <span>저장된 발화</span>
+            <select id="utterance-select">
+              <option value="">현재 세션에 등록된 발화 없음</option>
+            </select>
+          </label>
+
+          <form id="label-edit-form" class="label-edit-form">
+            <div class="label-edit-form__head">
+              <strong>정답 라벨 수정</strong>
+              <span id="label-editor-version">-</span>
+            </div>
+            <label>
+              <span>발화 원문</span>
+              <input id="label-surface-text" required />
+            </label>
+            <label>
+              <span>표준어 의미</span>
+              <input id="label-normalized-meaning" />
+            </label>
+            <fieldset>
+              <legend>방언 표현</legend>
+              <div id="label-expression-list" class="label-expression-list"></div>
+              <p class="field-help">
+                한 칸에서 나누려면 예: "와따", "맛있노"
+              </p>
+              <button id="add-label-expression" class="text-button" type="button">
+                + 방언 표현 추가
+              </button>
+            </fieldset>
+            <label>
+              <span>수정자 ID</span>
+              <input id="label-changed-by" value="labeler-001" required />
+            </label>
+            <label>
+              <span>수정 이유</span>
+              <textarea
+                id="label-reason"
+                rows="2"
+                placeholder="예: 원음을 다시 듣고 오탈자 수정"
+              ></textarea>
+            </label>
+            <div class="label-edit-actions">
+              <button type="submit">라벨 수정 저장</button>
+              <button id="delete-utterance" class="danger-button" type="button">
+                이 발화 삭제
+              </button>
+            </div>
+            <p id="label-edit-message" class="form-message" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <form id="evaluation-form" class="evaluation-form">
+          <label class="field field--primary">
+            <span>모델 출력</span>
+            <input
+              id="hypothesis"
+              placeholder="예: 국밥 하나 주세요"
+              autocomplete="off"
+              required
+            />
+          </label>
+          <div class="field-grid field-grid--model">
+            <label>
+              <span>실험 ID</span>
+              <input id="experiment-id" value="manual-baseline-v0" required />
+            </label>
+            <label>
+              <span>모델 이름</span>
+              <input id="model-name" value="pretrained-korean-surface-asr" required />
+            </label>
+            <label>
+              <span>모델 버전</span>
+              <input id="model-version" value="pretrained-v0" required />
+            </label>
+            <label>
+              <span>지연시간(ms)</span>
+              <input id="model-latency" type="number" min="0" step="0.1" placeholder="선택" />
+            </label>
+          </div>
+          <label class="confidence-control">
+            <span>신뢰도 <output id="confidence-output">0.90</output></span>
+            <input id="confidence" type="range" min="0" max="1" value="0.9" step="0.01" />
+          </label>
+          <button class="action-button action-button--dark" type="submit">
+            <span>평가 실행</span>
+            <span aria-hidden="true">↗</span>
+          </button>
+          <p id="evaluation-message" class="form-message" aria-live="polite"></p>
+        </form>
+
+        <div class="result-board" aria-live="polite">
+          <div class="result-board__primary">
+            <span>CER</span>
+            <strong id="result-cer">-</strong>
+          </div>
+          <div>
+            <span>DIALECT PRESERVATION</span>
+            <strong id="result-preservation">-</strong>
+          </div>
+          <div>
+            <span>OVERCORRECTION</span>
+            <strong id="result-overcorrection">-</strong>
+          </div>
+          <div>
+            <span>CONFIDENCE RISK</span>
+            <strong id="result-confidence">-</strong>
+          </div>
+          <div id="expression-results" class="expression-results">
+            결과 없음
+          </div>
+        </div>
+
+        <div class="prediction-workspace">
+          <div class="prediction-workspace__head">
+            <div>
+              <span>EXPERIMENT EVIDENCE</span>
+              <h3>저장된 모델 결과</h3>
+            </div>
+            <strong id="prediction-count">0 PREDICTIONS</strong>
+          </div>
+
+          <div class="prediction-grid">
+            <section class="prediction-pane" aria-labelledby="prediction-list-title">
+              <h4 id="prediction-list-title">예측 기록</h4>
+              <div id="prediction-list" class="prediction-list">
+                <p class="empty-state">저장된 예측이 없습니다.</p>
+              </div>
+            </section>
+
+            <section class="prediction-pane" aria-labelledby="comparison-title">
+              <h4 id="comparison-title">모델 A/B 비교</h4>
+              <form id="comparison-form" class="compact-form">
+                <label>
+                  <span>모델 A</span>
+                  <select id="prediction-a" required></select>
+                </label>
+                <label>
+                  <span>모델 B</span>
+                  <select id="prediction-b" required></select>
+                </label>
+                <button type="submit">비교 실행</button>
+              </form>
+              <div id="comparison-result" class="comparison-result">
+                두 개의 저장된 예측을 선택하세요.
+              </div>
+              <p id="comparison-message" class="form-message" aria-live="polite"></p>
+            </section>
+
+            <section class="prediction-pane" aria-labelledby="review-title">
+              <h4 id="review-title">사람 오류 검수</h4>
+              <form id="review-form" class="compact-form">
+                <label>
+                  <span>검수할 예측</span>
+                  <select id="review-prediction" required></select>
+                </label>
+                <div class="compact-form__row">
+                  <label>
+                    <span>검수자 ID</span>
+                    <input id="reviewer-id" value="reviewer-001" required />
+                  </label>
+                  <label>
+                    <span>판정</span>
+                    <select id="review-verdict">
+                      <option value="confirmed">확인됨</option>
+                      <option value="rejected">아님</option>
+                      <option value="uncertain">불확실</option>
+                    </select>
+                  </label>
+                </div>
+                <label>
+                  <span>확정 오류 유형</span>
+                  <input
+                    id="review-failures"
+                    placeholder="예: LANGUAGE_MODEL_BIAS, CALIBRATION"
+                  />
+                </label>
+                <label>
+                  <span>검수 메모</span>
+                  <textarea id="review-notes" rows="3" placeholder="원음 근거와 판단을 기록하세요."></textarea>
+                </label>
+                <button type="submit">검수 저장</button>
+              </form>
+              <div id="review-history" class="review-history">
+                <p class="empty-state">저장된 검수가 없습니다.</p>
+              </div>
+              <p id="review-message" class="form-message" aria-live="polite"></p>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <section class="benchmark-section" aria-labelledby="benchmark-title">
+        <h2 id="benchmark-title">벤치마크 등록</h2>
+        <form id="benchmark-form" class="benchmark-form">
+          <label>
+            <span>Benchmark ID</span>
+            <input id="benchmark-id" value="busan-surface-v0" required />
+          </label>
+          <label>
+            <span>Version</span>
+            <input id="benchmark-version" value="0.1.0" required />
+          </label>
+          <button type="submit">저장된 전체 발화 고정</button>
+        </form>
+        <div id="benchmark-list" class="benchmark-list">
+          <p class="empty-state">활성 Benchmark가 없습니다.</p>
+        </div>
+        <p id="benchmark-message" class="form-message" aria-live="polite"></p>
+      </section>
+    </main>
+
+    <script src="/static/app.js" defer></script>
+  </body>
+</html>

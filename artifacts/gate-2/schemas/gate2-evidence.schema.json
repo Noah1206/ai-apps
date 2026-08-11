@@ -1,0 +1,248 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "benchmark_integrity_passed": {
+      "title": "Benchmark Integrity Passed",
+      "type": "boolean"
+    },
+    "reproducibility_passed": {
+      "title": "Reproducibility Passed",
+      "type": "boolean"
+    },
+    "pilot_pretrained_cer": {
+      "minimum": 0,
+      "title": "Pilot Pretrained Cer",
+      "type": "number"
+    },
+    "pilot_fine_tuned_cer": {
+      "minimum": 0,
+      "title": "Pilot Fine Tuned Cer",
+      "type": "number"
+    },
+    "pilot_pretrained_dialect_preservation": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Pilot Pretrained Dialect Preservation",
+      "type": "number"
+    },
+    "pilot_fine_tuned_dialect_preservation": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Pilot Fine Tuned Dialect Preservation",
+      "type": "number"
+    },
+    "pilot_pretrained_empty_outputs": {
+      "minimum": 0,
+      "title": "Pilot Pretrained Empty Outputs",
+      "type": "integer"
+    },
+    "pilot_fine_tuned_empty_outputs": {
+      "minimum": 0,
+      "title": "Pilot Fine Tuned Empty Outputs",
+      "type": "integer"
+    },
+    "human_review_complete": {
+      "title": "Human Review Complete",
+      "type": "boolean"
+    },
+    "human_fine_tuned_preference_rate": {
+      "anyOf": [
+        {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Human Fine Tuned Preference Rate"
+    },
+    "independent_test_complete": {
+      "title": "Independent Test Complete",
+      "type": "boolean"
+    },
+    "independent_utterances": {
+      "minimum": 0,
+      "title": "Independent Utterances",
+      "type": "integer"
+    },
+    "independent_speakers": {
+      "minimum": 0,
+      "title": "Independent Speakers",
+      "type": "integer"
+    },
+    "independent_pretrained_cer": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Independent Pretrained Cer"
+    },
+    "independent_fine_tuned_cer": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Independent Fine Tuned Cer"
+    },
+    "independent_pretrained_dialect_preservation": {
+      "anyOf": [
+        {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Independent Pretrained Dialect Preservation"
+    },
+    "independent_fine_tuned_dialect_preservation": {
+      "anyOf": [
+        {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Independent Fine Tuned Dialect Preservation"
+    },
+    "independent_pretrained_empty_outputs": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Independent Pretrained Empty Outputs"
+    },
+    "independent_fine_tuned_empty_outputs": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Independent Fine Tuned Empty Outputs"
+    },
+    "standard_regression_complete": {
+      "title": "Standard Regression Complete",
+      "type": "boolean"
+    },
+    "standard_utterances": {
+      "minimum": 0,
+      "title": "Standard Utterances",
+      "type": "integer"
+    },
+    "standard_speakers": {
+      "minimum": 0,
+      "title": "Standard Speakers",
+      "type": "integer"
+    },
+    "standard_pretrained_cer": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Standard Pretrained Cer"
+    },
+    "standard_fine_tuned_cer": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Standard Fine Tuned Cer"
+    },
+    "standard_pretrained_empty_outputs": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Standard Pretrained Empty Outputs"
+    },
+    "standard_fine_tuned_empty_outputs": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Standard Fine Tuned Empty Outputs"
+    }
+  },
+  "required": [
+    "benchmark_integrity_passed",
+    "reproducibility_passed",
+    "pilot_pretrained_cer",
+    "pilot_fine_tuned_cer",
+    "pilot_pretrained_dialect_preservation",
+    "pilot_fine_tuned_dialect_preservation",
+    "pilot_pretrained_empty_outputs",
+    "pilot_fine_tuned_empty_outputs",
+    "human_review_complete",
+    "independent_test_complete",
+    "independent_utterances",
+    "independent_speakers",
+    "standard_regression_complete",
+    "standard_utterances",
+    "standard_speakers"
+  ],
+  "title": "Gate2Evidence",
+  "type": "object"
+}

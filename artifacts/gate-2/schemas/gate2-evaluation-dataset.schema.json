@@ -1,0 +1,176 @@
+{
+  "$defs": {
+    "Gate2EvaluationEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "utterance_id": {
+          "minLength": 1,
+          "title": "Utterance Id",
+          "type": "string"
+        },
+        "speaker_id": {
+          "minLength": 1,
+          "title": "Speaker Id",
+          "type": "string"
+        },
+        "source_recording_id": {
+          "minLength": 1,
+          "title": "Source Recording Id",
+          "type": "string"
+        },
+        "region": {
+          "minLength": 1,
+          "title": "Region",
+          "type": "string"
+        },
+        "audio_filepath": {
+          "minLength": 1,
+          "title": "Audio Filepath",
+          "type": "string"
+        },
+        "audio_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Audio Sha256",
+          "type": "string"
+        },
+        "audio_lineage_sha256s": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Audio Lineage Sha256S",
+          "type": "array"
+        },
+        "duration_seconds": {
+          "exclusiveMinimum": 0,
+          "title": "Duration Seconds",
+          "type": "number"
+        },
+        "surface_text": {
+          "minLength": 1,
+          "title": "Surface Text",
+          "type": "string"
+        },
+        "dialect_expressions": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Dialect Expressions",
+          "type": "array"
+        },
+        "label_status": {
+          "enum": [
+            "human_reviewed",
+            "approved"
+          ],
+          "title": "Label Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "utterance_id",
+        "speaker_id",
+        "source_recording_id",
+        "region",
+        "audio_filepath",
+        "audio_sha256",
+        "duration_seconds",
+        "surface_text",
+        "label_status"
+      ],
+      "title": "Gate2EvaluationEntry",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "dataset_id": {
+      "minLength": 1,
+      "title": "Dataset Id",
+      "type": "string"
+    },
+    "dataset_version": {
+      "minLength": 1,
+      "title": "Dataset Version",
+      "type": "string"
+    },
+    "dataset_kind": {
+      "enum": [
+        "independent_busan_test",
+        "standard_korean_regression"
+      ],
+      "title": "Dataset Kind",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "frozen": {
+      "const": true,
+      "default": true,
+      "title": "Frozen",
+      "type": "boolean"
+    },
+    "target_language": {
+      "const": "ko-KR",
+      "default": "ko-KR",
+      "title": "Target Language",
+      "type": "string"
+    },
+    "training_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Training Allowed",
+      "type": "boolean"
+    },
+    "checkpoint_selection_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Checkpoint Selection Allowed",
+      "type": "boolean"
+    },
+    "source_name": {
+      "minLength": 1,
+      "title": "Source Name",
+      "type": "string"
+    },
+    "source_version": {
+      "minLength": 1,
+      "title": "Source Version",
+      "type": "string"
+    },
+    "license_or_access_policy": {
+      "minLength": 1,
+      "title": "License Or Access Policy",
+      "type": "string"
+    },
+    "entries": {
+      "items": {
+        "$ref": "#/$defs/Gate2EvaluationEntry"
+      },
+      "minItems": 1,
+      "title": "Entries",
+      "type": "array"
+    }
+  },
+  "required": [
+    "dataset_id",
+    "dataset_version",
+    "dataset_kind",
+    "source_name",
+    "source_version",
+    "license_or_access_policy",
+    "entries"
+  ],
+  "title": "Gate2EvaluationManifest",
+  "type": "object"
+}

@@ -1,0 +1,137 @@
+{
+  "$defs": {
+    "ReproducibilityArtifact": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {
+          "minLength": 1,
+          "title": "Artifact Id",
+          "type": "string"
+        },
+        "relative_path": {
+          "minLength": 1,
+          "title": "Relative Path",
+          "type": "string"
+        },
+        "required": {
+          "default": true,
+          "title": "Required",
+          "type": "boolean"
+        },
+        "expected_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expected Sha256"
+        },
+        "source_gpu_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Gpu Path"
+        },
+        "purpose": {
+          "minLength": 1,
+          "title": "Purpose",
+          "type": "string"
+        }
+      },
+      "required": [
+        "artifact_id",
+        "relative_path",
+        "purpose"
+      ],
+      "title": "ReproducibilityArtifact",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "task_id": {
+      "const": "TASK-005",
+      "default": "TASK-005",
+      "title": "Task Id",
+      "type": "string"
+    },
+    "experiment_id": {
+      "minLength": 1,
+      "title": "Experiment Id",
+      "type": "string"
+    },
+    "base_model_id": {
+      "minLength": 1,
+      "title": "Base Model Id",
+      "type": "string"
+    },
+    "base_model_revision": {
+      "pattern": "^[0-9a-f]{40}$",
+      "title": "Base Model Revision",
+      "type": "string"
+    },
+    "nemo_revision": {
+      "pattern": "^[0-9a-f]{40}$",
+      "title": "Nemo Revision",
+      "type": "string"
+    },
+    "train_dataset_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Train Dataset Sha256",
+      "type": "string"
+    },
+    "validation_dataset_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Validation Dataset Sha256",
+      "type": "string"
+    },
+    "benchmark_package_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Benchmark Package Sha256",
+      "type": "string"
+    },
+    "checkpoint_selection_criterion": {
+      "minLength": 1,
+      "title": "Checkpoint Selection Criterion",
+      "type": "string"
+    },
+    "artifacts": {
+      "items": {
+        "$ref": "#/$defs/ReproducibilityArtifact"
+      },
+      "minItems": 1,
+      "title": "Artifacts",
+      "type": "array"
+    }
+  },
+  "required": [
+    "experiment_id",
+    "base_model_id",
+    "base_model_revision",
+    "nemo_revision",
+    "train_dataset_sha256",
+    "validation_dataset_sha256",
+    "benchmark_package_sha256",
+    "checkpoint_selection_criterion",
+    "artifacts"
+  ],
+  "title": "ReproducibilitySpec",
+  "type": "object"
+}

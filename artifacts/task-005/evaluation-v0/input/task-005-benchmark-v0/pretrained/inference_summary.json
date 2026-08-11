@@ -1,0 +1,80 @@
+{
+  "status": "complete",
+  "expected_utterances": 10,
+  "successful_utterances": 10,
+  "failed_utterances": 0,
+  "missing_utterance_ids": [],
+  "duplicate_utterance_ids": [],
+  "model_load_ms": 70186.045,
+  "warmup_ms": 3871.717,
+  "total_inference_ms": 21536.041,
+  "latency_mean_ms": 2152.203,
+  "latency_p50_ms": 407.427,
+  "latency_p95_ms": 9954.676,
+  "rtf_mean": 0.532354,
+  "confidence_supported": false,
+  "peak_cuda_memory_bytes": 2672116224,
+  "utterance_metrics": [
+    {
+      "utterance_id": "3faa344e-968d-42cb-baf8-f1847a936a98",
+      "audio_duration_ms": 4457.312,
+      "latency_ms": 407.543,
+      "rtf": 0.091432
+    },
+    {
+      "utterance_id": "dbfedf22-ef0f-4cc5-ac99-2daf4758aa72",
+      "audio_duration_ms": 4286.688,
+      "latency_ms": 415.593,
+      "rtf": 0.09695
+    },
+    {
+      "utterance_id": "75b96c24-cab0-4e52-839b-dd67b496e58a",
+      "audio_duration_ms": 4372.0,
+      "latency_ms": 445.459,
+      "rtf": 0.101889
+    },
+    {
+      "utterance_id": "d66716eb-c35d-4867-907c-187935449cab",
+      "audio_duration_ms": 3945.312,
+      "latency_ms": 16988.643,
+      "rtf": 4.306032
+    },
+    {
+      "utterance_id": "38f63a59-325b-4e53-9287-ab094c6a889d",
+      "audio_duration_ms": 4884.0,
+      "latency_ms": 358.194,
+      "rtf": 0.07334
+    },
+    {
+      "utterance_id": "c95d2f85-a98a-4c19-9476-e55b92a49dc0",
+      "audio_duration_ms": 3945.312,
+      "latency_ms": 377.915,
+      "rtf": 0.095788
+    },
+    {
+      "utterance_id": "c426f5fc-397d-4ef8-8d7c-9b1d34e4a81a",
+      "audio_duration_ms": 4713.312,
+      "latency_ms": 407.31,
+      "rtf": 0.086417
+    },
+    {
+      "utterance_id": "d53bf39e-0c55-4433-8bea-3b5242b55f9a",
+      "audio_duration_ms": 4372.0,
+      "latency_ms": 1357.606,
+      "rtf": 0.310523
+    },
+    {
+      "utterance_id": "9e5edb72-7ef8-46df-8021-ab0de6dfd567",
+      "audio_duration_ms": 4457.312,
+      "latency_ms": 379.74,
+      "rtf": 0.085195
+    },
+    {
+      "utterance_id": "e2d209fb-b801-4a47-b528-3ae54c723ea0",
+      "audio_duration_ms": 5054.688,
+      "latency_ms": 384.023,
+      "rtf": 0.075974
+    }
+  ],
+  "failures": []
+}

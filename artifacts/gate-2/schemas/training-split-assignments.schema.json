@@ -1,0 +1,30 @@
+{
+  "additionalProperties": false,
+  "description": "User-reviewed membership input for one immutable training manifest.",
+  "properties": {
+    "train_utterance_ids": {
+      "items": {
+        "format": "uuid",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Train Utterance Ids",
+      "type": "array"
+    },
+    "validation_utterance_ids": {
+      "items": {
+        "format": "uuid",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Validation Utterance Ids",
+      "type": "array"
+    }
+  },
+  "required": [
+    "train_utterance_ids",
+    "validation_utterance_ids"
+  ],
+  "title": "TrainingSplitAssignments",
+  "type": "object"
+}

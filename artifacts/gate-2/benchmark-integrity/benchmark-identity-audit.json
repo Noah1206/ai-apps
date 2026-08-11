@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0.0",
+  "audit_id": "gate-2-busan-surface-v0-1.0.0-semantic-identity-v1",
+  "created_at": "2026-08-08T12:34:52.282209Z",
+  "benchmark_id": "busan-surface-v0",
+  "benchmark_version": "1.0.0",
+  "decision": "audited_semantic_equivalence_keep_version",
+  "canonical_artifact_path": "artifacts/task-002/busan-surface-v0--1.0.0.zip",
+  "canonical_package_sha256": "151c1e28804627bea69bbd7f6632f4d3558ebf076147e42c1d168d508467233c",
+  "canonical_manifest_raw_sha256": "7dd7ad855da2fa5f3a9611b46315c4655f932e37a3706973070c526a6c804bdc",
+  "canonical_semantic_sha256": "700d352edb4a4e9321b48ec6cd312bec6ad1d4c48fa2bedbcf80a2ca23a67f8c",
+  "semantically_equivalent": true,
+  "serializations": [
+    {
+      "path": "data/lab/manifests/busan-surface-v0--1.0.0.json",
+      "raw_sha256": "ab9070550ef740fdd49fa79c0149f2e4002d8bacdec062881d9bd4ebbb8382b7",
+      "semantic_sha256": "700d352edb4a4e9321b48ec6cd312bec6ad1d4c48fa2bedbcf80a2ca23a67f8c",
+      "utterance_count": 10,
+      "raw_dialect_expression_count": 10,
+      "semantic_dialect_expression_count": 15,
+      "annotation_structure": "legacy_quoted_compound",
+      "used_by": [
+        "Audio Lab TASK-002/TASK-003A/TASK-003B evaluation after schema normalization"
+      ],
+      "related_artifacts": [
+        "data/lab/experiments/task-002-nvidia-korean-conformer-ctc-pretrained-v0.json",
+        "data/lab/experiments/task-003b-nemotron-3.5-asr-streaming-0.6b-pretrained-v0.json",
+        "data/lab/reports/"
+      ]
+    },
+    {
+      "path": "artifacts/task-005/evaluation-v0/benchmark/benchmark.json",
+      "raw_sha256": "7dd7ad855da2fa5f3a9611b46315c4655f932e37a3706973070c526a6c804bdc",
+      "semantic_sha256": "700d352edb4a4e9321b48ec6cd312bec6ad1d4c48fa2bedbcf80a2ca23a67f8c",
+      "utterance_count": 10,
+      "raw_dialect_expression_count": 15,
+      "semantic_dialect_expression_count": 15,
+      "annotation_structure": "expanded_labels",
+      "used_by": [
+        "TASK-003B external pretrained inference",
+        "TASK-003C diagnostics",
+        "TASK-005 pretrained-vs-adapter inference and automatic evaluation"
+      ],
+      "related_artifacts": [
+        "artifacts/task-005/evaluation-v0/input/task-005-benchmark-v0/pretrained/predictions.jsonl",
+        "artifacts/task-005/evaluation-v0/input/task-005-benchmark-v0/fine-tuned-best/predictions.jsonl",
+        "artifacts/task-005/evaluation-v0/output/task-005-benchmark-comparison.json"
+      ]
+    }
+  ],
+  "provenance_note": "The stored JSON preserves the user's quoted multi-expression input. BenchmarkEntry expands it during validation, so the exported JSON contains 15 individual labels. Raw byte hashes differ; validated semantic content is equal. Both historical files remain unchanged and v1.0.0 remains canonical."
+}

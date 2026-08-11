@@ -1,0 +1,34 @@
+{
+  "task_id": "TASK-003B",
+  "experiment_id": "task-003b-nemotron-3.5-asr-streaming-0.6b-pretrained-v0",
+  "benchmark": {
+    "id": "busan-surface-v0",
+    "version": "1.0.0",
+    "expected_utterances": 10
+  },
+  "model": {
+    "id": "nvidia/nemotron-3.5-asr-streaming-0.6b",
+    "revision": "f3d333391852ba876df169dcc9ba902d25b6ab0b",
+    "provider": "NVIDIA",
+    "family": "FastConformer-RNNT",
+    "decoder_type": "RNNT",
+    "target_language": "ko-KR",
+    "fine_tuned": false
+  },
+  "inference": {
+    "mode": "offline_per_utterance",
+    "decoding": "transformers_5.13_default_greedy_rnnt",
+    "max_symbols_per_step": 10,
+    "context_biasing": false,
+    "word_boosting": false,
+    "external_language_model": false,
+    "reference_conditioning": false,
+    "postprocessing_llm": false,
+    "punctuation": "model_default",
+    "capitalization": "model_default"
+  },
+  "runtime": {
+    "cache_dir": "./model-cache",
+    "random_seed": 0
+  }
+}

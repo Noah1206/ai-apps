@@ -1,0 +1,744 @@
+{
+  "$defs": {
+    "AggregateMetrics": {
+      "additionalProperties": false,
+      "properties": {
+        "utterance_count": {
+          "minimum": 0,
+          "title": "Utterance Count",
+          "type": "integer"
+        },
+        "cer": {
+          "minimum": 0,
+          "title": "Cer",
+          "type": "number"
+        },
+        "dialect_preservation_rate": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Dialect Preservation Rate",
+          "type": "number"
+        },
+        "context_overcorrection_rate": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Context Overcorrection Rate",
+          "type": "number"
+        },
+        "high_confidence_wrong_count": {
+          "minimum": 0,
+          "title": "High Confidence Wrong Count",
+          "type": "integer"
+        },
+        "p50_latency_ms": {
+          "minimum": 0,
+          "title": "P50 Latency Ms",
+          "type": "number"
+        },
+        "p95_latency_ms": {
+          "minimum": 0,
+          "title": "P95 Latency Ms",
+          "type": "number"
+        }
+      },
+      "required": [
+        "utterance_count",
+        "cer",
+        "dialect_preservation_rate",
+        "context_overcorrection_rate",
+        "high_confidence_wrong_count",
+        "p50_latency_ms",
+        "p95_latency_ms"
+      ],
+      "title": "AggregateMetrics",
+      "type": "object"
+    },
+    "CalibratedAggregateMetrics": {
+      "additionalProperties": false,
+      "properties": {
+        "reference_expression_count": {
+          "minimum": 0,
+          "title": "Reference Expression Count",
+          "type": "integer"
+        },
+        "evaluated_expression_count": {
+          "minimum": 0,
+          "title": "Evaluated Expression Count",
+          "type": "integer"
+        },
+        "ambiguous_expression_count": {
+          "minimum": 0,
+          "title": "Ambiguous Expression Count",
+          "type": "integer"
+        },
+        "exact_preserved_count": {
+          "minimum": 0,
+          "title": "Exact Preserved Count",
+          "type": "integer"
+        },
+        "acceptable_variant_count": {
+          "minimum": 0,
+          "title": "Acceptable Variant Count",
+          "type": "integer"
+        },
+        "standard_equivalent_candidate_count": {
+          "minimum": 0,
+          "title": "Standard Equivalent Candidate Count",
+          "type": "integer"
+        },
+        "missing_expression_count": {
+          "minimum": 0,
+          "title": "Missing Expression Count",
+          "type": "integer"
+        },
+        "dialect_preservation_rate": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Dialect Preservation Rate",
+          "type": "number"
+        },
+        "context_overcorrection_candidate_rate": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Context Overcorrection Candidate Rate",
+          "type": "number"
+        }
+      },
+      "required": [
+        "reference_expression_count",
+        "evaluated_expression_count",
+        "ambiguous_expression_count",
+        "exact_preserved_count",
+        "acceptable_variant_count",
+        "standard_equivalent_candidate_count",
+        "missing_expression_count",
+        "dialect_preservation_rate",
+        "context_overcorrection_candidate_rate"
+      ],
+      "title": "CalibratedAggregateMetrics",
+      "type": "object"
+    },
+    "CalibratedDialectResult": {
+      "additionalProperties": false,
+      "properties": {
+        "surface_form": {
+          "title": "Surface Form",
+          "type": "string"
+        },
+        "match_kind": {
+          "$ref": "#/$defs/DialectMatchKind"
+        },
+        "matched_form": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Matched Form"
+        },
+        "mapping_status": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ReviewStatus"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "observations": {
+          "items": {
+            "$ref": "#/$defs/ErrorObservation"
+          },
+          "title": "Observations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "surface_form",
+        "match_kind",
+        "observations"
+      ],
+      "title": "CalibratedDialectResult",
+      "type": "object"
+    },
+    "CalibratedEvaluationCase": {
+      "additionalProperties": false,
+      "properties": {
+        "prediction_id": {
+          "format": "uuid",
+          "title": "Prediction Id",
+          "type": "string"
+        },
+        "utterance_id": {
+          "format": "uuid",
+          "title": "Utterance Id",
+          "type": "string"
+        },
+        "reference_surface_text": {
+          "title": "Reference Surface Text",
+          "type": "string"
+        },
+        "hypothesis_surface_text": {
+          "title": "Hypothesis Surface Text",
+          "type": "string"
+        },
+        "legacy_dialect_results": {
+          "items": {
+            "$ref": "#/$defs/DialectExpressionResult"
+          },
+          "title": "Legacy Dialect Results",
+          "type": "array"
+        },
+        "legacy_automatic_failure_candidates": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Legacy Automatic Failure Candidates",
+          "type": "array"
+        },
+        "calibrated_dialect_results": {
+          "items": {
+            "$ref": "#/$defs/CalibratedDialectResult"
+          },
+          "title": "Calibrated Dialect Results",
+          "type": "array"
+        },
+        "observations": {
+          "items": {
+            "$ref": "#/$defs/ErrorObservation"
+          },
+          "title": "Observations",
+          "type": "array"
+        },
+        "automatic_failure_candidates": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Automatic Failure Candidates",
+          "type": "array"
+        },
+        "latest_review_id": {
+          "format": "uuid",
+          "title": "Latest Review Id",
+          "type": "string"
+        },
+        "review_revision_count": {
+          "minimum": 1,
+          "title": "Review Revision Count",
+          "type": "integer"
+        },
+        "human_verdict": {
+          "enum": [
+            "confirmed",
+            "rejected",
+            "uncertain"
+          ],
+          "title": "Human Verdict",
+          "type": "string"
+        },
+        "human_confirmed_failure_types": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Human Confirmed Failure Types",
+          "type": "array"
+        },
+        "human_review_notes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Human Review Notes"
+        },
+        "comparison_outcome": {
+          "$ref": "#/$defs/HumanComparisonOutcome"
+        }
+      },
+      "required": [
+        "prediction_id",
+        "utterance_id",
+        "reference_surface_text",
+        "hypothesis_surface_text",
+        "legacy_dialect_results",
+        "calibrated_dialect_results",
+        "observations",
+        "automatic_failure_candidates",
+        "latest_review_id",
+        "review_revision_count",
+        "human_verdict",
+        "comparison_outcome"
+      ],
+      "title": "CalibratedEvaluationCase",
+      "type": "object"
+    },
+    "DialectExpressionResult": {
+      "additionalProperties": false,
+      "properties": {
+        "surface_form": {
+          "title": "Surface Form",
+          "type": "string"
+        },
+        "normalized_forms": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Normalized Forms",
+          "type": "array"
+        },
+        "label_status": {
+          "$ref": "#/$defs/ReviewStatus"
+        },
+        "match_status": {
+          "$ref": "#/$defs/DialectMatchStatus"
+        },
+        "matched_form": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Matched Form"
+        }
+      },
+      "required": [
+        "surface_form",
+        "normalized_forms",
+        "label_status",
+        "match_status"
+      ],
+      "title": "DialectExpressionResult",
+      "type": "object"
+    },
+    "DialectMatchKind": {
+      "enum": [
+        "EXACT_SURFACE",
+        "ACCEPTABLE_VARIANT",
+        "STANDARD_EQUIVALENT",
+        "MISSING"
+      ],
+      "title": "DialectMatchKind",
+      "type": "string"
+    },
+    "DialectMatchStatus": {
+      "enum": [
+        "preserved",
+        "overcorrected",
+        "missing"
+      ],
+      "title": "DialectMatchStatus",
+      "type": "string"
+    },
+    "ErrorObservation": {
+      "additionalProperties": false,
+      "properties": {
+        "observed_error": {
+          "$ref": "#/$defs/ObservedError"
+        },
+        "suspected_cause": {
+          "$ref": "#/$defs/SuspectedCause",
+          "default": "UNKNOWN"
+        },
+        "surface_form": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Surface Form"
+        },
+        "matched_form": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Matched Form"
+        },
+        "mapping_status": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ReviewStatus"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "evidence": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Evidence"
+        }
+      },
+      "required": [
+        "observed_error"
+      ],
+      "title": "ErrorObservation",
+      "type": "object"
+    },
+    "HumanComparisonOutcome": {
+      "enum": [
+        "MATCH",
+        "MISMATCH",
+        "MISSED",
+        "FALSE_POSITIVE",
+        "NO_ERROR_AGREEMENT",
+        "UNCERTAIN"
+      ],
+      "title": "HumanComparisonOutcome",
+      "type": "string"
+    },
+    "HumanComparisonSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "automatic_human_match_count": {
+          "minimum": 0,
+          "title": "Automatic Human Match Count",
+          "type": "integer"
+        },
+        "automatic_human_mismatch_count": {
+          "minimum": 0,
+          "title": "Automatic Human Mismatch Count",
+          "type": "integer"
+        },
+        "automatic_missed_count": {
+          "minimum": 0,
+          "title": "Automatic Missed Count",
+          "type": "integer"
+        },
+        "automatic_false_positive_count": {
+          "minimum": 0,
+          "title": "Automatic False Positive Count",
+          "type": "integer"
+        },
+        "no_error_agreement_count": {
+          "minimum": 0,
+          "title": "No Error Agreement Count",
+          "type": "integer"
+        },
+        "uncertain_count": {
+          "minimum": 0,
+          "title": "Uncertain Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "automatic_human_match_count",
+        "automatic_human_mismatch_count",
+        "automatic_missed_count",
+        "automatic_false_positive_count",
+        "no_error_agreement_count",
+        "uncertain_count"
+      ],
+      "title": "HumanComparisonSummary",
+      "type": "object"
+    },
+    "ModelDescriptor": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "version": {
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        },
+        "model_provider": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Provider"
+        },
+        "model_family": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Family"
+        },
+        "decoder_type": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Decoder Type"
+        },
+        "target_language": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target Language"
+        },
+        "fine_tuned": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fine Tuned"
+        },
+        "checkpoint_identifier": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Checkpoint Identifier"
+        },
+        "checkpoint": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Checkpoint"
+        },
+        "tokenizer_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tokenizer Version"
+        },
+        "config_hash": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Config Hash"
+        }
+      },
+      "required": [
+        "name",
+        "version"
+      ],
+      "title": "ModelDescriptor",
+      "type": "object"
+    },
+    "ObservedError": {
+      "enum": [
+        "NO_ERROR",
+        "DIALECT_EXPRESSION_LOST",
+        "DIALECT_TO_STANDARD",
+        "PHONETIC_SUBSTITUTION",
+        "ENDING_SUBSTITUTION",
+        "WORD_OR_SYLLABLE_OMISSION",
+        "WORD_OR_SYLLABLE_INSERTION",
+        "WORD_BOUNDARY_ERROR",
+        "LABEL_ERROR",
+        "AUDIO_QUALITY_ERROR",
+        "AMBIGUOUS_VARIANT",
+        "UNKNOWN"
+      ],
+      "title": "ObservedError",
+      "type": "string"
+    },
+    "ReviewStatus": {
+      "enum": [
+        "candidate",
+        "human_reviewed",
+        "approved",
+        "deprecated"
+      ],
+      "title": "ReviewStatus",
+      "type": "string"
+    },
+    "SuspectedCause": {
+      "enum": [
+        "ACOUSTIC_CONFUSION",
+        "STANDARD_KOREAN_MODEL_BIAS",
+        "DECODER_BIAS",
+        "TOKENIZER_LIMITATION",
+        "AUDIO_QUALITY",
+        "LABEL_ERROR",
+        "UNKNOWN"
+      ],
+      "title": "SuspectedCause",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "report_id": {
+      "title": "Report Id",
+      "type": "string"
+    },
+    "evaluation_revision": {
+      "title": "Evaluation Revision",
+      "type": "string"
+    },
+    "source_report_id": {
+      "title": "Source Report Id",
+      "type": "string"
+    },
+    "source_reviewed_report_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Reviewed Report Id"
+    },
+    "experiment_id": {
+      "title": "Experiment Id",
+      "type": "string"
+    },
+    "benchmark_id": {
+      "title": "Benchmark Id",
+      "type": "string"
+    },
+    "benchmark_version": {
+      "title": "Benchmark Version",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "model": {
+      "$ref": "#/$defs/ModelDescriptor"
+    },
+    "legacy_automatic_metrics": {
+      "$ref": "#/$defs/AggregateMetrics"
+    },
+    "calibrated_metrics": {
+      "$ref": "#/$defs/CalibratedAggregateMetrics"
+    },
+    "human_comparison": {
+      "$ref": "#/$defs/HumanComparisonSummary"
+    },
+    "cases": {
+      "items": {
+        "$ref": "#/$defs/CalibratedEvaluationCase"
+      },
+      "title": "Cases",
+      "type": "array"
+    },
+    "limitations": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "task_003b_prediction_contract_compatible": {
+      "title": "Task 003B Prediction Contract Compatible",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "report_id",
+    "evaluation_revision",
+    "source_report_id",
+    "experiment_id",
+    "benchmark_id",
+    "benchmark_version",
+    "created_at",
+    "model",
+    "legacy_automatic_metrics",
+    "calibrated_metrics",
+    "human_comparison",
+    "cases",
+    "task_003b_prediction_contract_compatible"
+  ],
+  "title": "EvaluationCalibrationReport",
+  "type": "object"
+}

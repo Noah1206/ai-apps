@@ -1,0 +1,180 @@
+{
+  "schema_version": "1.0.0",
+  "task_id": "TASK-005",
+  "experiment_id": "task-005-nemotron-3.5-asr-streaming-0.6b-busan-adapter-best-v0",
+  "passed": true,
+  "errors": [],
+  "artifacts": [
+    {
+      "artifact_id": "pretrained_nemo",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/nemotron-3.5-asr-streaming-0.6b.nemo",
+      "required": false,
+      "expected_sha256": "210214ed94039bf6bfbb9a047c7fa289628db75b103e2bf6381fa78285436a74",
+      "exists": false,
+      "actual_sha256": null,
+      "verified": false
+    },
+    {
+      "artifact_id": "best_checkpoint",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/task-005-recovery-gate2-slim-20260808/model/task-005-nemotron-busan-adapter--val_loss=42.0270-epoch=5.ckpt",
+      "required": true,
+      "expected_sha256": "a05b3fcc919d18638d87f69700e1e7fba9b2f5f8b2d20396226b2aae9d13343e",
+      "exists": true,
+      "actual_sha256": "a05b3fcc919d18638d87f69700e1e7fba9b2f5f8b2d20396226b2aae9d13343e",
+      "verified": true
+    },
+    {
+      "artifact_id": "best_exported_nemo",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/task-005-recovery-gate2-slim-20260808/model/task-005-busan-adapter-best-epoch5-step97.nemo",
+      "required": true,
+      "expected_sha256": "580124ff0ea5c9e2f5546e9186c93c3c2d9e16641a749d02b219e2d06029f950",
+      "exists": true,
+      "actual_sha256": "580124ff0ea5c9e2f5546e9186c93c3c2d9e16641a749d02b219e2d06029f950",
+      "verified": true
+    },
+    {
+      "artifact_id": "best_adapter_state",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/task-005-recovery-gate2-slim-20260808/adapter/best-checkpoint-adapter-audit.recovery-time.json",
+      "required": true,
+      "expected_sha256": "04b4001d4d1e641e36d8af557a8f66d64f52a53318d93a8cf400d9d475735335",
+      "exists": true,
+      "actual_sha256": "04b4001d4d1e641e36d8af557a8f66d64f52a53318d93a8cf400d9d475735335",
+      "verified": true
+    },
+    {
+      "artifact_id": "hparams",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/task-005-recovery-gate2-slim-20260808/config/hparams.yaml",
+      "required": true,
+      "expected_sha256": "718e27fc8374bc33e9b8432f1dfa5df9afa72ce243fd1dc7ee6f88b08195b38b",
+      "exists": true,
+      "actual_sha256": "718e27fc8374bc33e9b8432f1dfa5df9afa72ce243fd1dc7ee6f88b08195b38b",
+      "verified": true
+    },
+    {
+      "artifact_id": "training_launcher",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/task-005-recovery-gate2-slim-20260808/launcher/run_task005_adapter_finetune_when_authorized.sh",
+      "required": true,
+      "expected_sha256": "a72b9a362b4ca4b12518899d57637f6c6b52d78a89f458bbd8a4d8d0570cffd0",
+      "exists": true,
+      "actual_sha256": "a72b9a362b4ca4b12518899d57637f6c6b52d78a89f458bbd8a4d8d0570cffd0",
+      "verified": true
+    },
+    {
+      "artifact_id": "benchmark_inference_runner",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/task-005-recovery-gate2-slim-20260808/inference/run_task005_nemo_benchmark.py",
+      "required": true,
+      "expected_sha256": "88232b4e2eae22608e5fb7144b9518f388c7ea5d4c2e75dda14bb273eb37ad7f",
+      "exists": true,
+      "actual_sha256": "88232b4e2eae22608e5fb7144b9518f388c7ea5d4c2e75dda14bb273eb37ad7f",
+      "verified": true
+    },
+    {
+      "artifact_id": "environment_lock",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/task-005-recovery-gate2-slim-20260808/environment/preserved-venv-versions.recovery-time.json",
+      "required": true,
+      "expected_sha256": "db0449f11a3c151be25af9ee312aa5a6c1ba87a7cc3533db4ceb52ffba2a0bf0",
+      "exists": true,
+      "actual_sha256": "db0449f11a3c151be25af9ee312aa5a6c1ba87a7cc3533db4ceb52ffba2a0bf0",
+      "verified": true
+    },
+    {
+      "artifact_id": "tensorboard_log_initial",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/task-005-recovery-gate2-slim-20260808/logs/training-experiment/events.out.tfevents.1786115470.DESKTOP-ACGQ4VL.860.0",
+      "required": true,
+      "expected_sha256": "86b5c682395dcb78e6d4f65a50c38b84705da428f84a0842f04f7a8195c78b54",
+      "exists": true,
+      "actual_sha256": "86b5c682395dcb78e6d4f65a50c38b84705da428f84a0842f04f7a8195c78b54",
+      "verified": true
+    },
+    {
+      "artifact_id": "tensorboard_log_resumed",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/task-005-recovery-gate2-slim-20260808/logs/training-experiment/events.out.tfevents.1786119975.DESKTOP-ACGQ4VL.730.0",
+      "required": true,
+      "expected_sha256": "725427c81b3f6cc5ddc030c84e6cf85c612d7d650fc4e90a81f5b2b112362359",
+      "exists": true,
+      "actual_sha256": "725427c81b3f6cc5ddc030c84e6cf85c612d7d650fc4e90a81f5b2b112362359",
+      "verified": true
+    },
+    {
+      "artifact_id": "console_log_initial",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/task-005-recovery-gate2-slim-20260808/logs/run-control/20260807T150953Z-main/console.log",
+      "required": true,
+      "expected_sha256": "77fcfc18c93e32c5581f61cc8780ff36798186b067a49ec28448f6e5e657b91a",
+      "exists": true,
+      "actual_sha256": "77fcfc18c93e32c5581f61cc8780ff36798186b067a49ec28448f6e5e657b91a",
+      "verified": true
+    },
+    {
+      "artifact_id": "console_log_resumed",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/task-005-recovery-gate2-slim-20260808/logs/run-control/20260807T162453Z-main/console.log",
+      "required": true,
+      "expected_sha256": "e0c77ec943338a0bd9641011cf888b1b527c15a7ffffe5edb9bab2d4a6bc8670",
+      "exists": true,
+      "actual_sha256": "e0c77ec943338a0bd9641011cf888b1b527c15a7ffffe5edb9bab2d4a6bc8670",
+      "verified": true
+    },
+    {
+      "artifact_id": "training_patch",
+      "relative_path": "artifacts/task-005/evaluation-v0/input/task-005-benchmark-v0/training_patch.diff",
+      "required": true,
+      "expected_sha256": "edf4aac3b415bb38856105f735914c14ff4b05a6f91083be5ffe8075b9370507",
+      "exists": true,
+      "actual_sha256": "edf4aac3b415bb38856105f735914c14ff4b05a6f91083be5ffe8075b9370507",
+      "verified": true
+    },
+    {
+      "artifact_id": "modified_training_entrypoint",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/task-005-recovery-gate2-slim-20260808/launcher/train_asr_adapter.py",
+      "required": true,
+      "expected_sha256": "9b73564f9fab17a40c305d86fe1e46cc259bcfd2b83cbc788a9ebdaa451dcd56",
+      "exists": true,
+      "actual_sha256": "9b73564f9fab17a40c305d86fe1e46cc259bcfd2b83cbc788a9ebdaa451dcd56",
+      "verified": true
+    },
+    {
+      "artifact_id": "recovery_bundle_manifest",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/task-005-recovery-gate2-slim-20260808/MANIFEST.json",
+      "required": true,
+      "expected_sha256": "dbe378df47bb18cf533ebfe93950a140ef334f2377a4a4a09737c493ab1310cc",
+      "exists": true,
+      "actual_sha256": "dbe378df47bb18cf533ebfe93950a140ef334f2377a4a4a09737c493ab1310cc",
+      "verified": true
+    },
+    {
+      "artifact_id": "nemo_dependency_lock",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/task-005-recovery-gate2-slim-20260808/provenance/NeMo-uv.lock",
+      "required": true,
+      "expected_sha256": "121cd4d0ce127a3c26c692c3ce47f59449034e61bffb56ad2ee6fe25ecd5fe22",
+      "exists": true,
+      "actual_sha256": "121cd4d0ce127a3c26c692c3ce47f59449034e61bffb56ad2ee6fe25ecd5fe22",
+      "verified": true
+    },
+    {
+      "artifact_id": "train_dataset",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/task-005-nemotron-train-pool-v0.zip",
+      "required": true,
+      "expected_sha256": "fcef88360c12d4149a290fa0ff93546fd2cb1bf7bd9d6f9c177557c27e22e20d",
+      "exists": true,
+      "actual_sha256": "fcef88360c12d4149a290fa0ff93546fd2cb1bf7bd9d6f9c177557c27e22e20d",
+      "verified": true
+    },
+    {
+      "artifact_id": "validation_dataset",
+      "relative_path": "artifacts/gate-2/reproducibility/recovered/task-005-independent-validation-v0.zip",
+      "required": true,
+      "expected_sha256": "8253af4979ce5f9e20aed9bbb9023ee9f03f3797278e53beabdb90468f825f0d",
+      "exists": true,
+      "actual_sha256": "8253af4979ce5f9e20aed9bbb9023ee9f03f3797278e53beabdb90468f825f0d",
+      "verified": true
+    },
+    {
+      "artifact_id": "benchmark_dataset",
+      "relative_path": "artifacts/task-002/busan-surface-v0--1.0.0.zip",
+      "required": true,
+      "expected_sha256": "151c1e28804627bea69bbd7f6632f4d3558ebf076147e42c1d168d508467233c",
+      "exists": true,
+      "actual_sha256": "151c1e28804627bea69bbd7f6632f4d3558ebf076147e42c1d168d508467233c",
+      "verified": true
+    }
+  ]
+}

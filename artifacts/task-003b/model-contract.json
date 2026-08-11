@@ -1,0 +1,144 @@
+{
+  "schema_version": "1.0.0",
+  "task_id": "TASK-003B",
+  "phase": "Phase B: External GPU pretrained inference package",
+  "status": "external_package_ready_gpu_execution_pending",
+  "experiment_id": "task-003b-nemotron-3.5-asr-streaming-0.6b-pretrained-v0",
+  "model": {
+    "model_id": "nvidia/nemotron-3.5-asr-streaming-0.6b",
+    "model_revision": "f3d333391852ba876df169dcc9ba902d25b6ab0b",
+    "model_revision_status": "verified",
+    "model_version": "nemotron-3.5-asr-streaming-0.6b-v1",
+    "model_provider": "NVIDIA",
+    "model_family": "FastConformer-RNNT",
+    "architecture_detail": "Cache-Aware FastConformer-RNNT with language-ID prompt conditioning",
+    "decoder_type": "RNNT",
+    "target_language": "ko-KR",
+    "fine_tuned": false
+  },
+  "access": {
+    "status": "verified",
+    "public": true,
+    "gated": false,
+    "license": "OpenMDW-1.1",
+    "license_url": "https://openmdw.ai/license/1-1/"
+  },
+  "artifacts": {
+    "hugging_face_safetensors": {
+      "status": "verified",
+      "filename": "model.safetensors",
+      "size_bytes": 2552062944
+    },
+    "nemo_checkpoint": {
+      "status": "verified",
+      "filename": "nemotron-3.5-asr-streaming-0.6b.nemo"
+    },
+    "checkpoint_file_hash": {
+      "status": "pending_verification"
+    }
+  },
+  "runtime_options": {
+    "transformers": {
+      "status": "verified",
+      "selected_version": "5.13.0",
+      "loader_class": "transformers.AutoModelForRNNT",
+      "resolved_model_class": "Nemotron3_5AsrForRNNT",
+      "processor_class": "transformers.AutoProcessor",
+      "resolved_processor_class": "Nemotron3_5AsrProcessor",
+      "tokenizer_class": "ParakeetTokenizer",
+      "offline_wav_inference": "verified",
+      "language_argument": "ko-KR",
+      "transcript_extraction": "processor.decode(output.sequences, skip_special_tokens=True)",
+      "generation_output_type": {
+        "status": "runtime_verification_required"
+      }
+    },
+    "nemo": {
+      "status": "partially_verified",
+      "loader_class": "nemo.collections.asr.models.ASRModel",
+      "exact_concrete_model_class": {
+        "status": "pending_verification"
+      },
+      "runtime_engine": "NeMo 26.06"
+    }
+  },
+  "environment_requirements": {
+    "execution_environment": "external_nvidia_gpu",
+    "operating_system": "Linux",
+    "python": {
+      "minimum_recommended": "3.11",
+      "selected_container_version": "3.12"
+    },
+    "pytorch": {
+      "selected_container_version": "2.13.0a0+8145d630e8",
+      "status": "selected_not_yet_gpu_validated"
+    },
+    "cuda": {
+      "selected_container_version": "13.3.0",
+      "status": "selected_not_yet_gpu_validated"
+    },
+    "nemo_install_revision": {
+      "status": "pending_verification"
+    }
+  },
+  "inference_contract": {
+    "input": "mono WAV; Audio Lab benchmark derivative is 16 kHz mono PCM16",
+    "output": "final surface_text",
+    "rnnt_decoding_defaults": {
+      "status": "verified_from_transformers_5.13_source_and_model_config",
+      "algorithm": "greedy RNNT",
+      "max_symbols_per_step": 10,
+      "custom_generation_overrides": false
+    },
+    "confidence": {
+      "status": "no_official_utterance_confidence_contract_verified",
+      "fallback": {
+        "confidence": null,
+        "confidence_supported": false
+      }
+    },
+    "segments": {
+      "status": "optional",
+      "fallback": []
+    }
+  },
+  "external_package": {
+    "path": "external_inference/nemotron_3_5",
+    "archive": "artifacts/task-003b/nemotron_3_5-external-inference.zip",
+    "archive_sha256": "f9c1f253e9f89d45caa302c61864749d61eb746a8f626e5972c0a237694a0c8a",
+    "selected_base_image": "nvcr.io/nvidia/pytorch:26.06-py3",
+    "runtime_library": "transformers==5.13.0",
+    "cpu_contract_tests": {
+      "status": "passed",
+      "tests": 17
+    },
+    "benchmark_package_validation": {
+      "status": "passed",
+      "sha256": "151c1e28804627bea69bbd7f6632f4d3558ebf076147e42c1d168d508467233c",
+      "utterances": 10
+    },
+    "status": "external_gpu_execution_pending"
+  },
+  "benchmark": {
+    "benchmark_id": "busan-surface-v0",
+    "benchmark_version": "1.0.0",
+    "usage": "evaluation_only",
+    "fine_tuning_allowed": false
+  },
+  "comparison_policy": {
+    "riva_baseline": "preserved as TASK-002 historical baseline",
+    "fine_tuning_effect": "compare Nemotron pretrained with Nemotron Busan fine-tuned only",
+    "whisper_cross_model_comparison": "deferred, not deleted"
+  },
+  "verified_at": "2026-07-30",
+  "sources": [
+    "https://huggingface.co/nvidia/nemotron-3.5-asr-streaming-0.6b",
+    "https://huggingface.co/nvidia/nemotron-3.5-asr-streaming-0.6b/tree/f3d333391852ba876df169dcc9ba902d25b6ab0b",
+    "https://huggingface.co/api/models/nvidia/nemotron-3.5-asr-streaming-0.6b",
+    "https://huggingface.co/docs/transformers/v5.13.0/model_doc/nemotron3_5_asr",
+    "https://github.com/huggingface/transformers/blob/v5.13.0/src/transformers/models/parakeet/generation_parakeet.py",
+    "https://build.nvidia.com/nvidia/nemotron-asr-streaming/modelcard",
+    "https://docs.nvidia.com/nemo/speech/nightly/asr/asr_checkpoints.html",
+    "https://docs.nvidia.com/deeplearning/frameworks/pytorch-release-notes/rel-26-06.html"
+  ]
+}

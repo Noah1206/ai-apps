@@ -1,0 +1,55 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "PASS",
+        "CONDITIONAL PASS",
+        "FAIL"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "passed_checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Passed Checks",
+      "type": "array"
+    },
+    "failed_checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Failed Checks",
+      "type": "array"
+    },
+    "pending_checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Pending Checks",
+      "type": "array"
+    },
+    "note": {
+      "minLength": 1,
+      "title": "Note",
+      "type": "string"
+    }
+  },
+  "required": [
+    "status",
+    "passed_checks",
+    "failed_checks",
+    "pending_checks",
+    "note"
+  ],
+  "title": "Gate2Assessment",
+  "type": "object"
+}

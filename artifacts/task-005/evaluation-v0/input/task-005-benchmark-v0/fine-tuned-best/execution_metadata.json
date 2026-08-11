@@ -1,0 +1,73 @@
+{
+  "experiment_id": "task-005-nemotron-3.5-asr-streaming-0.6b-busan-adapter-best-v0",
+  "started_at": "2026-08-08T05:04:51.505631Z",
+  "completed_at": "2026-08-08T05:05:57.169198Z",
+  "hostname": "DESKTOP-ACGQ4VL",
+  "operating_system": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+  "python_version": "3.13.14",
+  "pytorch_version": "2.12.0+cu132",
+  "cuda_runtime_version": "13.2",
+  "cuda_driver_version": null,
+  "cudnn_version": 92000,
+  "nemo_version": "3.1.0+6c57e73e83",
+  "gpu_name": "NVIDIA GeForce RTX 2070",
+  "gpu_count": 1,
+  "gpu_vram_bytes": 8589475840,
+  "model_id": "nvidia/nemotron-3.5-asr-streaming-0.6b",
+  "requested_revision": "f3d333391852ba876df169dcc9ba902d25b6ab0b",
+  "resolved_revision": "f3d333391852ba876df169dcc9ba902d25b6ab0b",
+  "model_provider": "NVIDIA",
+  "model_family": "FastConformer-RNNT",
+  "decoder_type": "RNNT",
+  "fine_tuned": true,
+  "target_language": "ko-KR",
+  "model_class": "nemo.collections.asr.models.rnnt_bpe_models_prompt.EncDecRNNTBPEModelWithPrompt",
+  "model_artifact_path": "/home/ab409/task-005-nemotron/evaluation-artifacts/task-005-busan-adapter-best-epoch5-step97.nemo",
+  "model_artifact_sha256": "580124ff0ea5c9e2f5546e9186c93c3c2d9e16641a749d02b219e2d06029f950",
+  "checkpoint_identifier": "lightning:///home/ab409/task-005-nemotron/experiments/task-005-nemotron-busan-adapter/2026-08-08_00-10-10/checkpoints/task-005-nemotron-busan-adapter--val_loss=42.0270-epoch=5.ckpt#sha256:a05b3fcc919d18638d87f69700e1e7fba9b2f5f8b2d20396226b2aae9d13343e",
+  "adapter_state_sha256": "f2c17a1c2bfdb8cf9f24ad79f28b6c3379c48ce1f3067312bb09e4b0eb41ff36",
+  "adapter_probe": {
+    "registered_modules": 24,
+    "warmup_forward_calls": 24,
+    "benchmark_forward_calls": 240
+  },
+  "benchmark_id": "busan-surface-v0",
+  "benchmark_version": "1.0.0",
+  "benchmark_frozen": true,
+  "benchmark_package_sha256": "151c1e28804627bea69bbd7f6632f4d3558ebf076147e42c1d168d508467233c",
+  "inference_config": {
+    "api": "nemo.collections.asr.models.ASRModel.restore_from + model.transcribe",
+    "mode": "offline_per_utterance",
+    "batch_size": 1,
+    "num_workers": 0,
+    "use_lhotse": false,
+    "dataloader_reason": "preserve ko-KR prompt for path-list offline transcription",
+    "target_lang": "ko-KR",
+    "decoding": {
+      "strategy": "greedy_batch",
+      "greedy": {
+        "max_symbols": 10
+      },
+      "beam": {
+        "beam_size": 2,
+        "return_best_hypothesis": false,
+        "score_norm": true,
+        "tsd_max_sym_exp": 50,
+        "alsd_max_target_len": 2.0
+      },
+      "compute_timestamps": false,
+      "preserve_alignments": false
+    },
+    "context_biasing": false,
+    "word_boosting": false,
+    "external_language_model": false,
+    "reference_conditioning": false,
+    "postprocessing_llm": false
+  },
+  "non_benchmark_warmup_audio": {
+    "path": "/home/ab409/task-005-nemotron/data/validation/v0/audio/DKSR20001584.1.1.7.wav",
+    "sha256": "d0e2eaba0976def1c59d5aa430618196e9b80f079fd4ef62e03862a57f37f008",
+    "latency_ms": 3147.911
+  },
+  "random_seed": 0
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0.0",
+  "experiment_id": "task-005-nemotron-3.5-asr-streaming-0.6b-nemo-pretrained-control-v0",
+  "task": "surface_asr",
+  "model": {
+    "name": "nvidia/nemotron-3.5-asr-streaming-0.6b",
+    "version": "f3d333391852ba876df169dcc9ba902d25b6ab0b",
+    "model_provider": "NVIDIA",
+    "model_family": "FastConformer-RNNT",
+    "decoder_type": "RNNT",
+    "target_language": "ko-KR",
+    "fine_tuned": false,
+    "checkpoint_identifier": "hf://nvidia/nemotron-3.5-asr-streaming-0.6b@f3d333391852ba876df169dcc9ba902d25b6ab0b#sha256:210214ed94039bf6bfbb9a047c7fa289628db75b103e2bf6381fa78285436a74",
+    "checkpoint": "nemo:///home/ab409/task-005-nemotron/models/nemotron-3.5-asr-streaming-0.6b.nemo#sha256:210214ed94039bf6bfbb9a047c7fa289628db75b103e2bf6381fa78285436a74",
+    "tokenizer_version": "sentencepiece-13087",
+    "config_hash": null
+  },
+  "benchmark_id": "busan-surface-v0",
+  "benchmark_version": "1.0.0",
+  "hypothesis": null,
+  "changed_variable": null,
+  "status": "completed",
+  "created_at": "2026-08-08T11:40:42.775274Z"
+}

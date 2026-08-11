@@ -1,0 +1,137 @@
+{
+  "schema_version": "2.0.0",
+  "status": "ready_for_blinded_review",
+  "benchmark_id": "busan-surface-v0",
+  "benchmark_version": "1.0.0",
+  "benchmark_semantic_sha256": "700d352edb4a4e9321b48ec6cd312bec6ad1d4c48fa2bedbcf80a2ca23a67f8c",
+  "model_names_exposed": false,
+  "allowed_preferences": [
+    "A",
+    "B",
+    "tie",
+    "uncertain"
+  ],
+  "allowed_findings": [
+    "present",
+    "absent",
+    "uncertain"
+  ],
+  "instructions": "Listen to the WAV before judging. Do not open the key. Compare A and B for transcript closeness, dialect preservation, meaning fidelity, meaning distortion, and standard-Korean overcorrection.",
+  "items": [
+    {
+      "item_id": "TASK005-AB-001",
+      "utterance_id": "3faa344e-968d-42cb-baf8-f1847a936a98",
+      "audio_path": "../../task-005/evaluation-v0/benchmark/derived/asr_16k_mono/27/2783c5f005a5ef63b7e9edbbbbe97f8e722ec33ddb4bbbafe6572b90b27168a3.asr-16k-mono.wav",
+      "reference_surface_text": "와따 맛있노",
+      "dialect_expressions": [
+        "와따",
+        "맛있노"
+      ],
+      "candidate_A": "",
+      "candidate_B": "와따 맛있노?"
+    },
+    {
+      "item_id": "TASK005-AB-002",
+      "utterance_id": "dbfedf22-ef0f-4cc5-ac99-2daf4758aa72",
+      "audio_path": "../../task-005/evaluation-v0/benchmark/derived/asr_16k_mono/85/85b2ee890d2c13bd5621208586af16187977ed1d966f01577bf7ef74cad7041a.asr-16k-mono.wav",
+      "reference_surface_text": "마, 괜찮다 아이가.",
+      "dialect_expressions": [
+        "마",
+        "아이가"
+      ],
+      "candidate_A": "막 괜찮다 아이가.",
+      "candidate_B": "막 괜찮다 이거"
+    },
+    {
+      "item_id": "TASK005-AB-003",
+      "utterance_id": "75b96c24-cab0-4e52-839b-dd67b496e58a",
+      "audio_path": "../../task-005/evaluation-v0/benchmark/derived/asr_16k_mono/0a/0adf8a1e25ed7c4477b27296173e199f4ff773a83faa4d59db699c614e36101a.asr-16k-mono.wav",
+      "reference_surface_text": "내일 같이 가재이",
+      "dialect_expressions": [
+        "가재이"
+      ],
+      "candidate_A": "",
+      "candidate_B": "내일 같이 가재이."
+    },
+    {
+      "item_id": "TASK005-AB-004",
+      "utterance_id": "d66716eb-c35d-4867-907c-187935449cab",
+      "audio_path": "../../task-005/evaluation-v0/benchmark/derived/asr_16k_mono/e6/e69ea3143e188b36f70a23a47cc0916ce9e48dfb5ce83c74639d97c37931c703.asr-16k-mono.wav",
+      "reference_surface_text": "여기 좀 앉으이소.",
+      "dialect_expressions": [
+        "앉으이소"
+      ],
+      "candidate_A": "아 여기 좀 앉으이소.",
+      "candidate_B": "어 이 조만칠이서"
+    },
+    {
+      "item_id": "TASK005-AB-005",
+      "utterance_id": "38f63a59-325b-4e53-9287-ab094c6a889d",
+      "audio_path": "../../task-005/evaluation-v0/benchmark/derived/asr_16k_mono/31/312f919809cef3db2534f14d14f32f70119afd024e504591572ef731935a3ecc.asr-16k-mono.wav",
+      "reference_surface_text": "지금 뭐 하노?",
+      "dialect_expressions": [
+        "하노"
+      ],
+      "candidate_A": "지금 뭐 하노",
+      "candidate_B": "지금 뭐 하노?"
+    },
+    {
+      "item_id": "TASK005-AB-006",
+      "utterance_id": "c95d2f85-a98a-4c19-9476-e55b92a49dc0",
+      "audio_path": "../../task-005/evaluation-v0/benchmark/derived/asr_16k_mono/1e/1edb9a815fbc9006e48106965370ee68e10754c8924bd5ca1df94493af757a48.asr-16k-mono.wav",
+      "reference_surface_text": "그거 아이다.",
+      "dialect_expressions": [
+        "아이다"
+      ],
+      "candidate_A": "그거 아이다.",
+      "candidate_B": ""
+    },
+    {
+      "item_id": "TASK005-AB-007",
+      "utterance_id": "c426f5fc-397d-4ef8-8d7c-9b1d34e4a81a",
+      "audio_path": "../../task-005/evaluation-v0/benchmark/derived/asr_16k_mono/08/08dfc20a2056ba0f4b54fd8454f6f20f16b127f5d2e5faba01109caa596eabbe.asr-16k-mono.wav",
+      "reference_surface_text": "오늘 와 이리 춥노?",
+      "dialect_expressions": [
+        "와",
+        "이리",
+        "춥노"
+      ],
+      "candidate_A": "오늘 와이리 춥노?",
+      "candidate_B": "옷 와이디 춤로"
+    },
+    {
+      "item_id": "TASK005-AB-008",
+      "utterance_id": "d53bf39e-0c55-4433-8bea-3b5242b55f9a",
+      "audio_path": "../../task-005/evaluation-v0/benchmark/derived/asr_16k_mono/cb/cb7704375e0137630de0df8bc69cc443fd966d48d89edf4c8257db1a5faa6671.asr-16k-mono.wav",
+      "reference_surface_text": "밥 묵었나?",
+      "dialect_expressions": [
+        "묵었나"
+      ],
+      "candidate_A": "밤 무거나",
+      "candidate_B": "밥 묵었나?"
+    },
+    {
+      "item_id": "TASK005-AB-009",
+      "utterance_id": "9e5edb72-7ef8-46df-8021-ab0de6dfd567",
+      "audio_path": "../../task-005/evaluation-v0/benchmark/derived/asr_16k_mono/1c/1cd1c4da037862f88b356a8b753b5c64b320f2e01a36eff793d52058a81b3496.asr-16k-mono.wav",
+      "reference_surface_text": "니 지금 어데고?",
+      "dialect_expressions": [
+        "니",
+        "어데고"
+      ],
+      "candidate_A": "니 지금 어데고?",
+      "candidate_B": "니 지금 어디가"
+    },
+    {
+      "item_id": "TASK005-AB-010",
+      "utterance_id": "e2d209fb-b801-4a47-b528-3ae54c723ea0",
+      "audio_path": "../../task-005/evaluation-v0/benchmark/derived/asr_16k_mono/35/35c0c64b9cdaa4835ec7f231ca20a55bdf6a07a23f54242735a52020156a353b.asr-16k-mono.wav",
+      "reference_surface_text": "국밥 하나 주이소",
+      "dialect_expressions": [
+        "주이소"
+      ],
+      "candidate_A": "국밥 하나 주의소",
+      "candidate_B": "국밥아나 주이소."
+    }
+  ]
+}

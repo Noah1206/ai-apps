@@ -1,0 +1,138 @@
+{
+  "$defs": {
+    "CalibratedForm": {
+      "additionalProperties": false,
+      "properties": {
+        "form": {
+          "minLength": 1,
+          "title": "Form",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/ReviewStatus",
+          "default": "candidate"
+        },
+        "evidence_review_ids": {
+          "default": [],
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": "Evidence Review Ids",
+          "type": "array"
+        },
+        "notes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Notes"
+        }
+      },
+      "required": [
+        "form"
+      ],
+      "title": "CalibratedForm",
+      "type": "object"
+    },
+    "DialectCalibrationRule": {
+      "additionalProperties": false,
+      "properties": {
+        "surface_form": {
+          "minLength": 1,
+          "title": "Surface Form",
+          "type": "string"
+        },
+        "acceptable_variants": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/CalibratedForm"
+          },
+          "title": "Acceptable Variants",
+          "type": "array"
+        },
+        "standard_equivalents": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/CalibratedForm"
+          },
+          "title": "Standard Equivalents",
+          "type": "array"
+        }
+      },
+      "required": [
+        "surface_form"
+      ],
+      "title": "DialectCalibrationRule",
+      "type": "object"
+    },
+    "ReviewStatus": {
+      "enum": [
+        "candidate",
+        "human_reviewed",
+        "approved",
+        "deprecated"
+      ],
+      "title": "ReviewStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "revision_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Revision Id",
+      "type": "string"
+    },
+    "benchmark_id": {
+      "minLength": 1,
+      "title": "Benchmark Id",
+      "type": "string"
+    },
+    "benchmark_version": {
+      "minLength": 1,
+      "title": "Benchmark Version",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "rules": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/DialectCalibrationRule"
+      },
+      "title": "Rules",
+      "type": "array"
+    },
+    "notes": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Notes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "revision_id",
+    "benchmark_id",
+    "benchmark_version"
+  ],
+  "title": "EvaluationCalibrationProfile",
+  "type": "object"
+}

@@ -1,0 +1,221 @@
+{
+  "$defs": {
+    "BlindABReviewItem": {
+      "additionalProperties": false,
+      "properties": {
+        "item_id": {
+          "minLength": 1,
+          "title": "Item Id",
+          "type": "string"
+        },
+        "utterance_id": {
+          "minLength": 1,
+          "title": "Utterance Id",
+          "type": "string"
+        },
+        "transcript_preference": {
+          "anyOf": [
+            {
+              "enum": [
+                "A",
+                "B",
+                "tie",
+                "uncertain"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Transcript Preference"
+        },
+        "dialect_preservation_preference": {
+          "anyOf": [
+            {
+              "enum": [
+                "A",
+                "B",
+                "tie",
+                "uncertain"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dialect Preservation Preference"
+        },
+        "meaning_fidelity_preference": {
+          "anyOf": [
+            {
+              "enum": [
+                "A",
+                "B",
+                "tie",
+                "uncertain"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Meaning Fidelity Preference"
+        },
+        "meaning_distortion_a": {
+          "anyOf": [
+            {
+              "enum": [
+                "present",
+                "absent",
+                "uncertain"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Meaning Distortion A"
+        },
+        "meaning_distortion_b": {
+          "anyOf": [
+            {
+              "enum": [
+                "present",
+                "absent",
+                "uncertain"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Meaning Distortion B"
+        },
+        "overcorrection_a": {
+          "anyOf": [
+            {
+              "enum": [
+                "present",
+                "absent",
+                "uncertain"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Overcorrection A"
+        },
+        "overcorrection_b": {
+          "anyOf": [
+            {
+              "enum": [
+                "present",
+                "absent",
+                "uncertain"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Overcorrection B"
+        },
+        "notes": {
+          "anyOf": [
+            {
+              "maxLength": 4000,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Notes"
+        }
+      },
+      "required": [
+        "item_id",
+        "utterance_id"
+      ],
+      "title": "BlindABReviewItem",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "review_id": {
+      "minLength": 1,
+      "title": "Review Id",
+      "type": "string"
+    },
+    "benchmark_id": {
+      "minLength": 1,
+      "title": "Benchmark Id",
+      "type": "string"
+    },
+    "benchmark_version": {
+      "minLength": 1,
+      "title": "Benchmark Version",
+      "type": "string"
+    },
+    "benchmark_semantic_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Benchmark Semantic Sha256",
+      "type": "string"
+    },
+    "reviewer_id": {
+      "minLength": 1,
+      "title": "Reviewer Id",
+      "type": "string"
+    },
+    "status": {
+      "default": "in_progress",
+      "enum": [
+        "in_progress",
+        "complete"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "items": {
+      "items": {
+        "$ref": "#/$defs/BlindABReviewItem"
+      },
+      "minItems": 1,
+      "title": "Items",
+      "type": "array"
+    }
+  },
+  "required": [
+    "review_id",
+    "benchmark_id",
+    "benchmark_version",
+    "benchmark_semantic_sha256",
+    "reviewer_id",
+    "items"
+  ],
+  "title": "BlindABReviewResult",
+  "type": "object"
+}

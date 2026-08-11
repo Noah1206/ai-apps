@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0.0",
+  "audited_at": "2026-08-09T08:25:06+09:00",
+  "scope": [
+    "repository",
+    "/Users/johyeon-ung/Downloads"
+  ],
+  "exclusion_registry": {
+    "path": "artifacts/gate-2/evaluation-datasets/exclusion-registry.json",
+    "sha256": "92e7091f6bfc9826211f292547e568efb51475d1c11b72c806a28fef7ac6987e",
+    "speaker_ids": 15,
+    "utterance_ids": 250,
+    "source_recording_ids": 214,
+    "audio_sha256s": 280,
+    "normalized_surface_texts": 250
+  },
+  "assets": [
+    {
+      "name": "Audio Lab recordings",
+      "path": "data/lab",
+      "items": 210,
+      "classification": "200 Train plus 10 frozen Benchmark",
+      "eligible_for_final_test": false,
+      "reason": "already used for training or frozen pilot evaluation"
+    },
+    {
+      "name": "TASK-005 independent validation",
+      "path": "artifacts/gate-2/reproducibility/recovered/task-005-independent-validation-v0.zip",
+      "sha256": "8253af4979ce5f9e20aed9bbb9023ee9f03f3797278e53beabdb90468f825f0d",
+      "items": 40,
+      "speakers": 4,
+      "classification": "checkpoint-selection Validation",
+      "eligible_for_final_test": false,
+      "reason": "used to select epoch 5 / global step 97"
+    },
+    {
+      "name": "TASK-005 Train package",
+      "path": "artifacts/gate-2/reproducibility/recovered/task-005-nemotron-train-pool-v0.zip",
+      "sha256": "fcef88360c12d4149a290fa0ff93546fd2cb1bf7bd9d6f9c177557c27e22e20d",
+      "items": 200,
+      "speakers": 1,
+      "classification": "training data duplicate",
+      "eligible_for_final_test": false,
+      "reason": "used for adapter training"
+    },
+    {
+      "name": "busan-surface-v0@1.0.0 packages",
+      "path": "repository and Downloads copies",
+      "sha256": "151c1e28804627bea69bbd7f6632f4d3558ebf076147e42c1d168d508467233c",
+      "items": 10,
+      "classification": "frozen pilot duplicate",
+      "eligible_for_final_test": false,
+      "reason": "already used by TASK-002 through TASK-005"
+    },
+    {
+      "name": "TASK-003/TASK-005 result and recovery archives",
+      "path": "repository and Downloads",
+      "classification": "predictions, diagnostics, code, model artifacts, or duplicate audio",
+      "eligible_for_final_test": false,
+      "reason": "no new independently labeled evaluation speech"
+    }
+  ],
+  "independent_busan_test": {
+    "required_utterances": 100,
+    "required_speakers": 5,
+    "eligible_utterances_found": 0,
+    "eligible_speakers_found": 0,
+    "status": "insufficient_data",
+    "needed": "at least 100 human-reviewed Busan/Gyeongsang utterances from at least 5 new speakers"
+  },
+  "standard_korean_regression": {
+    "required_utterances": 100,
+    "required_speakers": 5,
+    "eligible_utterances_found": 0,
+    "eligible_speakers_found": 0,
+    "status": "insufficient_data",
+    "needed": "at least 100 human-reviewed Standard Korean utterances from at least 5 independent speakers"
+  },
+  "exclusion_validation": "not_applicable_no_candidate_manifest",
+  "fabricated_data": false
+}

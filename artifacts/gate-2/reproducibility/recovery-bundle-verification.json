@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0.0",
+  "bundle_root": "artifacts/gate-2/reproducibility/recovered/task-005-recovery-gate2-slim-20260808",
+  "manifest_sha256": "dbe378df47bb18cf533ebfe93950a140ef334f2377a4a4a09737c493ab1310cc",
+  "indexed_files": 125,
+  "verified_files": 125,
+  "missing_files": [],
+  "mismatched_files": [],
+  "unexpected_files": [],
+  "source_archive": {
+    "sha256": "f41cf5aca71efb2bb1c261ce8ab41ceae5e6795368d1713e82600ecdb30b7f0a",
+    "member_count": 166,
+    "safety_errors": []
+  },
+  "passed": true,
+  "errors": []
+}

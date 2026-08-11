@@ -1,0 +1,76 @@
+{
+  "$defs": {
+    "DatasetSplit": {
+      "enum": [
+        "unassigned",
+        "train",
+        "validation",
+        "test"
+      ],
+      "title": "DatasetSplit",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Model-neutral JSONL row; text is always the approved Surface transcript.",
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "utterance_id": {
+      "format": "uuid",
+      "title": "Utterance Id",
+      "type": "string"
+    },
+    "split": {
+      "$ref": "#/$defs/DatasetSplit"
+    },
+    "audio_filepath": {
+      "minLength": 1,
+      "title": "Audio Filepath",
+      "type": "string"
+    },
+    "audio_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Audio Sha256",
+      "type": "string"
+    },
+    "duration_seconds": {
+      "exclusiveMinimum": 0,
+      "title": "Duration Seconds",
+      "type": "number"
+    },
+    "text": {
+      "minLength": 1,
+      "title": "Text",
+      "type": "string"
+    },
+    "speaker_id": {
+      "minLength": 1,
+      "title": "Speaker Id",
+      "type": "string"
+    },
+    "dialect_expressions": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Dialect Expressions",
+      "type": "array"
+    }
+  },
+  "required": [
+    "utterance_id",
+    "split",
+    "audio_filepath",
+    "audio_sha256",
+    "duration_seconds",
+    "text",
+    "speaker_id"
+  ],
+  "title": "TrainingExportRecord",
+  "type": "object"
+}
