@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0.0",
+  "benchmark_manifest_sha256": "09b1685eaeb512ad1b9d5632ba40e6b829387bd5cf3ee0724038da2202d73b7a",
+  "criteria_sha256": "bf8831bd69f2f3faed1dce0ebb5c28d42819120c810753a8db76214f41ea8757",
+  "attempts": [
+    {
+      "run": "engineering-v1-run-001",
+      "runtime_candidate": "runtime-v1",
+      "decision": "FAIL",
+      "failed_checks": [
+        "complete_traces",
+        "empty_finals",
+        "exact_surface_agreement",
+        "surface_cer"
+      ],
+      "local_summary_sha256": "9f14da46e48ebd8639903c90bbe188ee147ebdd5b9146e7c77efcebdb20a9545"
+    },
+    {
+      "run": "engineering-v1-run-002",
+      "runtime_candidate": "runtime-v2",
+      "decision": "FAIL",
+      "failed_checks": ["exact_surface_agreement"],
+      "local_summary_sha256": "aadf8ad39c32c9ac1c4ee0af955b9084d414e1f2118b33e39d432b8a0400dbb0"
+    },
+    {
+      "run": "engineering-v1-run-003",
+      "runtime_candidate": "runtime-v3",
+      "decision": "FAIL",
+      "failed_checks": ["exact_surface_agreement"],
+      "local_summary_sha256": "cc1e38b2c127338e84518da435aaeebca2ff57be8da2e5d3fc899a2216c316e1"
+    }
+  ],
+  "additional_runs_after_runtime_v3": 0
+}

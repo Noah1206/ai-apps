@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0.0",
+  "status": "smoke_passed_not_gate_passed",
+  "accepted_local_run": "data/lab/gate3/smoke-v3",
+  "single_process": true,
+  "model_sha256": "eb7d5112329504db72ffcb2c638e245e68f35801cda14a33682478d4a2ae85ee",
+  "audio_sha256": "2b221f85b9979f33fd42c3b003cea2358f27199a66de850148075d0d5d06dba5",
+  "final_transcript_sha256": "5eef445c561a5986932398f52e3b8d866e227339a33c44eefed5a7431d3bda38",
+  "runtime": {
+    "python": "3.13.14",
+    "nemo": "3.1.0+6c57e73e83",
+    "torch": "2.12.0+cu132",
+    "device": "NVIDIA GeForce RTX 2070",
+    "model_load_ms": 124697.44548000017
+  },
+  "streaming": {
+    "implementation": "CacheAwareStreamingAudioBuffer+conformer_stream_step",
+    "attention_context": [56, 3],
+    "chunk_size_ms": 320.0,
+    "event_count": 10,
+    "partial_event_count": 9,
+    "first_partial_latency_ms": 1813.3870659985405,
+    "final_latency_ms": 2187.242502997833,
+    "mean_chunk_inference_latency_ms": 217.29153150008642,
+    "partial_stability": 1.0,
+    "stable_prefix_violations": 0,
+    "surface_final_cer": 0.0,
+    "final_agreement_with_surface_asr": 1.0,
+    "peak_device_memory_bytes": 2694814208,
+    "adapter_module_count": 24,
+    "adapter_call_count": 240,
+    "session_state_released": true,
+    "endpoint_accuracy_tested": false,
+    "cancellation_tested": false,
+    "confidence_supported": false
+  },
+  "local_artifact_sha256": {
+    "summary.json": "de0476971387b8f5a00815ea8bec7e85c831aac61c3c955cc741a96e09e98aec",
+    "events.jsonl": "53644ada3a02de0687a98353406371e50d543ad41052292a4864e1bdfbd5c927",
+    "resolved-config.json": "2675d1186be211443ccdb415a3d1d1f487a86cd74d65c6a91f79b71c89548636"
+  },
+  "limitations": [
+    "one previously consumed integration sample, not a fixed Gate 3 benchmark",
+    "accelerated cold file simulation, not real-time-paced input",
+    "explicit end-of-input only; endpoint accuracy not tested",
+    "runtime cancellation and long-session memory growth not tested"
+  ]
+}

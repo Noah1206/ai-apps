@@ -1,0 +1,98 @@
+{
+  "schema_version": "1.0.0",
+  "decision": "FAIL",
+  "runtime_candidate": "runtime-v5",
+  "passed_check_count": 28,
+  "failed_check_count": 1,
+  "failed_checks": ["exact_surface_agreement"],
+  "model_sha256": "eb7d5112329504db72ffcb2c638e245e68f35801cda14a33682478d4a2ae85ee",
+  "benchmark_manifest_sha256": "8bfbd54d0e1b631fc502773472a056b0b77891ae520cb6618c5d329eb2722b9b",
+  "criteria_sha256": "431cd7fae1635f9046ef97d0921a832e2f0d5982657713aec3fbaadb37f3f23f",
+  "evidence": {
+    "case_count": 20,
+    "speaker_count": 10,
+    "complete_trace_count": 20,
+    "empty_final_count": 0,
+    "nonempty_partial_rate": 1.0,
+    "mean_partial_stability": 1.0,
+    "trace_retraction_rate": 0.0,
+    "exact_surface_agreement_rate": 0.65,
+    "aggregate_surface_cer": 0.0038314176245210726,
+    "warm_first_partial_p95_ms": 1007.968355446792,
+    "finalization_lag_p95_ms": 246.1664758524421,
+    "post_warmup_chunk_inference_p95_ms": 143.41361420083558,
+    "trace_realtime_factor_p95": 1.0687853906403721,
+    "synthetic_endpoint_precision": 0.95,
+    "synthetic_endpoint_recall": 0.95,
+    "synthetic_endpoint_f1": 0.9500000000000001,
+    "endpoint_early_trigger_rate": 0.05,
+    "endpoint_delay_p95_ms": 782.9999999999999,
+    "cancellation_correctness": 1.0,
+    "reset_correctness": 1.0,
+    "allocated_memory_growth_bytes": 0,
+    "reserved_memory_growth_bytes": 106954752,
+    "adapter_module_count": 24,
+    "every_adapter_called": true,
+    "every_session_state_released": true,
+    "confidence_policy": "explicitly_unsupported_no_fabricated_values",
+    "infrastructure_failures": []
+  },
+  "exact_mismatch_cases": [
+    {
+      "case_id": "gate3-001",
+      "audio_sha256": "c5cf3e0b718a77c4c4df7f1e557c3363182bd3e07639836102f0c401e2a37242",
+      "difference": "streaming_missing_terminal_U+002E",
+      "surface_cer": 0.0
+    },
+    {
+      "case_id": "gate3-003",
+      "audio_sha256": "cb739182e2ca910b5a2e664d7f187d239b1f380657b8c65a08e05fdd3240e8eb",
+      "difference": "streaming_extra_terminal_U+002E",
+      "surface_cer": 0.0
+    },
+    {
+      "case_id": "gate3-006",
+      "audio_sha256": "e91101e7e6a7e587007fa0ca8b66a35991be0813aa2eabdf95be59e848d95f1f",
+      "difference": "streaming_missing_terminal_U+002E",
+      "surface_cer": 0.0
+    },
+    {
+      "case_id": "gate3-007",
+      "audio_sha256": "868b46c0c590a4c3e66b2c5e481243c547840fa1d26e5d669693da701c4890d7",
+      "difference": "streaming_missing_terminal_U+003F",
+      "surface_cer": 0.0
+    },
+    {
+      "case_id": "gate3-009",
+      "audio_sha256": "6f0b6acd0cc21bf3477f80167b88e2aaf6bf7be71323b60e358f6e1bc4e50cea",
+      "difference": "streaming_missing_terminal_U+003F",
+      "surface_cer": 0.0
+    },
+    {
+      "case_id": "gate3-015",
+      "audio_sha256": "969aeac909a2cfe4eb20f6ee5336b9497d2ef41b189824d582b043ff26aed23c",
+      "difference": "streaming_missing_terminal_U+002E",
+      "surface_cer": 0.0
+    },
+    {
+      "case_id": "gate3-017",
+      "audio_sha256": "5a00b247861473021146e05584e2b6511a0fead1f496a84c306dbd5de42a9ff8",
+      "difference": "streaming_missing_two_terminal_CER_counted_characters",
+      "surface_cer": 0.11764705882352941
+    }
+  ],
+  "synthetic_endpoint_early_cases": [
+    "9067acd34ece51f44e5ef6fc71e6a242215991b675418e5edcce16200c7fcdc3"
+  ],
+  "local_artifact_sha256": {
+    "summary.json": "34de49a46168938a83223dd6ccb8bc95fc297b2c3e8661e60bd13fe1da4eb5e5",
+    "assessment.json": "ff4dfc3e35a6be48ca7bf21f885ec3d03c72135640004701e4a99e48ee92d5a8",
+    "evidence.json": "d775f51fffcbfcddd487a5c604fa95aff9e454351df06bd7c59ffc2eaf36ec21",
+    "resolved-config.json": "a3959c9438c1c38d675d2e0ac1f1a035ae17689eefda38c076186afcfda2fe77",
+    "events.jsonl": "317db11efbe5430d0fc9c9f4b82dd0773f12b6ebfd7095d932347802c3d9f4d6",
+    "traces.jsonl": "06dad27a2b7d9d24c1080a07bd2d89f38e2a943d19352179b11f2526a2b50914"
+  },
+  "quality_generalization_claim_allowed": false,
+  "endpoint_evidence_scope": "synthetic_appended_silence_only",
+  "additional_runs_allowed_under_protocol": 0
+}

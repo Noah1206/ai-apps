@@ -1,0 +1,24 @@
+{
+  "independent_busan": {
+    "schema_version": "1.0.0",
+    "dataset_id": "aihub-gyeongsang-busan-final-test-v2",
+    "dataset_version": "2.0.0",
+    "dataset_kind": "independent_busan_test",
+    "passed": true,
+    "utterances": 100,
+    "speakers": 10,
+    "errors": [],
+    "warnings": []
+  },
+  "standard_korean": {
+    "schema_version": "1.0.0",
+    "dataset_id": "zeroth-korean-standard-regression",
+    "dataset_version": "1.0.0",
+    "dataset_kind": "standard_korean_regression",
+    "passed": true,
+    "utterances": 100,
+    "speakers": 10,
+    "errors": [],
+    "warnings": []
+  }
+}

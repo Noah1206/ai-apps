@@ -35,6 +35,9 @@ from busan_lab.schemas import (
     Gate2Criteria,
     Gate2EvaluationManifest,
     Gate2Evidence,
+    Gate3Assessment,
+    Gate3Criteria,
+    Gate3Evidence,
     HumanReview,
     HumanReviewedBaselineReport,
     LabelRevision,
@@ -42,6 +45,8 @@ from busan_lab.schemas import (
     PredictionComparison,
     ReproducibilitySpec,
     StoredPrediction,
+    StreamingTraceMetrics,
+    StreamingTranscriptEvent,
     TrainingDatasetManifest,
     TrainingDatasetValidationReport,
     TrainingExportRecord,
@@ -406,6 +411,11 @@ def export_schemas(output_dir: Path) -> None:
         "evaluation-case.schema.json": EvaluationCaseResult.model_json_schema(),
         "experiment-run.schema.json": ExperimentRun.model_json_schema(),
         "stored-prediction.schema.json": StoredPrediction.model_json_schema(),
+        "streaming-transcript-event.schema.json": StreamingTranscriptEvent.model_json_schema(),
+        "streaming-trace-metrics.schema.json": StreamingTraceMetrics.model_json_schema(),
+        "gate3-criteria.schema.json": Gate3Criteria.model_json_schema(),
+        "gate3-evidence.schema.json": Gate3Evidence.model_json_schema(),
+        "gate3-assessment.schema.json": Gate3Assessment.model_json_schema(),
         "human-review.schema.json": HumanReview.model_json_schema(),
         "label-revision.schema.json": LabelRevision.model_json_schema(),
         "prediction-comparison.schema.json": PredictionComparison.model_json_schema(),
@@ -428,9 +438,7 @@ def export_schemas(output_dir: Path) -> None:
         "training-recording-import-plan.schema.json": (
             TrainingRecordingImportPlan.model_json_schema()
         ),
-        "training-split-assignments.schema.json": (
-            TrainingSplitAssignments.model_json_schema()
-        ),
+        "training-split-assignments.schema.json": (TrainingSplitAssignments.model_json_schema()),
     }
     for filename, schema in schemas.items():
         (output_dir / filename).write_text(

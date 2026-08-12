@@ -3,11 +3,14 @@
 from __future__ import annotations
 
 import argparse
+import base64
 import hashlib
 import json
 import os
+import shutil
 import statistics
 import subprocess
+import sys
 import tarfile
 import tempfile
 import wave
@@ -467,6 +470,76 @@ def _prompt_choice(
         print("허용된 선택지만 입력하세요.")
 
 
+def _running_in_wsl() -> bool:
+    if os.name != "posix" or sys.platform == "darwin":
+        return False
+    try:
+        return "microsoft" in Path("/proc/sys/kernel/osrelease").read_text(
+            encoding="utf-8"
+        ).casefold()
+    except OSError:
+        return False
+
+
+def _powershell_audio_command(audio_path: str) -> list[str]:
+    escaped_path = audio_path.replace("'", "''")
+    script = (
+        "$ProgressPreference = 'SilentlyContinue'; "
+        f"Start-Process -FilePath '{escaped_path}'"
+    )
+    encoded_script = base64.b64encode(script.encode("utf-16-le")).decode("ascii")
+    return [
+        "powershell.exe",
+        "-NoProfile",
+        "-NonInteractive",
+        "-EncodedCommand",
+        encoded_script,
+    ]
+
+
+def _play_audio(audio_path: Path) -> None:
+    if not audio_path.is_file():
+        raise FileNotFoundError(f"오디오 파일을 찾을 수 없습니다: {audio_path}")
+
+    if sys.platform == "darwin":
+        command = ["/usr/bin/open", str(audio_path)]
+    elif os.name == "nt":
+        command = _powershell_audio_command(str(audio_path))
+    elif _running_in_wsl():
+        windows_path = subprocess.run(
+            ["wslpath", "-w", str(audio_path)],
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+        command = _powershell_audio_command(windows_path)
+    elif xdg_open := shutil.which("xdg-open"):
+        command = [xdg_open, str(audio_path)]
+    elif ffplay := shutil.which("ffplay"):
+        command = [
+            ffplay,
+            "-nodisp",
+            "-autoexit",
+            "-loglevel",
+            "error",
+            str(audio_path),
+        ]
+    elif aplay := shutil.which("aplay"):
+        command = [aplay, str(audio_path)]
+    else:
+        raise RuntimeError(
+            "사용 가능한 오디오 재생기를 찾지 못했습니다. "
+            "macOS open, Windows PowerShell, WSL 또는 xdg-open/ffplay/aplay가 필요합니다."
+        )
+
+    try:
+        subprocess.run(command, check=True, capture_output=True, text=True)
+    except subprocess.CalledProcessError as error:
+        detail = (error.stderr or error.stdout or "").strip()
+        suffix = f": {detail}" if detail else ""
+        raise RuntimeError(f"오디오 파일 열기에 실패했습니다{suffix}") from error
+
+
 def run_blind_ab_review(
     *,
     queue_path: Path,
@@ -504,7 +577,8 @@ def run_blind_ab_review(
         print(f"A: {item['candidate_A']!r}")
         print(f"B: {item['candidate_B']!r}")
         if open_audio:
-            subprocess.run(["/usr/bin/afplay", str(audio_path)], check=True)
+            _play_audio(audio_path)
+            print("오디오를 기본 플레이어로 열었습니다. 재생을 확인한 뒤 판정하세요.")
 
         transcript = _prompt_choice(
             "실제 발화와 더 가까운 결과 [a=A, b=B, s=동일, u=판단불가]",

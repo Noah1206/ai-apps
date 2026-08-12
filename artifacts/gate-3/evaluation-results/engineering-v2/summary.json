@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0.0",
+  "decision": "FAIL",
+  "runtime_candidate": "runtime-v4",
+  "passed_check_count": 28,
+  "failed_check_count": 1,
+  "failed_checks": ["finalization_lag"],
+  "model_sha256": "eb7d5112329504db72ffcb2c638e245e68f35801cda14a33682478d4a2ae85ee",
+  "benchmark_manifest_sha256": "509bbdd97e73add605a51355ddaa572365acd1ab4134235bd24d5a1b338c37f3",
+  "criteria_sha256": "93a2135c43c7acff0cf525a3ff1c8bd9e1c07eaaad9d585c8fa9473188f8a5fd",
+  "evidence": {
+    "case_count": 20,
+    "speaker_count": 10,
+    "complete_trace_count": 20,
+    "empty_final_count": 0,
+    "nonempty_partial_rate": 1.0,
+    "mean_partial_stability": 1.0,
+    "trace_retraction_rate": 0.0,
+    "exact_surface_agreement_rate": 0.95,
+    "aggregate_surface_cer": 0.0,
+    "warm_first_partial_p95_ms": 1410.5842287524877,
+    "finalization_lag_p95_ms": 510.23260674846824,
+    "post_warmup_chunk_inference_p95_ms": 157.23110369799542,
+    "trace_realtime_factor_p95": 1.1450281611693616,
+    "synthetic_endpoint_precision": 0.9,
+    "synthetic_endpoint_recall": 0.9,
+    "synthetic_endpoint_f1": 0.9,
+    "endpoint_early_trigger_rate": 0.1,
+    "endpoint_delay_p95_ms": 693.0,
+    "cancellation_correctness": 1.0,
+    "reset_correctness": 1.0,
+    "allocated_memory_growth_bytes": 0,
+    "reserved_memory_growth_bytes": 106954752,
+    "adapter_module_count": 24,
+    "every_adapter_called": true,
+    "every_session_state_released": true,
+    "confidence_policy": "explicitly_unsupported_no_fabricated_values",
+    "infrastructure_failures": []
+  },
+  "failure_detail": {
+    "metric": "finalization_lag_p95_ms",
+    "observed": 510.23260674846824,
+    "requirement": 500.0,
+    "excess_ms": 10.23260674846824,
+    "largest_case": {
+      "case_id": "gate3-019",
+      "audio_sha256": "2d22ef0dace8afbbae8cb12ce4368b81d070aacc0158110bf6f9cd076497f4a5",
+      "finalization_lag_ms": 538.5221580040525
+    }
+  },
+  "exact_mismatch": {
+    "case_id": "gate3-010",
+    "audio_sha256": "ab7d9dec824510e105a98398ac8972e6f821baef5271bc230205a8dd1a14594e",
+    "difference": "streaming_missing_terminal_U+003F",
+    "surface_cer": 0.0
+  },
+  "synthetic_endpoint_early_cases": [
+    "7e84d88dbf9c0ef78f79fadd0bff157fdf814cfe561ecda8bfe306d524ed6419",
+    "87896879b673d9d701a362f2bbf6c46bd81c8c3eb22962b5b1b17559ae220a0c"
+  ],
+  "local_artifact_sha256": {
+    "summary.json": "c2e8335eb8c8d974f55666042a6f9f209401f5177681abdde9bf31c614963098",
+    "assessment.json": "f0b0ee7d19389383b56f0505a06947a44b3b8dda0d226d8e4e1a576d2f1cadae",
+    "evidence.json": "f59a83aa91352d3d27ecc03a581197f0b8bb78061f495a15ef628e2106bc6ef8",
+    "resolved-config.json": "2c36b9ea8d228b49d74dbc0c41398562166cab38431fa2c647822460542a4915",
+    "events.jsonl": "59293af9b4022b0a1c1d4420a4ff9d296da1985c5003b9ed26bf4c6be810aa1c",
+    "traces.jsonl": "45cfb965b6ad2961407c244e5be51c7ff6f4781ef608f80661e666202e48744b"
+  },
+  "quality_generalization_claim_allowed": false,
+  "endpoint_evidence_scope": "synthetic_appended_silence_only",
+  "additional_runs_allowed_under_protocol": 0
+}

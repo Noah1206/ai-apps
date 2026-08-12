@@ -29,6 +29,16 @@ from busan_lab.schemas.gate2 import (
     Gate2Evidence,
     ReproducibilitySpec,
 )
+from busan_lab.schemas.streaming import (
+    Gate3Assessment,
+    Gate3Check,
+    Gate3Criteria,
+    Gate3Decision,
+    Gate3Evidence,
+    StreamingSessionStatus,
+    StreamingTraceMetrics,
+    StreamingTranscriptEvent,
+)
 from busan_lab.schemas.training import (
     TrainingDatasetManifest,
     TrainingDatasetValidationReport,
@@ -64,6 +74,11 @@ __all__ = [
     "Gate2Criteria",
     "Gate2EvaluationManifest",
     "Gate2Evidence",
+    "Gate3Assessment",
+    "Gate3Check",
+    "Gate3Criteria",
+    "Gate3Decision",
+    "Gate3Evidence",
     "HumanReview",
     "HumanReviewedBaselineReport",
     "LabelRevision",
@@ -72,6 +87,9 @@ __all__ = [
     "PredictionComparison",
     "ReproducibilitySpec",
     "StoredPrediction",
+    "StreamingSessionStatus",
+    "StreamingTraceMetrics",
+    "StreamingTranscriptEvent",
     "SurfaceASRResult",
     "TrainingDatasetManifest",
     "TrainingDatasetValidationReport",

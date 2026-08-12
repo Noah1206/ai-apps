@@ -5,17 +5,17 @@
 
 현재 연구 질문은 다음 하나다.
 
-> 고정된 Nemotron pretrained와 TASK-005 Busan encoder adapter의 차이가
-> 재현 가능하며, 보지 않은 다화자 부산어에 일반화하고 표준 한국어를 훼손하지 않는가?
+> Gate 2를 통과한 고정 Nemotron encoder adapter가 cache-aware Streaming ASR에서
+> 안정적인 부분 전사와 Surface ASR에 합의하는 최종 전사를 낼 수 있는가?
 
 `busan-surface-v0@1.0.0` 10개와 외부 NVIDIA GPU 환경의 prediction을 분리해
 주고받는 측정 수직 슬라이스를 제공한다. 모델 런타임과 Audio Lab은 같은
 컴퓨터에 있을 필요가 없다.
 
-## Gate 2 상태 (2026-08-09)
+## Gate 2 상태 (2026-08-12)
 
-**FAIL (검증 증거 미완료)**. TASK-005 학습과 10개 자동 평가는 완료됐지만 Gate 2는
-아직 종료하지 않는다.
+**PASS (13/13)**. 마지막으로 고정한 단일 학습 후보가 미사용 부산어 Test v2와
+기존 표준어 Regression의 모든 Gate 2 기준을 통과했다. Gate 2는 종료한다.
 
 - Benchmark 두 원본은 raw SHA가 다르지만 검증된 의미 내용은 동일하다. Canonical
   package SHA-256은 `151c1e28804627bea69bbd7f6632f4d3558ebf076147e42c1d168d508467233c`,
@@ -24,13 +24,52 @@
   `0.2000`, 빈 출력 3개; adapter CER `0.0500`, 방언 보존 `0.9333`, 빈 출력 0개다.
 - GPU recovery bundle의 125/125 파일과 best `.ckpt`, best `.nemo`, embedded adapter,
   hparams, launcher, inference runner, 환경 및 학습 로그 SHA-256 검증이 통과했다.
-- 10개 blinded Human A/B는 준비됐지만 판정은 0/10이다.
-- checkpoint 선택에 쓴 Validation 40개는 final Test에서 제외한다. 독립 다화자 부산어
-  Test와 표준 한국어 Regression 데이터·결과는 아직 없다.
+- 10개 blinded Human A/B를 모델 key 공개 전에 완료했고 fine-tuned가 8/10으로
+  선호됐다.
+- 신규 데이터를 포함한 Train 1,000개/41명, Validation 140개/14명과 사전에 고정한
+  부산어 Test v2 100개/10명은 화자·발화·오디오·표면문자열이 서로 겹치지 않는다.
+- RTX 2070, Python 3.13.14에서 선택 후보를 Test v2에 한 번 평가했다. 부산어 CER은
+  `0.3628 -> 0.2093`(상대 `42.30%` 개선), 방언 보존율은
+  `0.1815 -> 0.3629`(절대 `+0.1815`)이며 빈 출력은 `0 -> 0`이다.
+- 표준어 CER은 `0.1977 -> 0.0761`(상대 `61.51%` 개선), 빈 출력은 `0 -> 0`이다.
 
 감사 결과, 복구 목록, 검수 파일과 Gate 기준은
-[`artifacts/gate-2/`](artifacts/gate-2/README.md)에 있다. Gate 2가 PASS하기 전에는
-Streaming ASR, IPA, Forced Alignment, 발음 점수 또는 TTS로 넘어가지 않는다.
+[`artifacts/gate-2/`](artifacts/gate-2/README.md)에 있다. 최종 상세 판정은
+[`GATE2_FINAL_REASSESSMENT_2026-08-12.md`](artifacts/gate-2/status/GATE2_FINAL_REASSESSMENT_2026-08-12.md)에
+고정했다.
+
+## Gate 3 상태 (2026-08-12)
+
+**FAIL (28/29)**. Streaming 계약, RTX 2070 단일 음성 스모크와 서로 겹치지 않는
+세 개의 사전 고정 20개·10명 화자 실시간 속도 공학 평가를 완료했다. 최신
+runtime-v5는 finalization-lag p95 `246.17ms`로 고정 상한 `500ms`를 통과했지만,
+raw exact Surface agreement가 `0.65`로 고정 기준 `0.95`에 미달했다.
+
+- 고정 Gate 2 `.nemo`와 `ko-KR` prompt, RNNT greedy, attention context `[56, 3]`,
+  320ms chunk, float32를 사용한다.
+- NVIDIA reference 경로와 같은 `CacheAwareStreamingAudioBuffer` 및
+  `conformer_stream_step`로 encoder cache를 단계별 유지한다.
+- 2.93초 음성의 단일 프로세스 GPU 스모크는 10개 이벤트(부분 9, 최종 1)를
+  생성했고 최종 전사는 기존 Surface ASR과 CER `0.0`으로 일치했다.
+- 첫 비어 있지 않은 부분 전사는 가속 시뮬레이션 시작 후 `1813.39ms`, 최종 전사는
+  `2187.24ms`, 평균 chunk 추론은 `217.29ms`, peak GPU allocation은
+  `2,694,814,208 bytes`였다. 이 값은 실시간 속도로 audio chunk를 공급한 지연이
+  아니라 단일 cold-run 가속 시뮬레이션 값이다.
+- 24개 encoder adapter가 총 240회 호출됐고, stable prefix 위반은 없었으며 세션
+  buffer release가 확인됐다.
+- 최신 runtime-v5 배치는 20/20 완결, 빈 final 0, 부분 안정성 1.0, exact agreement
+  0.65, aggregate Surface CER 0.00383, 첫 부분 전사 p95 1007.97ms, finalization lag
+  p95 246.17ms, chunk 추론 p95 143.41ms, synthetic endpoint F1 0.95를 기록했다.
+- Runtime cancellation/reset은 모두 통과했고 allocated memory growth는 0,
+  reserved growth는 106,954,752 bytes였다. confidence는 값을 조작하지 않고
+  명시적 unsupported 정책으로 고정했다.
+- runtime-v5는 EOF 뒤 320ms zero-PCM flush를 기다리지 않고 즉시 처리하면서도 flush
+  추론 시간은 finalization lag에 포함한다.
+- 7개 exact mismatch는 terminal punctuation 6개와 CER 대상 마지막 두 문자 누락 1개다.
+  기준은 완화하지 않았고 고정 v3 run 001은 한 번만 실행했다.
+
+현재 상태와 다음 판정 조건은
+[`artifacts/gate-3/`](artifacts/gate-3/README.md)에 고정한다.
 
 ## 현재 아키텍처 위치
 
@@ -48,8 +87,9 @@ Streaming ASR, IPA, Forced Alignment, 발음 점수 또는 TTS로 넘어가지 �
   → 고신뢰 오답과 실패 샘플 export
 ```
 
-최종 아키텍처의 `Data Platform + Evaluation Platform + Surface-form ASR`
-경계에 해당한다. Streaming ASR, Direct IPA, 신경 Prosody, TTS 학습은 포함하지
+최종 아키텍처의 `Data Platform + Evaluation Platform + Surface-form ASR`과
+초기 `Streaming ASR` 연구 경계에 해당한다. Streaming은 현재 파일 기반 GPU
+시뮬레이션이며 실시간 미디어 입력, Direct IPA, 신경 Prosody, TTS 학습은 포함하지
 않는다.
 
 ## 구현 범위
@@ -456,6 +496,11 @@ python3 ~/.codex/skills/use-busan-project-venv/scripts/run.py \
 - `reports/schemas/evaluation-case.schema.json`
 - `reports/schemas/experiment-run.schema.json`
 - `reports/schemas/stored-prediction.schema.json`
+- `reports/schemas/streaming-transcript-event.schema.json`
+- `reports/schemas/streaming-trace-metrics.schema.json`
+- `reports/schemas/gate3-criteria.schema.json`
+- `reports/schemas/gate3-evidence.schema.json`
+- `reports/schemas/gate3-assessment.schema.json`
 - `reports/schemas/precomputed-prediction.schema.json`
 - `reports/schemas/human-review.schema.json`
 - `reports/schemas/label-revision.schema.json`
@@ -497,7 +542,7 @@ Gate criteria/evidence/assessment 계약을 포함한다.
 - Surface ASR 입력: 마스터에서 만든 16kHz mono PCM16 WAV
 - 모델 출력: 정규화하지 않은 `surface_text`, confidence, latency, 모델 버전
 - 정답: 사람이 확인한 실제 발화 형태인 `surface_text`
-- 최적화 대상: 아직 없음. 현재는 pretrained baseline 측정 단계
+- 최적화 대상: Gate 2를 통과한 고정 Nemotron encoder adapter; 다음은 Streaming 통합
 - 평가 데이터: frozen manifest에 들어간 speaker/lineage-disjoint 발화
 - 실패 계층: DATA/LABEL/AUDIO/TOKENIZER/MODEL/DECODING/LM_BIAS/CALIBRATION 중
   evidence에 따라 분류
@@ -512,13 +557,15 @@ TASK-003A Surface ASR Evaluation Calibration                       완료
 TASK-003B Nemotron 3.5 Pretrained Surface ASR Baseline Integration 완료(제한 있음)
 TASK-003C Nemotron Inference Configuration Validation              완료
 TASK-004 Busan ASR Training Dataset Foundation                     완료(200 train + 40 validation)
-TASK-005 Nemotron Busan encoder-adapter Pilot                      학습/자동 pilot 완료, Gate 검증 중
-Gate 2 closure                                                     FAIL(필수 증거 미완료)
+TASK-005 Nemotron Busan encoder-adapter Pilot                      완료
+Gate 2 closure                                                     PASS(13/13)
+Gate 3 Streaming ASR integration                                   FAIL(28/29)
 ```
 
-다음 실행은 (1) 10개 blinded Human A/B 완료, (2) Train/Validation/기존 Benchmark와
-겹치지 않는 다화자 부산 Test 확보, (3) 독립 표준어 Regression 데이터 확보 후 같은
-pretrained/adapter로 평가하는 것이다. 기존 40개 Validation은 checkpoint 선택에
-사용했으므로 final Test로 재사용하지 않는다.
+다음 작업은 runtime-v5의 통과 지연을 보존하면서 transcript 안정성 기반 adaptive EOF
+flush 후보를 설계하고, 겹치지 않는 입력과 함께 새 프로토콜로 고정하는 것이다.
+Gate 3를 통과하기 전 Gate 4는 시작하지 않는다. Gate 2의
+부산어 Test v1/v2는 모두 소비된 최종 평가셋이므로 이후 학습, Validation, checkpoint
+선택 또는 임계값 선택에 재사용하지 않는다.
 # ai-apps
 # ai-apps

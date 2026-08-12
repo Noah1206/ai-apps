@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0.0",
+  "benchmark_id": "gate3-streaming-engineering-v1",
+  "status": "frozen_before_streaming_outputs",
+  "source_manifest_sha256": "6e5c23057e90b84c47141c976138b0faa6a9505342ed09cb70b4cd4fe45fe93c",
+  "manifest_sha256": "09b1685eaeb512ad1b9d5632ba40e6b829387bd5cf3ee0724038da2202d73b7a",
+  "selection_seed": "gate3-engineering-v1-2026-08-12",
+  "selection_algorithm": "duration_filter_then_sha256_rank_speakers_then_sha256_rank_utterances",
+  "duration_range_seconds": [2.5, 7.0],
+  "case_count": 20,
+  "speaker_count": 10,
+  "samples_per_speaker": 2,
+  "source_role": "checkpoint_validation_reused_for_streaming_engineering_only",
+  "quality_claim_allowed": false
+}

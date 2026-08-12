@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "status": "PASS",
+  "status": "CONDITIONAL PASS",
   "passed_checks": [
     "benchmark_integrity",
     "reproducibility",
@@ -10,13 +10,14 @@
     "human_ab",
     "independent_dataset_size",
     "independent_cer_improvement",
-    "independent_dialect_preservation",
     "independent_empty_output_regression",
     "standard_dataset_size",
     "standard_cer_regression",
     "standard_empty_output_regression"
   ],
-  "failed_checks": [],
+  "failed_checks": [
+    "independent_dialect_preservation"
+  ],
   "pending_checks": [],
   "note": "FAIL means Gate 2 evidence is incomplete or a safety/integrity check failed; it does not by itself mean the adapter weights are unusable. Thresholds are proposals."
 }

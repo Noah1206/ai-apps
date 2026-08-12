@@ -19,9 +19,10 @@ python3 ~/.codex/skills/use-busan-project-venv/scripts/run.py \
 
 For each item choose `a`, `b`, `s` (same), or `u` (uncertain). Meaning distortion and
 overcorrection also accept `d` (both) and `n` (neither). Progress is saved after every item
-in the existing Gate 2 result schema. `--open-audio` plays each WAV directly with macOS
-`afplay`; it does not launch Apple Music or convert the source file. The command never opens
-the model key.
+in the existing Gate 2 result schema. `--open-audio` opens each WAV in the system's default
+audio player through macOS `open`, Windows PowerShell, WSL's Windows bridge, or Linux
+`xdg-open` (with `ffplay`/`aplay` fallback). It does not convert the source file. Listen to
+the opened file before answering the terminal prompt. The command never opens the model key.
 
 The stored fields are:
 

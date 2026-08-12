@@ -33,3 +33,7 @@ reports/*
 *.log
 artifacts/gate-2/reproducibility/recovered/
 **/blinded-ab-review-key.json
+
+# Per-utterance Gate 2 comparisons contain licensed source transcripts.
+artifacts/gate-2/evaluation-results/**/independent-busan-comparison.json
+artifacts/gate-2/evaluation-results/**/standard-korean-comparison.json

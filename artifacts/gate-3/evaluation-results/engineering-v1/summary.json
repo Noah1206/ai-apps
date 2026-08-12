@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0.0",
+  "decision": "FAIL",
+  "runtime_candidate": "runtime-v3",
+  "passed_check_count": 28,
+  "failed_check_count": 1,
+  "failed_checks": ["exact_surface_agreement"],
+  "model_sha256": "eb7d5112329504db72ffcb2c638e245e68f35801cda14a33682478d4a2ae85ee",
+  "benchmark_manifest_sha256": "09b1685eaeb512ad1b9d5632ba40e6b829387bd5cf3ee0724038da2202d73b7a",
+  "criteria_sha256": "bf8831bd69f2f3faed1dce0ebb5c28d42819120c810753a8db76214f41ea8757",
+  "evidence": {
+    "case_count": 20,
+    "speaker_count": 10,
+    "complete_trace_count": 20,
+    "empty_final_count": 0,
+    "nonempty_partial_rate": 1.0,
+    "mean_partial_stability": 1.0,
+    "trace_retraction_rate": 0.0,
+    "exact_surface_agreement_rate": 0.9,
+    "aggregate_surface_cer": 0.0,
+    "warm_first_partial_p95_ms": 1376.9242086502352,
+    "finalization_lag_p95_ms": 141.1864764508646,
+    "post_warmup_chunk_inference_p95_ms": 133.53598449975834,
+    "trace_realtime_factor_p95": 1.0300267258783333,
+    "synthetic_endpoint_precision": 0.95,
+    "synthetic_endpoint_recall": 0.95,
+    "synthetic_endpoint_f1": 0.9500000000000001,
+    "endpoint_early_trigger_rate": 0.05,
+    "endpoint_delay_p95_ms": 722.9999999999999,
+    "cancellation_correctness": 1.0,
+    "reset_correctness": 1.0,
+    "allocated_memory_growth_bytes": 0,
+    "reserved_memory_growth_bytes": 142606336,
+    "adapter_module_count": 24,
+    "every_adapter_called": true,
+    "every_session_state_released": true,
+    "confidence_policy": "explicitly_unsupported_no_fabricated_values"
+  },
+  "failure_cases": [
+    {
+      "audio_sha256": "628a3e63b8ed7379a813aa49f0feae353376d2e134dd20b41ed6ef4797102550",
+      "difference": "streaming_missing_terminal_U+002E",
+      "surface_cer": 0.0
+    },
+    {
+      "audio_sha256": "64b4c1268d95f52a8b8bf447d7ca67807215181fafa75d8367d157b96871f625",
+      "difference": "streaming_missing_terminal_U+002E",
+      "surface_cer": 0.0
+    }
+  ],
+  "local_artifact_sha256": {
+    "summary.json": "cc1e38b2c127338e84518da435aaeebca2ff57be8da2e5d3fc899a2216c316e1",
+    "assessment.json": "6f5c2a26b8817e4c43943f29401c23bbf5664e35fdd09d5cab4daf9441bbf46f",
+    "evidence.json": "69bd4c69772c383a0d83b0eabf343c80cbb47369a4192ed7dc74d6164e6bdba7",
+    "resolved-config.json": "12bcb3cf92bf0d626bfa9c99d84460e04e42fb479af861a764fb2effa972cc73",
+    "events.jsonl": "7eb5129ca181c6730f359ba8a17371c9aa9115af8b610148882a3671ae1b20f4",
+    "traces.jsonl": "af86f39e526de31597bb19cf36b45b87b92538b4e0b858a2d7f65fd88ffe613a"
+  },
+  "quality_generalization_claim_allowed": false,
+  "endpoint_evidence_scope": "synthetic_appended_silence_only"
+}

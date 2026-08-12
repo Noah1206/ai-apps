@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import hashlib
 import json
-import subprocess
 import tarfile
 import wave
 from pathlib import Path
@@ -189,11 +188,10 @@ def test_terminal_blind_review_saves_complete_structured_result(
     _write_json(queue_path, queue)
     _write_json(results_path, results)
     answers = iter(("a", "b", "s", "n", "d"))
-    played: list[list[str]] = []
+    played: list[Path] = []
     monkeypatch.setattr(
-        subprocess,
-        "run",
-        lambda command, check: played.append(command),
+        "busan_lab.gate2._play_audio",
+        lambda audio_path: played.append(audio_path),
     )
 
     completed = run_blind_ab_review(
@@ -210,7 +208,7 @@ def test_terminal_blind_review_saves_complete_structured_result(
     assert completed.items[0].meaning_distortion_a == "absent"
     assert completed.items[0].overcorrection_a == "present"
     assert completed.items[0].overcorrection_b == "present"
-    assert played[0][0] == "/usr/bin/afplay"
+    assert played == [(queue_path.parent / queue["items"][0]["audio_path"]).resolve()]
 
 
 def test_held_out_dataset_validation_checks_audio_and_overlap(tmp_path: Path) -> None:
@@ -353,18 +351,18 @@ def test_prediction_comparison_uses_surface_text_for_rnnt_results(tmp_path: Path
     assert report["comparison"] == {"improved": 1, "equal": 0, "worsened": 0}
 
 
-def test_gate2_stays_failed_until_required_evidence_exists() -> None:
+def test_gate2_current_evidence_passes_all_checks() -> None:
     evidence = Gate2Evidence.model_validate_json(
         (ROOT / "artifacts/gate-2/status/gate2-evidence.current.json").read_text(
             encoding="utf-8"
         )
     )
     assessment = assess_gate2(_criteria(), evidence)
-    assert assessment.status == "FAIL"
-    assert assessment.pending_checks == (
-        "human_ab",
-        "independent_multi_speaker_test",
-        "standard_korean_regression",
-    )
+    assert assessment.status == "PASS"
+    assert assessment.pending_checks == ()
     assert assessment.failed_checks == ()
+    assert "human_ab" in assessment.passed_checks
+    assert "independent_cer_improvement" in assessment.passed_checks
+    assert "independent_dialect_preservation" in assessment.passed_checks
+    assert "standard_cer_regression" in assessment.passed_checks
     assert "reproducibility" in assessment.passed_checks

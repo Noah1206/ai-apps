@@ -22,6 +22,6 @@ Decision:
 - `FAIL`: evidence is missing, integrity/reproducibility fails, or any safety regression
   fails.
 
-The current recovery evidence now passes. Human A/B and both held-out datasets/results are
-still missing, so the current result remains `FAIL`. This is a Gate status, not a claim that
-the adapter is worse than pretrained.
+The final one-attempt evidence passes every criterion. The current result is `PASS`; see
+`GATE2_FINAL_REASSESSMENT_2026-08-12.md` for the frozen datasets, selected checkpoint,
+runtime exception disclosure, metrics, and final decision.

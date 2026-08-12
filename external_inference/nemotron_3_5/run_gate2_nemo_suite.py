@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import gc
 import hashlib
 import importlib.util
 import json
@@ -132,6 +133,18 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--model-revision")
     parser.add_argument("--warmup-audio", type=Path)
     parser.add_argument("--output-dir", type=Path)
+    parser.add_argument(
+        "--dataset",
+        choices=("all", "independent-busan", "standard-korean"),
+        default="all",
+        help="run one dataset in a fresh process when host memory is constrained",
+    )
+    parser.add_argument(
+        "--arm",
+        choices=("all", "pretrained", "fine-tuned"),
+        default="all",
+        help="run one model arm in a fresh process when host memory is constrained",
+    )
     parser.add_argument("--validate-manifests-only", action="store_true")
     return parser.parse_args()
 
@@ -174,8 +187,18 @@ def main() -> int:
         raise RuntimeError(f"missing inference arguments: {', '.join(missing)}")
     module = load_runner(args.recovered_runner)
     base_write_json = module.write_json
-    for dataset_name, (path, manifest, entries) in datasets.items():
-        for fine_tuned in (False, True):
+    selected_datasets = (
+        datasets.items()
+        if args.dataset == "all"
+        else ((args.dataset, datasets[args.dataset]),)
+    )
+    selected_arms = {
+        "all": (False, True),
+        "pretrained": (False,),
+        "fine-tuned": (True,),
+    }[args.arm]
+    for dataset_name, (path, manifest, entries) in selected_datasets:
+        for fine_tuned in selected_arms:
             run_arm(
                 module,
                 base_write_json,
@@ -195,6 +218,8 @@ def main() -> int:
                 ),
                 fine_tuned=fine_tuned,
             )
+            gc.collect()
+            module.torch.cuda.empty_cache()
     return 0
 
 
