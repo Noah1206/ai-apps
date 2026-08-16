@@ -14,7 +14,7 @@ from fastapi import (
     HTTPException,
     UploadFile,
 )
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import Field, ValidationError
 
@@ -54,7 +54,12 @@ from busan_lab.schemas.utterance import (
     UtteranceRecord,
     expand_dialect_expression_labels,
 )
-from busan_lab.storage import LabStorage, RecordNotFoundError, file_is_dataless
+from busan_lab.storage import (
+    DatalessFileError,
+    LabStorage,
+    RecordNotFoundError,
+    file_is_dataless,
+)
 from busan_lab.training_import import (
     build_training_recording_review_queue,
     list_training_recording_import_summaries,
@@ -133,6 +138,19 @@ def create_app(data_root: Path | None = None) -> FastAPI:
     application.state.storage = storage
     application.state.processor = processor
     application.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+
+    @application.exception_handler(DatalessFileError)
+    async def dataless_file_handler(_request, error: DatalessFileError) -> JSONResponse:
+        return JSONResponse(
+            status_code=503,
+            content={
+                "detail": (
+                    "Record data is stored in cloud-only mode. "
+                    "Download data/lab to this Mac and retry. "
+                    f"({error.path.name})"
+                ),
+            },
+        )
 
     def evaluate_and_store(
         *,

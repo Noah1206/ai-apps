@@ -290,6 +290,24 @@ def test_cloud_only_audio_returns_without_blocking_other_apis(
     assert health.status_code == 200
 
 
+def test_cloud_only_record_json_returns_503_instead_of_blocking(
+    tmp_path: Path,
+    monkeypatch,
+) -> None:
+    """Regression: evicted record JSON must fail fast, not hang the worker forever."""
+
+    client = TestClient(create_app(tmp_path / "lab"))
+    upload_utterance(client)
+    monkeypatch.setattr("busan_lab.storage.file_is_dataless", lambda _path: True)
+
+    listing = client.get("/api/utterances")
+    health = client.get("/api/health")
+
+    assert listing.status_code == 503
+    assert "cloud-only" in listing.json()["detail"]
+    assert health.status_code == 200
+
+
 def test_research_ui_exposes_prediction_review_and_comparison_controls(
     tmp_path: Path,
 ) -> None:

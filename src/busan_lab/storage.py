@@ -26,6 +26,25 @@ class RecordNotFoundError(KeyError):
     """Raised when an immutable lab record does not exist."""
 
 
+class DatalessFileError(OSError):
+    """Raised instead of blocking forever on a cloud-evicted record file."""
+
+    def __init__(self, path: Path) -> None:
+        super().__init__(
+            f"Record file is stored in cloud-only mode: {path}. "
+            "Download data/lab to this Mac (e.g. `brctl download <file>`) and retry."
+        )
+        self.path = path
+
+
+def _read_text(path: Path) -> str:
+    """Read a record file, failing fast if macOS evicted its contents."""
+
+    if file_is_dataless(path):
+        raise DatalessFileError(path)
+    return path.read_text(encoding="utf-8")
+
+
 @dataclass(frozen=True)
 class ArchivedUtterance:
     """Recoverable archive result for one utterance and its dependent evidence."""
@@ -105,11 +124,11 @@ class LabStorage:
         path = self.records_dir / f"{utterance_id}.json"
         if not path.is_file():
             raise RecordNotFoundError(str(utterance_id))
-        return UtteranceRecord.model_validate_json(path.read_text(encoding="utf-8"))
+        return UtteranceRecord.model_validate_json(_read_text(path))
 
     def list_utterances(self) -> tuple[UtteranceRecord, ...]:
         return tuple(
-            UtteranceRecord.model_validate_json(path.read_text(encoding="utf-8"))
+            UtteranceRecord.model_validate_json(_read_text(path))
             for path in sorted(self.records_dir.glob("*.json"))
         )
 
@@ -130,7 +149,7 @@ class LabStorage:
         if not directory.is_dir():
             return ()
         return tuple(
-            LabelRevision.model_validate_json(path.read_text(encoding="utf-8"))
+            LabelRevision.model_validate_json(_read_text(path))
             for path in sorted(directory.glob("*.json"))
         )
 
@@ -193,7 +212,7 @@ class LabStorage:
 
         utterance_text = str(record.utterance_id)
         for report_path in self.reports_dir.glob("*.json"):
-            if utterance_text in report_path.read_text(encoding="utf-8"):
+            if utterance_text in _read_text(report_path):
                 targets.add(report_path)
 
         for target in sorted(targets):
@@ -216,7 +235,7 @@ class LabStorage:
         safe_name = _safe_record_name(f"{manifest.benchmark_id}--{manifest.benchmark_version}")
         path = self.manifests_dir / f"{safe_name}.json"
         if path.exists() and manifest.frozen:
-            existing = BenchmarkManifest.model_validate_json(path.read_text(encoding="utf-8"))
+            existing = BenchmarkManifest.model_validate_json(_read_text(path))
             if existing != manifest:
                 raise FileExistsError(
                     "a frozen benchmark version already exists with different content"
@@ -230,11 +249,11 @@ class LabStorage:
         path = self.manifests_dir / f"{safe_name}.json"
         if not path.is_file():
             raise RecordNotFoundError(f"{benchmark_id}@{benchmark_version}")
-        return BenchmarkManifest.model_validate_json(path.read_text(encoding="utf-8"))
+        return BenchmarkManifest.model_validate_json(_read_text(path))
 
     def list_manifests(self) -> tuple[BenchmarkManifest, ...]:
         return tuple(
-            BenchmarkManifest.model_validate_json(path.read_text(encoding="utf-8"))
+            BenchmarkManifest.model_validate_json(_read_text(path))
             for path in sorted(self.manifests_dir.glob("*.json"))
         )
 
@@ -245,7 +264,7 @@ class LabStorage:
         path = self.training_datasets_dir / f"{safe_name}.json"
         if path.exists():
             existing = TrainingDatasetManifest.model_validate_json(
-                path.read_text(encoding="utf-8")
+                _read_text(path)
             )
             if existing != manifest:
                 raise FileExistsError(
@@ -266,13 +285,13 @@ class LabStorage:
         if not path.is_file():
             raise RecordNotFoundError(f"{dataset_id}@{dataset_version}")
         return TrainingDatasetManifest.model_validate_json(
-            path.read_text(encoding="utf-8")
+            _read_text(path)
         )
 
     def list_training_datasets(self) -> tuple[TrainingDatasetManifest, ...]:
         return tuple(
             TrainingDatasetManifest.model_validate_json(
-                path.read_text(encoding="utf-8")
+                _read_text(path)
             )
             for path in sorted(self.training_datasets_dir.glob("*.json"))
         )
@@ -289,7 +308,7 @@ class LabStorage:
         path = self.training_imports_dir / f"{safe_name}.json"
         if path.exists():
             existing = TrainingRecordingImportManifest.model_validate_json(
-                path.read_text(encoding="utf-8")
+                _read_text(path)
             )
             if existing != manifest:
                 raise FileExistsError(
@@ -308,7 +327,7 @@ class LabStorage:
         if not path.is_file():
             raise RecordNotFoundError(import_id)
         return TrainingRecordingImportManifest.model_validate_json(
-            path.read_text(encoding="utf-8")
+            _read_text(path)
         )
 
     def list_training_recording_imports(
@@ -316,7 +335,7 @@ class LabStorage:
     ) -> tuple[TrainingRecordingImportManifest, ...]:
         return tuple(
             TrainingRecordingImportManifest.model_validate_json(
-                path.read_text(encoding="utf-8")
+                _read_text(path)
             )
             for path in sorted(self.training_imports_dir.glob("*.json"))
         )
@@ -348,7 +367,7 @@ class LabStorage:
         safe_name = _safe_record_name(experiment.experiment_id)
         path = self.experiments_dir / f"{safe_name}.json"
         if path.exists():
-            existing = ExperimentRun.model_validate_json(path.read_text(encoding="utf-8"))
+            existing = ExperimentRun.model_validate_json(_read_text(path))
             existing_conditions = (
                 existing.task,
                 existing.model,
@@ -378,11 +397,11 @@ class LabStorage:
         path = self.experiments_dir / f"{safe_name}.json"
         if not path.is_file():
             raise RecordNotFoundError(experiment_id)
-        return ExperimentRun.model_validate_json(path.read_text(encoding="utf-8"))
+        return ExperimentRun.model_validate_json(_read_text(path))
 
     def list_experiments(self) -> tuple[ExperimentRun, ...]:
         return tuple(
-            ExperimentRun.model_validate_json(path.read_text(encoding="utf-8"))
+            ExperimentRun.model_validate_json(_read_text(path))
             for path in sorted(self.experiments_dir.glob("*.json"))
         )
 
@@ -397,14 +416,14 @@ class LabStorage:
         path = self.predictions_dir / f"{prediction_id}.json"
         if not path.is_file():
             raise RecordNotFoundError(str(prediction_id))
-        return StoredPrediction.model_validate_json(path.read_text(encoding="utf-8"))
+        return StoredPrediction.model_validate_json(_read_text(path))
 
     def list_predictions(
         self,
         utterance_id: UUID | None = None,
     ) -> tuple[StoredPrediction, ...]:
         predictions = tuple(
-            StoredPrediction.model_validate_json(path.read_text(encoding="utf-8"))
+            StoredPrediction.model_validate_json(_read_text(path))
             for path in sorted(self.predictions_dir.glob("*.json"))
         )
         if utterance_id is None:
@@ -424,7 +443,7 @@ class LabStorage:
 
     def list_reviews(self, prediction_id: UUID | None = None) -> tuple[HumanReview, ...]:
         reviews = tuple(
-            HumanReview.model_validate_json(path.read_text(encoding="utf-8"))
+            HumanReview.model_validate_json(_read_text(path))
             for path in sorted(self.reviews_dir.glob("*.json"))
         )
         if prediction_id is None:
@@ -457,7 +476,7 @@ class LabStorage:
             return 0
         kept_lines: list[str] = []
         removed_rows = 0
-        for line in path.read_text(encoding="utf-8").splitlines():
+        for line in _read_text(path).splitlines():
             try:
                 payload = json.loads(line)
                 exported_utterance_id = payload.get("case", {}).get("utterance_id")
@@ -496,7 +515,7 @@ def write_jsonl(path: Path, models: Iterable[BaseModel]) -> None:
 
 
 def read_json(path: Path) -> Any:
-    return json.loads(path.read_text(encoding="utf-8"))
+    return json.loads(_read_text(path))
 
 
 def _safe_record_name(value: str) -> str:
