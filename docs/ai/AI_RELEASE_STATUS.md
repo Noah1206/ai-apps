@@ -4,7 +4,7 @@
 
 - Date: 2026-08-16 (Asia/Seoul)
 - Branch: `Noah1206/clone-copy-next-steps`
-- Commit: worktree based on `da5265a`; Speech API changes are not yet committed
+- Implementation commit: `269d8d3` (`Add release Speech API and verify offline ASR`)
 
 ## Release Deadline
 
@@ -63,7 +63,9 @@ modified.
 - Local-only real HTTP evidence:
   `artifacts/release/speech-api/http-end-to-end-smoke-20260816.json`;
   `/health`, `/version`, multipart conversion, GPU inference, and JSON response passed;
-  request-path inference latency 1,792 ms
+  request-path inference latency 1,792 ms. The smoke recorded base commit `da5265a` while
+  the verified Speech API worktree was dirty; the resulting implementation is commit
+  `269d8d3`.
 - Local-only 50-file stability:
   `artifacts/release/speech-api/asr-50-sequential-stability-20260816.json`;
   50/50 success, 0 failures, 0 empty outputs, mean 563.285 ms, p50 387.241 ms,

@@ -54,7 +54,7 @@ Response:
   "asr_model_version": "busan-asr-gate2-pass-20260812",
   "tts_model_version": "unavailable",
   "asr_mode": "raw",
-  "git_commit": "da5265a"
+  "git_commit": "269d8d3"
 }
 ```
 
