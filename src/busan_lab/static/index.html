@@ -37,6 +37,14 @@
           <span>04</span>
           벤치마크
         </a>
+        <a href="#experiment-title">
+          <span>05</span>
+          실험 이력
+        </a>
+        <a href="#review-queue-title">
+          <span>06</span>
+          리뷰 큐
+        </a>
       </nav>
       <div id="connection-status" class="connection-status" aria-live="polite">
         <span aria-hidden="true"></span>
@@ -509,6 +517,22 @@
           <p class="empty-state">활성 Benchmark가 없습니다.</p>
         </div>
         <p id="benchmark-message" class="form-message" aria-live="polite"></p>
+      </section>
+
+      <section class="benchmark-section" aria-labelledby="experiment-title">
+        <h2 id="experiment-title">실험 이력</h2>
+        <div id="experiment-list" class="benchmark-list" aria-live="polite">
+          <p class="empty-state">아직 등록된 실험이 없습니다.</p>
+        </div>
+        <p id="experiment-message" class="form-message" aria-live="polite"></p>
+      </section>
+
+      <section class="benchmark-section" aria-labelledby="review-queue-title">
+        <h2 id="review-queue-title">전역 리뷰 큐</h2>
+        <div id="review-queue-list" class="benchmark-list" aria-live="polite">
+          <p class="empty-state">현재 검토를 기다리는 예측이 없습니다.</p>
+        </div>
+        <p id="review-queue-message" class="form-message" aria-live="polite"></p>
       </section>
     </main>
 

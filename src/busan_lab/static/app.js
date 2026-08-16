@@ -39,6 +39,67 @@ function setMessage(element, message, isError = false) {
   element.classList.toggle("is-error", isError);
 }
 
+function renderList(container, items, rowFn, emptyText) {
+  container.replaceChildren();
+  if (!Array.isArray(items) || items.length === 0) {
+    const empty = document.createElement("p");
+    empty.className = "empty-state";
+    empty.textContent = emptyText;
+    container.append(empty);
+    return;
+  }
+  items.forEach((item, index) => {
+    container.append(rowFn(item, index));
+  });
+}
+
+async function loadExperiments() {
+  const experiments = await requestJson("/api/experiments");
+  experiments.sort((left, right) => new Date(right.created_at) - new Date(left.created_at));
+  renderList(
+    $("#experiment-list"),
+    experiments,
+    (run) => {
+      const row = document.createElement("article");
+      row.className = "benchmark-item";
+      const summary = document.createElement("div");
+      const title = document.createElement("strong");
+      title.textContent = run.experiment_id;
+      const metadata = document.createElement("span");
+      const parts = [`${run.model.name}@${run.model.version}`, run.status];
+      if (run.hypothesis) parts.push(run.hypothesis);
+      metadata.textContent = parts.join(" · ");
+      summary.append(title, metadata);
+      row.append(summary);
+      return row;
+    },
+    "아직 등록된 실험이 없습니다.",
+  );
+}
+
+async function loadReviewQueue() {
+  const queue = await requestJson("/api/review-queue");
+  renderList(
+    $("#review-queue-list"),
+    queue,
+    (prediction) => {
+      const row = document.createElement("article");
+      row.className = "benchmark-item";
+      const summary = document.createElement("div");
+      const title = document.createElement("strong");
+      title.textContent = prediction.evaluation.hypothesis_surface_text;
+      const metadata = document.createElement("span");
+      metadata.textContent =
+        `${prediction.experiment_id} · CER ${prediction.evaluation.cer.toFixed(3)} · ` +
+        `보존율 ${(prediction.evaluation.dialect.preservation_rate * 100).toFixed(0)}%`;
+      summary.append(title, metadata);
+      row.append(summary);
+      return row;
+    },
+    "현재 검토를 기다리는 예측이 없습니다.",
+  );
+}
+
 async function initialize() {
   const status = $("#connection-status");
   setupSidebarNavigation();
@@ -70,6 +131,16 @@ async function initialize() {
     await loadBenchmarks();
   } catch (error) {
     setMessage($("#benchmark-message"), `Benchmark 조회 실패: ${error.message}`, true);
+  }
+  try {
+    await loadExperiments();
+  } catch (error) {
+    setMessage($("#experiment-message"), `실험 이력 조회 실패: ${error.message}`, true);
+  }
+  try {
+    await loadReviewQueue();
+  } catch (error) {
+    setMessage($("#review-queue-message"), `리뷰 큐 조회 실패: ${error.message}`, true);
   }
 }
 
