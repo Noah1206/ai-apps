@@ -1,0 +1,20 @@
+services:
+  speech-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.speech
+    image: wreckfish/speech-api:dev-20260816
+    env_file:
+      - ${BUSAN_SPEECH_ENV_FILE:-.env.speech.example}
+    ports:
+      - "8000:8000"
+    volumes:
+      - "${BUSAN_ASR_MODEL_HOST_PATH:?Set BUSAN_ASR_MODEL_HOST_PATH}:/models/busan-asr.nemo:ro"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    restart: unless-stopped

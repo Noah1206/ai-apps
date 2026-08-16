@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "date": "2026-08-16",
+  "data_scope": "non_test_train_audio",
+  "quality_evaluation": false,
+  "model_version": "busan-asr-gate2-pass-20260812",
+  "model_sha256": "eb7d5112329504db72ffcb2c638e245e68f35801cda14a33682478d4a2ae85ee",
+  "adapter_sha256": "d0716aff0f05580d51dcad138c3036128d925d4821149842625f760ed0b7b954",
+  "single_file": {
+    "checkpoint_load": "passed",
+    "adapter_execution": "passed",
+    "raw_transcription": "passed",
+    "model_load_ms": 193417.641,
+    "latency_ms": 4337.859
+  },
+  "http_end_to_end": {
+    "health": "passed",
+    "version": "passed",
+    "multipart_upload": "passed",
+    "audio_conversion_16khz_mono_pcm16": "passed",
+    "gpu_inference": "passed",
+    "raw_json_response": "passed",
+    "latency_ms": 1792
+  },
+  "sequential_stability": {
+    "requested_utterances": 50,
+    "successful_utterances": 50,
+    "failed_utterances": 0,
+    "empty_outputs": 0,
+    "model_reloads": 0,
+    "latency_mean_ms": 563.285,
+    "latency_p50_ms": 387.241,
+    "latency_p95_ms": 1239.49,
+    "rtf_mean": 0.155811,
+    "peak_cuda_memory_allocated_bytes": 2688304128,
+    "peak_cuda_memory_reserved_bytes": 2900361216
+  },
+  "sensitive_detail_policy": "Per-file identities, paths, hashes, and transcripts remain in ignored local-only evidence files."
+}

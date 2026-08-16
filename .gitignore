@@ -7,6 +7,7 @@
 .venv.fileprovider-backup/
 .playwright-mcp/
 .Codex/
+.env.speech
 __pycache__/
 *.py[cod]
 *.egg-info/
@@ -37,3 +38,8 @@ artifacts/gate-2/reproducibility/recovered/
 # Per-utterance Gate 2 comparisons contain licensed source transcripts.
 artifacts/gate-2/evaluation-results/**/independent-busan-comparison.json
 artifacts/gate-2/evaluation-results/**/standard-korean-comparison.json
+
+# Release verification detail can contain licensed Train transcripts and identities.
+artifacts/release/speech-api/asr-single-file-smoke-*.json
+artifacts/release/speech-api/http-end-to-end-smoke-*.json
+artifacts/release/speech-api/asr-50-sequential-stability-*.json

@@ -1,0 +1,39 @@
+FROM nvcr.io/nvidia/pytorch:26.05-py3@sha256:ca73b4795f0d3ae27e9cd81b1b1f1b7fc6c0a129f7d51a359d2326e95af48a3d
+
+ARG DEBIAN_FRONTEND=noninteractive
+ARG NEMO_SPEECH_COMMIT=6c57e73e83de967eed4d334c493ac313b9afd147
+
+RUN apt-get update \
+    && apt-get install --yes --no-install-recommends ffmpeg git libsndfile1 \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN python -m pip install --no-cache-dir Cython packaging \
+    && python -m pip install --no-cache-dir \
+        "nemo_toolkit[asr] @ git+https://github.com/NVIDIA-NeMo/Speech.git@${NEMO_SPEECH_COMMIT}" \
+    && python -m pip install --no-cache-dir \
+        fastapi==0.141.1 \
+        pydantic==2.13.4 \
+        python-multipart==0.0.32 \
+        uvicorn==0.52.3
+
+WORKDIR /service
+COPY pyproject.toml README.md ./
+COPY src ./src
+RUN python -m pip install --no-cache-dir --no-deps .
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONPATH=/service/src \
+    BUSAN_ASR_MODEL_PATH=/models/busan-asr.nemo \
+    BUSAN_ASR_MODEL_SHA256=eb7d5112329504db72ffcb2c638e245e68f35801cda14a33682478d4a2ae85ee \
+    BUSAN_ASR_ADAPTER_SHA256=d0716aff0f05580d51dcad138c3036128d925d4821149842625f760ed0b7b954 \
+    BUSAN_ASR_MODEL_VERSION=busan-asr-gate2-pass-20260812 \
+    BUSAN_ASR_DEVICE=cuda:0 \
+    BUSAN_SPEECH_EAGER_LOAD=true \
+    BUSAN_SPEECH_SERVICE_VERSION=speech-api-dev-20260816
+
+EXPOSE 8000
+
+HEALTHCHECK --interval=30s --timeout=10s --start-period=300s --retries=3 \
+    CMD python -c "import json,urllib.request; p=json.load(urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=5)); assert p['asr_loaded']" || exit 1
+
+CMD ["uvicorn", "busan_lab.speech_api:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1"]

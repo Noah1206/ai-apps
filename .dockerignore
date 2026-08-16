@@ -1,0 +1,13 @@
+.git
+.venv
+.pytest_cache
+__pycache__
+*.pyc
+apps
+artifacts
+data
+docs
+external_training
+notebooks
+reports
+tests
